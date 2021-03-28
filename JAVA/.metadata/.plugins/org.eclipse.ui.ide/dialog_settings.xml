@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ResourceNavigator">
+		<item key="ResourceViewer.STORE_SORT_TYPE" value="1"/>
+		<item key="ResourceWorkingSetFilter.STORE_WORKING_SET" value="Aggregate for window 1610956879102"/>
+	</section>
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="true"/>
+		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value=""/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="C:\Users\이영준\Desktop\13_Collection_Homework.zip"/>
+			<item value="C:\Users\이영준\Desktop\10_API_Homework.zip"/>
+			<item value="C:\Users\이영준\Desktop\08_Inheritance_Homework_Answer.zip"/>
+			<item value="C:\Users\이영준\Desktop\07_ObjectArray_Homework_Answer.zip"/>
+			<item value="C:\Users\이영준\Desktop\06_Object_Homework_Answer.zip"/>
+		</list>
+	</section>
+</section>
