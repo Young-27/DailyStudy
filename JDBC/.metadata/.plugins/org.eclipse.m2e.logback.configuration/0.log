@@ -1,0 +1,43 @@
+2021-03-23 21:08:38,248 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-03-23 22:34:38,742 [Worker-46: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-23 23:03:44,478 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-23 23:11:05,174 [Worker-29: Updating Git status for repository jdbc-workspace] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-23 23:18:50,081 [Worker-32: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for [RepositoryHandle:Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]]
+2021-03-23 23:18:50,084 [Worker-32: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for [RepositoryHandle:Repository[C:\jdbc-workspace\DailyStudy\.git]]
+2021-03-23 23:22:16,717 [ModalContext] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\DailyStudy\.git]
+2021-03-23 23:34:53,074 [Worker-44: refresh] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-24 00:02:50,200 [Framework stop] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\.git]
+2021-03-24 15:35:56,383 [Worker-28: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-24 15:42:25,874 [ModalContext] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-24 15:43:36,064 [Framework stop] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\.git]
+2021-03-24 15:43:47,522 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-24 21:22:46,199 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2021-03-24 21:56:53,943 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-24 22:15:37,810 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-24 22:16:46,994 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-25 14:07:21,010 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-25 15:22:20,038 [main] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-25 15:25:13,227 [Worker-60: Disconnect] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Users\이영준\git\repository\.git]
+2021-03-25 22:37:50,311 [Framework stop] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\.git]
+2021-03-26 15:38:41,242 [Worker-42: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-26 19:17:59,269 [Worker-139: Building] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-26 19:19:10,608 [Worker-133: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Users\이영준\Desktop\01_JDBC_Statement\.git]
+2021-03-26 21:01:41,287 [Worker-179: Updating Git status for repository jdbc-workspace] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\02_JDBC_PreparedStatement\.git]
+2021-03-26 21:02:28,567 [Worker-179: Updating Git status for repository jdbc-workspace] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-26 21:04:25,993 [Worker-179: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for [RepositoryHandle:Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]]
+2021-03-26 21:04:25,996 [Worker-179: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for [RepositoryHandle:Repository[C:\jdbc-workspace\02_JDBC_PreparedStatement\.git]]
+2021-03-26 21:04:25,998 [Worker-179: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for [RepositoryHandle:Repository[C:\jdbc-workspace\test\.git]]
+2021-03-26 21:10:36,771 [Worker-183: Git Repository Change Scanner] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\.git]
+2021-03-26 22:17:44,996 [Framework stop] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Users\이영준\Desktop\Study\.git]
+2021-03-26 22:17:44,998 [Framework stop] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\test\.git]
+2021-03-26 22:23:33,928 [Worker-10: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-26 22:41:59,725 [Worker-40: Cloning from https://github.com/Young-27/Study.git] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Users\이영준\Desktop\Study\Study\.git]
+2021-03-26 22:43:01,301 [Worker-42: Git Repository Change Scanner] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\01_JDBC_Statement\.git]
+2021-03-26 22:44:53,032 [Worker-37: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\02_JDBC_PreparedStatement\.git]
+2021-03-26 22:44:57,949 [Worker-44: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Users\이영준\git\Study\.git]
+2021-03-26 22:45:18,289 [main] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Users\이영준\git\repository\.git]
+2021-03-26 22:47:05,369 [Worker-42: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-03-26 22:59:27,390 [Worker-44: Updating Git status for repository jdbc-workspace] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\test2\.git]
+2021-03-26 23:02:27,604 [Worker-49: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\Java-workspace\.git]
+2021-03-26 23:02:27,608 [Worker-49: Remove Repositories] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for [RepositoryHandle:Repository[C:\jdbc-workspace\test2\.git]]
+2021-03-26 23:03:24,631 [Framework stop] WARN  org.eclipse.jgit.lib.Repository - close() called when useCnt is already zero for Repository[C:\jdbc-workspace\.git]

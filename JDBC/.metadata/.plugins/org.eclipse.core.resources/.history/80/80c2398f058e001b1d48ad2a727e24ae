@@ -1,0 +1,403 @@
+package com.kh.model.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import com.kh.model.vo.Member;
+
+// DAO(Data Access Object) : DB에 직접적으로 접근해서 사용자의 요청에 맞는 sql문 실행 및 결과 받기 (JDBC)
+//							 결과를 Controller로 return
+public class MemberDao {
+	
+	/*
+	 * * Statement와 PreparedStatement의 차이점
+	 * - Statement같은 경우 완성된 sql문을 바로 전달하면서 실행하는 객체 (=> sql문을 완성형태로!! == 사용자가 입력한 값으로 다 대체된 형태로!!)
+	 * - PreparedStatement 같은 경우 "미완성된 sql문"을 잠시 보관해둘 수 있는 객체
+	 *   단, 해당 담아둔 sql문 실행하기 전에는 빈 공간을 채워서 실행 하면됨!!
+	 *   
+	 * 
+	 * * 기존의 Statement 방식
+	 *   Connection 객체를 통해 Statement 객체 생성 :		stmt = conn.createStatement();
+	 *   Statement 객체를 통해 "완성된 sql문" 실행 및 결과받기 : 결과 = stmt.executeXXX(완성된sql문);
+	 *   
+	 * * PreparedStatement 방식
+	 *   Connection 객체를 통해 PreparedStatement객체 생성 :  pstmt = conn.prepareStatement(미완성된sql문);
+	 *   
+	 *   해당 sql문 실행 전 pstmt에 담긴 sql문이 미완성상태일 경우 완성시켜야됨!! => pstmt.setXXX(1, "대체할값");
+	 *   														 pstmt.setXXX(2, "대체할값");
+	 *   
+	 *   해당 완성된 sql문 실행 및 결과받기					: 결과 = pstmt.executeXXX();
+	 *   
+	 */
+	
+	public int insertMember(Member m) { // insert문 => 처리된 행수 => 트랜잭션 처리
+		
+		// 필요한 변수들 먼저 셋팅
+		int result = 0;	// 처리된 결과(처리된 행수)를 받아줄 변수
+		
+		Connection conn = null; // DB의 연결정보를 담는 객체
+		PreparedStatement pstmt = null;
+		
+		// 실행할 sql문 (미완성된 형태로 둘 수 있음!!)
+		// 미리 사용자가 입력한 값들이 들어갈 수 있게 공간 확보(? == 홀더)만 해두면됨!
+		
+		//INSERT INTO MEMBER VALUES(SEQ_USERNO.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)
+		
+		String sql = "INSERT INTO MEMBER VALUES(SEQ_USERNO.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
+		
+		try {
+			// 1) jdbc driver 등록
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			// 2) Connection 객체 생성 == DB에 연결 (url, 계정명, 비밀번호)
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
+			
+			// 3) PreparedStatement 객체 생성 
+			pstmt = conn.prepareStatement(sql); // 애초에 PreparedStatement 객체 생성시 sql문을 담은채로 생성!! (하필 담은 sql문이 미완성)
+			
+			// 각 공간에 들어갈 실제값(사용자가입력한값)을 대체한 후 실행
+			// pstmt.setString(홀더순번, 대체할값);		=>  '대체할값' (양 옆에 홑따옴표 붙여서 들어감)
+			// pstmt.setInt(홀더순번, 대체할값);			=>   대체할값
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setString(4, m.getGender());
+			pstmt.setInt(5, m.getAge());
+			pstmt.setString(6, m.getEmail());
+			pstmt.setString(7,  m.getPhone());
+			pstmt.setString(8, m.getAddress());
+			
+			
+			
+			// 4, 5) sql문 전달하면서 실행 후 결과 받기 (처리된 행수)
+			result = stmt.executeUpdate(sql);
+			
+			// 6_2) 트랜잭션 처리
+			if(result > 0) {
+				conn.commit();
+			}else {
+				conn.rollback();
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				// 7) 다 쓴 JDBC용 객체 반납 (close) => 생성된 역순
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	public ArrayList<Member> selectList() { // select문 => ResultSet객체 (여러행)
+		
+		// 필요한 변수들 셋팅
+		
+		// 처리된 결과 (조회된 회원들(여러회원)==여러행)들을 담아줄 ArrayList생성
+		ArrayList<Member> list = new ArrayList<>(); // 텅 빈 리스트
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rset = null; // select문 실행된 조회된 결과값들이 처음에 실질적으로 담길 객체
+		
+		// 실행할 sql문(완성된 형태로!!)
+		String sql = "SELECT * FROM MEMBER";
+		
+		try {
+			// 1) jdbc driver 등록 (ojdbc6 연동)
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			// 2) Connection 객체 생성
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
+			// 3) Statement 객체 생성
+			stmt = conn.createStatement();
+			// 4, 5) sql문 전달해서 실행 후 결과 받기 (resultSet객체)
+			// stmt.excueteUpdate(dml문) : int형으로 반환
+			// stmt.executeQuery(select문) : ResultSet
+			rset = stmt.executeQuery(sql);
+			
+			// 6_1) 
+			while(rset.next()) { // 행 커서 움직여주는 역할, 뿐만 아니라 해당 행이 있으면 true 없으면 false 반환
+				
+				// 현재 rset의 커서가 가리키고 있는 한 행의 데이터들을 싹 다 뽑아서 Member객체에 담기
+				Member m = new Member();
+				// rset으로부터 어떤 컬럼에 해당하는 값을 어떤 타입으로 뽑을건지 제시해주면됨!! ( db컬럼명제시 == 대소문자 가리지 않음)
+				m.setUserNo(rset.getInt("USERNO"));
+				m.setUserId(rset.getString("USERID"));
+				m.setUserPwd(rset.getString("userpwd"));
+				m.setUserName(rset.getString("userName"));
+				m.setGender(rset.getString("GENDER"));
+				m.setAge(rset.getInt("AGE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setAddress(rset.getString("ADDRESS"));
+				m.setHobby(rset.getString("HOBBY"));
+				m.setEnrollDate(rset.getDate("enrollDate"));
+				// 현재 참조하고 있는 행에 대한 모든 데이터들을 한 Member객체에 담기 끝!
+				
+				list.add(m); // 리스트에 해당 회원 객체 차곡차곡 담기
+				
+			}
+			
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 7) 다 쓴 JDBC용 객체 반납하기
+			try {
+				rset.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return list;
+		
+	}
+	
+	public Member selectByUserId(String userId) { // select문 => ResultSet객체 (한 행)
+		
+		// 필요한 변수들 셋팅
+		
+		// 처리결과 (조회된 한 회원)
+		Member m = null;
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		// 실행할 sql문 (완성된형태로!!)
+		// SELECT * FROM MEMBER WHERE USERID = 'XXXX';
+		String sql = "SELECT * FROM MEMBER WHERE USERID = '" + userId + "'";
+		
+		try {
+			// 1)
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			// 2)
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
+			// 3)
+			stmt = conn.createStatement();
+			// 4, 5)
+			rset = stmt.executeQuery(sql);
+			// 6_1)
+			if(rset.next()) {
+				
+				m = new Member(rset.getInt("userno"),
+							   rset.getString("userid"),
+							   rset.getString("userpwd"),
+							   rset.getString("username"),
+							   rset.getString("gender"),
+							   rset.getInt("age"),
+							   rset.getString("email"),
+							   rset.getString("phone"),
+							   rset.getString("address"),
+							   rset.getString("hobby"),
+							   rset.getDate("enrolldate"));
+				
+			}
+			
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// 7) 다 쓴 자원 반납
+				rset.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return m;
+		
+	}
+	
+	public ArrayList selectByUserName(String keyword) { // select문 => ResultSet객체 (여러행)
+		
+		ArrayList<Member> list = new ArrayList<>(); // 텅 빈 리스트
+		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		//SELECT * FROM MEMBER WHERE USERNAME LIKE '%XX%'; 
+		String sql = "SELECT * FROM MEMBER WHERE USERNAME LIKE '%" + keyword + "%'";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			while(rset.next()) {
+				
+				// 현재 rset이 참조하는 한 행 데이터들 => 한 Member객체에 주섬주섬 담기 => list에 차곡차곡 담기
+				list.add(new Member(rset.getInt("userno"), 
+									rset.getString("userid"),
+									rset.getString("userpwd"),
+									rset.getString("username"),
+									rset.getString("gender"),
+									rset.getInt("age"),
+									rset.getString("email"),
+									rset.getString("phone"),
+									rset.getString("address"),
+									rset.getString("hobby"),
+									rset.getDate("enrolldate")));
+				
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+		
+		
+		
+	}
+	
+	public int updateMember(Member m) { // update문 => 처리된행수 (int) => 트랜잭션처리
+		
+		int result = 0;
+		
+		Connection conn = null;
+		Statement stmt = null;
+		
+		// 실행할 sql문(완성된 형태로!!)
+		/*
+		 * UPDATE MEMBER
+		      SET USERPWD = 'XXXX',
+		          EMAIL = 'XXXXXX',
+		          PHONE = 'XXXX',
+		          ADDRESS = 'XXXX'
+		    WHERE USERID = 'XXXX'
+		 */
+		String sql = "UPDATE MEMBER "
+					+ "SET USERPWD = '" + m.getUserPwd() + "', "
+					+ 	    "EMAIL = '" + m.getEmail() + "', "
+					+		"PHONE = '" + m.getPhone() + "', "
+					+	  "ADDRESS = '" + m.getAddress() + "' "
+					+ "WHERE USERID = '" + m.getUserId() + "'";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
+			stmt = conn.createStatement();
+			
+			result = stmt.executeUpdate(sql);
+			
+			if(result > 0) {
+				conn.commit();
+			}else {
+				conn.rollback();
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return result;
+		
+		
+	}
+	
+	
+	public int deleteMember(Member m) {
+		
+		int result = 0;
+		Connection conn = null;
+		Statement stmt = null;
+		
+		// DELETE FROM MEMBER WHERE USERID = 'XXXX';
+		String sql = "DELETE FROM MEMBER WHERE USERID = '" + m.getUserId() + "'";
+		
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "JDBC", "JDBC");
+			stmt = conn.createStatement();
+			
+			result = stmt.executeUpdate(sql);
+			
+			if(result > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return result;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+}
+
+
+
+
+
+
