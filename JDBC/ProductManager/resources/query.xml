@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	
+	<entry key="selectProduct">
+		SELECT PRODUCT_ID
+			 , P_NAME
+			 , PRICE
+			 , DESCRIPTION
+			 , STOCK
+		  FROM PRODUCT
+		
+	</entry>
+	
+	<entry key = "insertProduct">
+		INSERT 
+		  INTO PRODUCT
+			  (
+			    PRODUCT_ID
+			  , P_NAME
+			  , PRICE
+			  , DESCRIPTION
+			  , STOCK
+			  )
+		VALUES(
+			    ?
+			  , ?
+			  , ?
+			  , ?
+			  , ?
+			  )
+				
+	</entry>
+	
+	<entry key = "updateProduct">
+		UPDATE PRODUCT
+		   SET P_NAME = ?
+			 , PRICE = ?
+			 , DESCRIPTION = ?
+			 , STOCK = ?
+		 WHERE PRODUCT_ID = ?
+	
+	</entry>
+	
+	<entry key = "deleteProduct">
+		DELETE
+		  FROM PRODUCT
+		 WHERE PRODUCT_ID = ?
+	</entry>
+	
+	<entry key = "selectByProductName">
+		SELECT PRODUCT_ID
+			 , P_NAME
+			 , PRICE
+			 , DESCRIPTION
+			 , STOCK
+		  FROM PRODUCT
+		 WHERE P_NAME LIKE '%' || ? || '%'
+	</entry>
+	
+	
+	
+	
+</properties>
