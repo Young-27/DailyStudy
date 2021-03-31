@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	
+	<entry key="inserMember">
+		INSERT
+		  INTO MEMBER
+			   (
+				  USERNO
+				, USERID
+				, USERPWD
+				, USERNAME
+				, GENDER
+				, AGE
+				, EMAIL
+				, PHONE
+				, ADDRESS
+				, HOBBY
+				, ENROLLDATE
+				)
+		VALUES (
+				  SEQ_USERNO.NEXTVAL
+				, ?
+				, ?
+				, ?
+				, ?
+				, ?
+				, ?
+				, ?
+				, ?
+				, ?
+				, SYSDATE
+				)
+	</entry>
+	
+	<entry key="selectList">
+		SELECT 
+			   USERNO
+			 , USERID
+			 , USERPWD
+			 , USERNAME
+			 , GENDER
+			 , AGE
+		     , EMAIL
+			 , PHONE
+			 , ADDRESS
+			 , HOBBY
+			 , ENROLLDATE
+		  FROM MEMBER
+		 ORDER
+			BY ENROLLDATE DESC
+	</entry>
+	
+	<entry key="deleteMember">
+		DELETE
+		  FROM MEMBER
+		 WHERE USERID = ?
+	</entry>
+	
+	<entry key="selectByUserId">
+		SELECT
+			   USERNO
+			 , USERID
+			 , USERPWD
+			 , USERNAME
+			 , GENDER
+			 , AGE
+		     , EMAIL
+			 , PHONE
+			 , ADDRESS
+			 , HOBBY
+			 , ENROLLDATE
+		  FROM MEMBER
+		 WHERE USERID = ?
+	</entry>
+	
+	<entry key="selectByUserName">
+		SELECT
+			   USERNO
+			 , USERID
+			 , USERPWD
+			 , USERNAME
+			 , GENDER
+			 , AGE
+		     , EMAIL
+			 , PHONE
+			 , ADDRESS
+			 , HOBBY
+			 , ENROLLDATE
+		  FROM MEMBER
+		 WHERE USERNAME LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="updateMember">
+		UPDATE 
+			   MEMBER 
+		   SET USERPWD = ?
+			 , EMAIL = ?
+			 , PHONE = ?
+			 , ADDRESS = ?
+		 WHERE USERID = ?
+	</entry>
+	
+	<entry key = "loginMember">
+		SELECT 
+			   USERNO
+			 , USERID
+			 , USERPWD
+			 , USERNAME
+			 , GENDER
+			 , AGE
+		     , EMAIL
+			 , PHONE
+			 , ADDRESS
+			 , HOBBY
+			 , ENROLLDATE 
+		  FROM MEMBER 
+		 WHERE USERID = ? 
+		   AND USERPWD = ?
+	</entry>
+	
+	
+	
+</properties>
