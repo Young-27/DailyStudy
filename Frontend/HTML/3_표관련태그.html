@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>표 관련 태그</title>
-    </head>
-    <body>
+<head>
+    <title>표 관련 태그</title>
+    <style>
+        /* css 영역의 주석 */
+        #tt{
+            background-color: lightgrey;
+        }
+        thead{
+            background-color: magenta;
+            color: white;
+        }
+        tfoot{
+            background-color: darkgreen;
+            color: yellow;
+        }
+        h2{
+            color:pink;
+        }
+        h1{
+            color:lightblue
+        }
+    </style>
+</head>
+<body>
         <!--
             표 : 문서에서 다량의 데이터를 정리해서 표현하고자 할 때 사용
                  행과 열로 이루어져있음
@@ -20,7 +40,9 @@
 
         <h1>기본적인 표 만들기 (4행 3열)</h1>
 
-        <table border="1">
+        <table border="1"><!--border속성 : 표의 테두리 두께-->
+            <caption><b>웹 브라우저 종류</b></caption>
+            <!--cpation태그 : 테이블의 제목 역할-->
             <tr>
                 <th width="130" height="30">브라우저명</th>
                 <th width="80">제조사</th>
@@ -43,6 +65,86 @@
             </tr>
 
         </table>
+
+        <hr>
+
+        <h1>표의 행과 열을 합치는 속성</h1>
+        <!--
+            셀(th, td) 태그의 속성을 이용해서 행 또는 열을 합칠 수 있음
+
+            colspan="2" : 2개의 열을 합치기
+            rowspan="2" : 2개의 행을 합치기
+        -->
+
+        <h3>이력서</h3>
+        <table border="1">
+            <tr>
+                <td colspan="2" rowspan="2" width="130" height="130">사진</td>
+                <td width="80">이름</td>
+                <td width="200"></td>
+            </tr>
+            
+            <tr>
+                <td>연락처</td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td width="70" height="50">주소</td>
+                <td colspan="3"></td>
+            </tr>  
+
+            <tr>
+                <td height="130">자기소개</td>
+                <td colspan="3"></td>
+            </tr>  
+            
+        </table>
+     
+        <hr>
+
+        <h2>테이블내에 구조 나누기</h2>
+
+        <table border="1">
+
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+
+            <tbody id="tt">
+                <tr>
+                    <td>홍길동</td>
+                    <td>23</td>
+                    <td>서울</td>
+                </tr>
+                <tr>
+                    <td>김말똥</td>
+                    <td>30</td>
+                    <td>부산</td>
+                </tr>
+                <tr>
+                    <td>김개순</td>
+                    <td>25</td>
+                    <td>광주</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th colspan="2">총 인원</th>
+                    <td>3명</td>
+                </tr>
+            </tfoot>
+
+        </table>
+
+
+
+
 
 
     </body>

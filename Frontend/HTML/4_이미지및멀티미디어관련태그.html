@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>이미지 및 멀티미디어 관련 태그</title>
+</head>
+
+<body>
+    <h1>이미지 관련 태그</h1>
+    <!--
+        <img src="삽입하고자 하는 이미지의 경로" alt="이미지 설명문구" width="가로길이(px/%)" height="세로길이(px/%)">
+    -->
+    <h3>* src속성 alt속성</h3>
+    <img src="resources/image/city1.PNG" alt="이 사진은 도시 사진입니다.">
+    <br>
+    <img src="resources/image/river.PNG" alt="이 사진은 강 사진입니다.">
+    <p>
+        * alt <br>
+        - 사진의 경로가 잘못되거나 이미지를 제대로 표현할 수 없는 경우 대체 텍스트의 용도 <br>
+        - 시각장애인들을 위한 스크린리더(화면낭독기)에서 이미지를 읽어주는 설명 문구
+    </p>
+
+    <hr>
+
+    <h3>* width와 height 속성</h3>
+    <p>
+        이미지의 가로, 세로길이 조정 가능 <br>
+        고정길이(px), 가변길이(%)로 지정
+    </p>
+
+    <h4>고정길이단위(px) == 기본값 : 화면사이즈가 조정이 돼도 이미지의 크기는 변동 없음</h4>
+    <img src="resources/image/flower1.PNG" width="200px" height="150">
+    <img src="resources/image/flower2.PNG" width="200px" height="150">
+    <img src="resources/image/flower3.PNG" width="200px" height="150">
+    <img src="resources/image/flower4.PNG" width="200px" height="150">
+    <img src="resources/image/flower5.PNG" width="200px" height="150">
+
+    <br>
+
+    <h4>가변길이단위(%) : 화면사이즈 혹은 부모요소사이즈에 따라 이미지의 크기도 같이 변동</h4>
+    <img src="resources/image/flower1.PNG" width="15%" height="150">
+    <img src="resources/image/flower2.PNG" width="15%" height="150">
+    <img src="resources/image/flower3.PNG" width="15%" height="150">
+    <img src="resources/image/flower4.PNG" width="15%" height="150">
+    <img src="resources/image/flower5.PNG" width="15%" height="150">
+
+    <hr>
+
+    <h1>미디어 관련 태그</h1>
+
+    <h3>오디오 관련 태그</h3>
+    <!--
+        <audio src="" controls autoplay loop></audio>
+
+        src : 오디오 경로
+        controls : 재생도구 출력 여부
+        autoplay : 자동 재생여부 지정
+        loop : 반복 재생여부 지정
+    -->
+    <audio src="resources/audio/major.mp3" controls autoplay loop></audio>
+
+    <hr>
+
+    <h3>비디오 관련 태그</h3>
+    <!--
+        <video src="" controls autoplay loop width="" height="" poster=""></video>
+    -->
+    <video src="resources/video/video1.mp4" controls autoplay loop
+            width="400px" height="200px" poster="resources/image/flower1.PNG"></video>
+
+
+
+</body>
+
+</html>
