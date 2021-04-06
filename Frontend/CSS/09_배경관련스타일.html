@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{background-color: skyblue;}
+
+        #div-bg{
+            background-color: white;
+            border: 30px solid blue;
+            padding: 20px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .div-test{
+            margin:30px;
+            border:10px dashed black;
+            padding:20px;
+            background-color: yellow;
+        }
+        #div1{background-clip: border-box;}
+        #div2{background-clip: padding-box;}
+        #div3{background-clip: content-box;}
+
+        #bg-img{
+            border:1px solid black;
+            width:70%;
+            height:800px;
+
+            background-image:url("resources/image/bgsample.PNG");
+
+            background-repeat: no-repeat;
+            background-size: 50% 50%;
+            background-position: 50% 50%;
+            background-attachment: fixed;
+
+        }
+    </style>
+
+</head>
+<body>
+    <h1>배경관련 스타일(background~)</h1>
+
+    <h3>background-color:배경색 지정하고자 할 때 사용</h3>
+
+    <div id="div-bg">
+        보배를 실로 방황하였으며, 바이며, 이상은 것이다. 가치를 생명을 이는 없으면, 이것을 그들은 하는 오아이스도 싹이 칼이다. 끓는 그들에게 길을 생의 설레는 청춘에서만 바이며, 부패뿐이다. 구하지 기쁘며, 심장의 사라지지 그것을 열락의 청춘은 아름다우냐? 수 것은 인생의 이상은 거친 살았으며, 이상 커다란 같이, 때문이다. 없으면 청춘의 예가 무엇이 풍부하게 같은 같은 있는가? 이것을 방지하는 유소년에게서 그것을 산야에 쓸쓸하랴? 그와 뭇 돋고, 품으며, 피고 그들은 무엇을 같으며, 있는가? 찾아 영락과 속에서 이것이다. 원대하고, 청춘의 이상은 칼이다. 설산에서 피어나는 일월과 몸이 거친 것은 힘있다.
+    </div>
+
+    <hr>
+
+    <h3>background-clip : 배경을 적용시키고자 하는 범위를 지정할 때 사용</h3>
+
+    <pre>
+    선택자{
+        background-clip:border-box(기본값)|padding-box|content-box;
+    }
+    </pre>
+
+    <div class="div-test" id="div1">
+        보배를 실로 방황하였으며, 바이며, 이상은 것이다. 가치를 생명을 이는 없으면, 이것을 그들은 하는 오아이스도 싹이 칼이다. 끓는 그들에게 길을 생의 설레는 청춘에서만 바이며, 부패뿐이다. 구하지 기쁘며, 심장의 사라지지 그것을 열락의 청춘은 아름다우냐? 수 것은 인생의 이상은 거친 살았으며, 이상 커다란 같이, 때문이다. 없으면 청춘의 예가 무엇이 풍부하게 같은 같은 있는가? 이것을 방지하는 유소년에게서 그것을 산야에 쓸쓸하랴? 그와 뭇 돋고, 품으며, 피고 그들은 무엇을 같으며, 있는가? 찾아 영락과 속에서 이것이다. 원대하고, 청춘의 이상은 칼이다. 설산에서 피어나는 일월과 몸이 거친 것은 힘있다.
+    </div>
+
+    <div class="div-test" id="div2">
+        보배를 실로 방황하였으며, 바이며, 이상은 것이다. 가치를 생명을 이는 없으면, 이것을 그들은 하는 오아이스도 싹이 칼이다. 끓는 그들에게 길을 생의 설레는 청춘에서만 바이며, 부패뿐이다. 구하지 기쁘며, 심장의 사라지지 그것을 열락의 청춘은 아름다우냐? 수 것은 인생의 이상은 거친 살았으며, 이상 커다란 같이, 때문이다. 없으면 청춘의 예가 무엇이 풍부하게 같은 같은 있는가? 이것을 방지하는 유소년에게서 그것을 산야에 쓸쓸하랴? 그와 뭇 돋고, 품으며, 피고 그들은 무엇을 같으며, 있는가? 찾아 영락과 속에서 이것이다. 원대하고, 청춘의 이상은 칼이다. 설산에서 피어나는 일월과 몸이 거친 것은 힘있다.
+    </div>
+
+    <div class="div-test" id="div3">
+        보배를 실로 방황하였으며, 바이며, 이상은 것이다. 가치를 생명을 이는 없으면, 이것을 그들은 하는 오아이스도 싹이 칼이다. 끓는 그들에게 길을 생의 설레는 청춘에서만 바이며, 부패뿐이다. 구하지 기쁘며, 심장의 사라지지 그것을 열락의 청춘은 아름다우냐? 수 것은 인생의 이상은 거친 살았으며, 이상 커다란 같이, 때문이다. 없으면 청춘의 예가 무엇이 풍부하게 같은 같은 있는가? 이것을 방지하는 유소년에게서 그것을 산야에 쓸쓸하랴? 그와 뭇 돋고, 품으며, 피고 그들은 무엇을 같으며, 있는가? 찾아 영락과 속에서 이것이다. 원대하고, 청춘의 이상은 칼이다. 설산에서 피어나는 일월과 몸이 거친 것은 힘있다.
+    </div>
+
+    <hr>
+
+    <h3>배경 이미지 테스트</h3>
+    <pre>
+    선택자{
+        background-image:url(이미지경로);
+        background-repeat:repeat|repeat-x|repeat-y|no-repeat;
+        background-size:auto|contain|cover|px px|% %;
+        background-position:좌/우/가운데 위/아래/가운데|px px|% %;
+        background-attachment:scroll|fixed;
+    }
+    </pre>
+
+    <div id="bg-img"></div>
+
+
+</body>
+</html>

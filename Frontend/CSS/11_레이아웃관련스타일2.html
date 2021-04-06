@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .positioning{border:1px solid black;}
+        .outer{
+            border:1px solid blue;
+            position:relative;
+        }
+        #first{
+            width:300px;
+            height:300px;
+            background:yellow;
+        }
+        #second{
+            width:200px;
+            height:200px;
+            background:yellowgreen;
+            position:absolute;
+            top:50px;
+            left:50px;
+            /*position:relative로 세팅된 부모요소로부터 위쪽으로 50px, 왼쪽으로 50px 떨언진 위치에 자리함*/
+        }
+        #third{
+            width:100px;
+            height:100px;
+            background:red;
+            position:absolute;
+            top:100px;
+            left:100px;
+        }
+
+        .fixed-area{
+            width:100px;
+            height:100px;
+            background:red;
+            /*position:fixed;*/
+        }
+
+        .z-test{
+            width:150px;
+            height:100px;
+            border:1px solid black;
+            position:absolute;
+        }
+        #z1{
+            background:yellow;
+            top:100px;
+            left:100px;
+            z-index: 10000;
+        }
+        #z2{
+            background:green;
+            top:50px;
+            left:50px;
+            z-index:1000;
+        }
+        #z3{
+            background:red;
+            z-index: 100000;
+        }
+
+        .vis-test{
+            width:100px;
+            height:100px;
+        }
+        #vis{
+            /*visibility:hidden;*/
+            display:none;
+        }
+
+        .float-test{
+            border:1px solid black;
+            width:70px;
+            height:30px;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <h1>배치관련 스타일</h1>
+    <h3>절대위치와 상대위치</h3>
+
+    <div class="outer">
+        <div id="first" class="positioning">첫번째 자식</div>
+        <div id="second" class="positioning">두번째 자식</div>
+        <div id="third" class="positioning">세번째 자식</div>
+    </div>
+
+    <h3>고정위치</h3>
+    <div class="positioning fixed-area"></div>
+
+    <hr>
+
+    <h3>z-index</h3>
+    <p>페이지안의 요소들을 순서대로 위로 쌓는 속성</p>
+
+    <div class="outer"> <!--position:relative-->
+        <div id="z1" class="z-test">요소1</div>
+        <div id="z2" class="z-test">요소2</div>
+        <div id="z3" class="z-test">요소3</div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+    <hr>
+
+    <h3>visibility</h3>
+    <p>페이지에 특정 요소를 보이거나 보이지 않게 하는 속성</p>
+
+    <div class="vis-test" style="background:red;"></div>
+    <div id="vis" class="vis-test" style="background:green;"></div>
+    <div class="vis-test" style="background:yellow;"></div>
+    <p>visibility:hidden 속성은 공간은 차지하고 있지만 display:none은 공간마저도 차지 하지 않음</p>
+
+    <hr>
+
+    <h3>float</h3>
+    <p>페이지 내의 요소들을 화면으로부터 띄워서 왼쪽 또는 오른쪽으로 배치하는 속성</p>
+
+    <div class="float-test">요소1</div>
+    <div class="float-test">요소2</div>
+    <div class="float-test">요소3</div>
+    <div class="float-test">요소4</div>
+    <div class="float-test">요소5</div>
+    
+    <br clear="both">
+
+    <hr>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+</body>
+</html>

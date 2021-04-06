@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            background: pink;
+            color: yellow;
+        }
+        h1{
+            color: red;
+        }
+
+        #id1{
+            background: pink;
+        }
+        .class1{
+            background: yellowgreen;
+            color: white;
+        }
+        div{
+            background: teal !important;
+            color: red !important;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>선택자 우선순위</h1>
+    <p>
+        기본적으로 css는 위에서부터 아래로 적용됨 <br>
+        동일한 요소를 다양한 선택자로 css가 부여된 경우 우선순위에 따라 적용<br>
+        태그선택자->클래스선택자->아이디선택자->인라인스타일방식->!important
+    </p>
+
+    <div id="id1" class="class1" style="background: purple; color:pink;">우선순위 테스트</div>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #c{
+            color:red;
+            color:#6799FF;
+            color:rgb(39, 95, 41);
+            color:rgba(62, 206, 69, 0.425);
+            color:hsl(200, 50%, 50%); /*h:색상값(0~360), s:채도(%), l:명도(%)*/
+            color:hsla(200, 50%, 50%, 0.76);
+
+        }
+
+        #td1{text-decoration: underline}
+        #td2{text-decoration: line-through;}
+        #td3{text-decoration: overline;}
+        #td4{text-decoration: none; color: black;}
+
+        #tt1{text-transform: uppercase;}
+        #tt2{text-transform: lowercase;}
+        #tt3{text-transform: capitalize;}
+
+        .shadow{font-size:50px; font-weight:900;}
+
+        #ts1{
+            color:orangered;
+            text-shadow:5px 5px 5px yellow;
+        }
+
+        #ts2{
+            color: white;
+            text-shadow: 0px 0px 10px black;
+        }
+
+        #ts3{
+            text-shadow: 0px 0px 4px gray, 0px -5px 4px yellow, 0px -10px 8px orange, 0px -15px 14px orangered, 0px -22px 19px red;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h1>텍스트 관련 스타일 (text~)</h1>
+
+    <h3>color : 텍스트의 색상을 지정</h3>
+    <pre id="c">
+    선택자{
+        color:색상명|16진수|rgb(x,x,x)|rgba(x,x,x,x)|hsl(x,x,x)|hsla(x,x,x,x)
+    }
+    </pre>
+
+    <hr>
+
+    <h3>text-decoration : 텍스트에 줄을 긋거나 줄을 없앨 때 사용</h3>
+    <pre>
+    선택자{
+        text-decoration:none|underline|overline|line-through;
+    }
+    </pre>
+
+    <ul>
+        <li id="td1">텍스트 영역 아래 줄 긋기</li>
+        <li id="td2">텍스트 영역 중간에 줄 긋기</li>
+        <li id="td3">텍스트 영역 위에 줄 긋기</li>
+    </ul>
+
+    <a href="" id="td4">네이버로</a>
+
+    <hr>
+
+    <h3>text-transform : 영문 텍스트의 대소문자 변환시 사용</h3>
+    <pre>
+    선택자{
+        text-transform:uppercase|lowercase|capitalize;
+    }
+    </pre>
+
+    <ul>
+        <li id="tt1">uppercase : 모든 영문자 다 대문자로</li>
+        <li id="tt2">LowerCase : 모든 영문자 다 소문자로</li>
+        <li id="tt3">capitalize : 영문자의 firsttext만 대문자로</li>
+    </ul>
+
+    <hr>
+
+    <h3>text-align : 텍스트 정렬할 때 사용</h3>
+    <pre>
+    선택자{
+        text-align:left(기본값)|justify|right|center;
+    }
+    </pre>
+
+    <h4>왼쪽정렬(기본값)</h4>
+    <p style="text-align:left;">
+        같이 내 까닭이요, 별들을 봅니다. 무덤 비둘기, 별이 지나가는 있습니다. 이름과, 봄이 이런 때 걱정도 언덕 계십니다. 가난한 별 풀이 속의 하나에 별 나의 거외다. 나는 그러나 어머님, 버리었습니다. 이름과 않은 밤이 내일 헤일 내 있습니다. 오는 때 같이 이런 노새, 있습니다. 풀이 계절이 하나 아직 아스라히 이름과, 파란 위에 까닭입니다. 하나에 강아지, 이네들은 하나의 이름을 언덕 까닭입니다. 겨울이 같이 마디씩 하나에 잠, 않은 봅니다. 별이 계집애들의 라이너 하나에 봅니다.
+
+없이 너무나 이런 하나에 까닭입니다. 이름과, 그리워 별 비둘기, 추억과 봅니다. 차 시인의 가득 다하지 둘 봅니다. 하나에 소녀들의 아이들의 있습니다. 마디씩 우는 내 밤을 내린 봅니다. 별 아직 북간도에 청춘이 그러나 시인의 거외다. 옥 아침이 어머니, 이국 토끼, 있습니다. 무덤 라이너 계집애들의 봅니다. 지나고 오면 덮어 한 가난한 헤는 추억과 봅니다.
+    </p>
+
+
+    <h4>양쪽정렬</h4>
+    <p style="text-align:justify;">
+        같이 내 까닭이요, 별들을 봅니다. 무덤 비둘기, 별이 지나가는 있습니다. 이름과, 봄이 이런 때 걱정도 언덕 계십니다. 가난한 별 풀이 속의 하나에 별 나의 거외다. 나는 그러나 어머님, 버리었습니다. 이름과 않은 밤이 내일 헤일 내 있습니다. 오는 때 같이 이런 노새, 있습니다. 풀이 계절이 하나 아직 아스라히 이름과, 파란 위에 까닭입니다. 하나에 강아지, 이네들은 하나의 이름을 언덕 까닭입니다. 겨울이 같이 마디씩 하나에 잠, 않은 봅니다. 별이 계집애들의 라이너 하나에 봅니다.
+
+없이 너무나 이런 하나에 까닭입니다. 이름과, 그리워 별 비둘기, 추억과 봅니다. 차 시인의 가득 다하지 둘 봅니다. 하나에 소녀들의 아이들의 있습니다. 마디씩 우는 내 밤을 내린 봅니다. 별 아직 북간도에 청춘이 그러나 시인의 거외다. 옥 아침이 어머니, 이국 토끼, 있습니다. 무덤 라이너 계집애들의 봅니다. 지나고 오면 덮어 한 가난한 헤는 추억과 봅니다.
+    </p>
+
+
+    <h4>오른쪽정렬</h4>
+    <p style="text-align: right;">
+        같이 내 까닭이요, 별들을 봅니다. 무덤 비둘기, 별이 지나가는 있습니다. 이름과, 봄이 이런 때 걱정도 언덕 계십니다. 가난한 별 풀이 속의 하나에 별 나의 거외다. 나는 그러나 어머님, 버리었습니다. 이름과 않은 밤이 내일 헤일 내 있습니다. 오는 때 같이 이런 노새, 있습니다. 풀이 계절이 하나 아직 아스라히 이름과, 파란 위에 까닭입니다. 하나에 강아지, 이네들은 하나의 이름을 언덕 까닭입니다. 겨울이 같이 마디씩 하나에 잠, 않은 봅니다. 별이 계집애들의 라이너 하나에 봅니다.
+
+없이 너무나 이런 하나에 까닭입니다. 이름과, 그리워 별 비둘기, 추억과 봅니다. 차 시인의 가득 다하지 둘 봅니다. 하나에 소녀들의 아이들의 있습니다. 마디씩 우는 내 밤을 내린 봅니다. 별 아직 북간도에 청춘이 그러나 시인의 거외다. 옥 아침이 어머니, 이국 토끼, 있습니다. 무덤 라이너 계집애들의 봅니다. 지나고 오면 덮어 한 가난한 헤는 추억과 봅니다.
+    </p>
+
+
+    <h4>가운데정렬</h4>
+    <p style="text-align: center;">
+        같이 내 까닭이요, 별들을 봅니다. 무덤 비둘기, 별이 지나가는 있습니다. 이름과, 봄이 이런 때 걱정도 언덕 계십니다. 가난한 별 풀이 속의 하나에 별 나의 거외다. 나는 그러나 어머님, 버리었습니다. 이름과 않은 밤이 내일 헤일 내 있습니다. 오는 때 같이 이런 노새, 있습니다. 풀이 계절이 하나 아직 아스라히 이름과, 파란 위에 까닭입니다. 하나에 강아지, 이네들은 하나의 이름을 언덕 까닭입니다. 겨울이 같이 마디씩 하나에 잠, 않은 봅니다. 별이 계집애들의 라이너 하나에 봅니다.
+
+없이 너무나 이런 하나에 까닭입니다. 이름과, 그리워 별 비둘기, 추억과 봅니다. 차 시인의 가득 다하지 둘 봅니다. 하나에 소녀들의 아이들의 있습니다. 마디씩 우는 내 밤을 내린 봅니다. 별 아직 북간도에 청춘이 그러나 시인의 거외다. 옥 아침이 어머니, 이국 토끼, 있습니다. 무덤 라이너 계집애들의 봅니다. 지나고 오면 덮어 한 가난한 헤는 추억과 봅니다.
+    </p>
+
+    <hr>
+
+    <h3>text-shadow : 텍스트에 그림자효과를 줄 때 사용</h3>
+    <pre>
+    선택지{
+        text-shadow:가로거리(x) 세로거리(y) [번짐정도] [색상];
+    }
+    </pre>
+
+    <div>
+        <span class="shadow" id="ts1">HTML</span> <br><br><br>
+        <span class="shadow" id="ts2">HTML</span> <br><br><br>
+        <span class="shadow" id="ts3">HTML</span>
+    </div>
+
+
+
+
+
+    
+
+
+
+</body>
+</html>
