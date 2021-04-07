@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        caption{
+            color: tomato;
+        }
+
+        thead{
+            background-color: thistle;
+            color :white
+        }
+
+        button{
+            background-color: turquoise;
+            color: white;
+        }
+
+        tfoot{
+            background-color: red;
+            color: blue;
+        }
+
+        tbody{
+            background-color: yellow;
+        }
+    </style>
+
+<head>
+    <title>
+        연습문제3_표태그2
+    </title>
+    
+</head>
+
+<body>
+    <table border="1">
+        <caption><sub><h1>KH 정보교육원 강의</h1></caption>
+        <thead>
+        <tr>
+            <th>관</th>
+            <th>강의장</th>
+            <th>인원수</th>
+            <th>강의명</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td rowspan="6">1관</td>
+            <td rowspan="2">I강의장</td>
+            <td>30명</td>
+            <td>오전: 강보람 <button>신청하기</button></td> 
+        </tr>
+
+        <tr>
+            <td>23명</td>
+            <td>오후: 강보람 <button>신청하기</button></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">G강의장</td>
+            <td>27명</td>
+            <td>오전: 박신우 <button>신청하기</button></td>
+        </tr>
+
+        <tr>
+            <td>27명</td>
+            <td>오후: 박신우 <button>신청하기</button></td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">H강의장</td>
+            <td>27명</td>
+            <td>오전: 유승제 <button>신청하기</button></td>
+        </tr>
+
+        <tr>
+            <td>27명</td>
+            <td>오후: 유승제 <button>신청하기</button></td>
+        </tr>
+        </tbody>    
+
+        <tfoot>
+            <th colspan="4" height="20">많이 신청해주세요!</th>
+        </tfoot>
+
+    </table>
+</body>
+
+</html>

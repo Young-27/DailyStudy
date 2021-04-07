@@ -1,0 +1,122 @@
+< 사례연구 >
+네이버 회원가입 양식에 사용된 HTML 태그의 종류와 CSS 속성 종류를 제시하는 사항에 맞추어 분석한 문서를 수강생이름.zip 압축파일로 제출하시오.
+1. 사용자 입력을 위해 사용된 HTML 요소의 종류와 해당 요소를 사용한 이유를 분석하시오.
+(input 요소는 type 종류를 작성.)
+2. 1번에서 분석한 HTML 요소에 적용된 속성의 종류와 해당 속성을 사용한 이유를 분석하시오.
+3. 회원가입 화면 디자인을 위해 사용된 CSS 속성의 종류가 어떤 것이 있는지 분석하시오.
+ 
+
+아이디 : input요소에 text타입 ..~ 배운것만 기술 !!
+생년월일 : select옵션에 대해 기술
+이미지 삭제해서 제출해도됨
+한글파일이나 워드파일로 작성해서 압축해서 수요일에 제출 !!
+
+
+1. HTML 태그분석
+ 1) input type="text"
+-아이디 입력란
+<input type="text" id="id" name="id" class="int" title="ID" maxlength="20">
+-이름
+<input type="text" id="name" name="name" title="이름" class="int" maxlength="40">
+-이메일
+<input type="text" id="email" name="email" placeholder="선택입력" aria-label="선택입력" class="int" maxlength="100">
+
+- type="text" : 아이디, 이름, 이메일 입력란에는 input type 중 글자를 입력받는 text를 사용함 
+- maxlength : 아이디, 이름, 이메일의 글자수가 적정한 수를 넘지 않도록 maxlength를 사용하여 글자수 제한을 둠
+- placeholder : 이메일을 입력하는 란에는 placeholder를 사용하여 사용자가 클릭하기 전 "선택입력"이라는 문구가 보이도록 함
+
+ 2) input type="tel"
+-전화번호 입력란
+<input type="tel" id="phoneNo" name="phoneNo" placeholder="전화번호 입력" aria-label="전화번호 입력" class="int" maxlength="16">
+- type="tel" : tel type을 사용해서 사용자가 전화번호 형식에 맞게 입력할 수 있도록 함
+
+ 3) input type="password"
+-비밀번호 입력란 & 확인란
+<input type="password" id="pswd1" name="pswd1" class="int" title="비밀번호 입력" aria-describedby="pswd1Msg" maxlength="20">
+- type="password" : 문자입력 시 *로 표기되어 보안상 안전한 속성을 비밀번호 입력란에 사용함
+
+ 4) select와 option
+-생년월일
+<input type="text" id="yy" placeholder="년(4자)" aria-label="년(4자)" class="int" maxlength="4">
+<select id="mm" class="sel" aria-label="월">
+    <option value="">월</option>
+    <option value="01">
+    1
+    </option>
+    <option value="02">
+    2
+    </option>
+    <option value="03">
+    3
+    </option>
+    <option value="04">
+    4
+    </option>
+    <option value="05">
+    5
+    </option>
+    <option value="06">
+    6
+    </option>
+    <option value="07">
+    7
+    </option>
+    <option value="08">
+    8
+    </option>
+    <option value="09">
+    9
+    </option>
+    <option value="10">
+    10
+    </option>
+    <option value="11">
+    11
+    </option>
+    <option value="12">
+    12
+    </option>
+</select>
+
+<input type="text" id="dd" placeholder="일" aria-label="일" class="int" maxlength="2">
+
+- 년도와 일은 사용자가 직접 입력하도록 input "text" 타입을 사용했다.
+- 착오없이 입력하도록 placeholder를 사용하여 사용자가 클릭하기 전 "년(4자)", "일"이라는 문구가 뜨게했다.
+- 월은 사용자가 1~12 중에 선택하여 고를 수 있도록 select option 태그를 사용했다.
+
+-성별
+<select id="gender" name="gender" class="sel" aria-label="성별">
+    <option value="" selected="">성별</option>
+    <option value="M">남자</option>
+    <option value="F">여자</option>
+    <option value="U">선택 안함</option>
+</select>
+
+- 성별 또한 사용자가 선택지에서 선택하게끔 select를 사용하고 남자, 여자, 선택안함을 option으로 두었다.
+
+ 5) button
+-가입하기 버튼
+<button type="button" id="btnJoin" class="btn_type btn_primary"><span>가입하기</span></button>
+- 입력 내용을 제출할 수 있도록 가입하기 버튼을 사용하였다.
+
+-인증번호받기 버튼
+<a href="#" class="btn_verify btn_primary" id="btnSend" role="button">
+    <span class="">인증번호 받기</span>
+</a>
+- 인증번호받기 버튼을 누르면 인증번호를 받을 수 있도록 하이퍼링크를 사용하였다.
+
+
+
+2. CSS 태그 분석
+- NAVER 로고부분을 position:relative로 설정해 놓았다.
+- 각 입력칸을 border: solid 1px #dadada; 로 테두리가 밝은 회색으로 보이도록 태그를 사용하였다.
+- 비밀번호 자물쇠모양
+    -position: absolute 태그를 사용하여 오른쪽구석에 뜨도록 고정시켜 놓았다.
+    -background-image: url(https://static.nid.naver.com/images/ui/join/m_icon_pw_step.png);
+     : 자물쇠 모양을 배경 이미지로 사용하도록 이미지 경로로 url을 제시해놓았다.
+    -background-repeat: no-repeat;태그를 사용하여 이미지가 반복되지 않고 하나만 뜨도록 설정해놓았다.
+
+
+-버튼 (인증번호받기, 가입하기)
+- box-sizing: border-box; 태그를 사용하여 박스 테두리를 기준으로 크기를 설정하도록 했다.
+- background-color: #03c75a; 태그를 사용하여 버튼부분을 네이버의 대표 색인 #03c75a으로 통일하였다.

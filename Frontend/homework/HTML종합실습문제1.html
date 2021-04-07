@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML종합실습문제1</title>
+</head>
+<body>
+    <form action="pizza">
+
+        고객명 : <input type="text" name="name">
+        <br><br>
+        전화번호 : <input type="text" name="phonenumber">
+        <br><br>
+        E-mail : <input type="email" name="email">
+        <br><br>
+
+        <fieldset>
+            <legend>피자 사이즈</legend>
+            <input type="radio" name="size" value="small"> Small
+            <br><br>
+            <input type="radio" name="size" value="medium"> medium
+            <br><br>
+            <input type="radio" name="size" value="large"> Large
+            <br><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>토핑 선택</legend>
+            <input type="checkbox" name="toping" value="bacon"> 베이컨
+            <br><br>
+            <input type="checkbox" name="toping" value="cheeze"> 치즈
+            <br><br>
+            <input type="checkbox" name="toping" value="onion"> 양파
+            <br><br>
+            <input type="checkbox" name="toping" value="mushroom"> 버섯
+            <br><br>
+        </fieldset>
+
+        <br>
+        희망 배송 시간 : <input type="time" value="timeIn">
+        <br><br>
+        배송 시 요청사항 : <textarea name="request" id="request" cols="20" rows="3"></textarea>
+        <br><br>
+        <input type="submit" value="주문하기">
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        #소제목{
+            background-color: rosybrown;
+        }
+
+        #총합{
+            background-color: rosybrown;
+        }
+
+        thead{
+            background-color: royalblue;
+        }
+
+        #price{
+            background-color: yellow;
+        }
+        
+        #amount{
+            background-color: yellow;
+        }
+
+        td{
+            background-color: wheat;
+        }
+
+        
+    </style>
+
+<head>
+    <title>
+        연습문제2_표태그
+    </title>
+</head>
+
+<body>
+    <table border="1">
+        <thead>
+            <th colspan="5">하수정 보석 컬렉션</th>
+        </thead>
+
+        <tbody>
+        <tr id="소제목">
+            <th rowspan="5" width="80">제품리스트</th>
+            <th width="50">코드</th>
+            <th width="30">분류</th>
+            <th width="70">가격</th>
+            <th width="90">구매가능 개수</th>
+            
+        </tr>
+
+        <tr>
+            <td>01-468</td>
+            <td>가을</td>
+            <td>200,000원</td>
+            <td>1068</td>
+        </tr>
+        <tr>
+            <td>01-469</td>
+            <td>가을</td>
+            <td>150,000원</td>
+            <td>2500</td>
+        </tr>
+        <tr>
+            <td>01-470</td>
+            <td>여름</td>
+            <td>950,000</td>
+            <td>2500</td>
+        </tr>
+        <tr>
+            <td>01-471</td>
+            <td>봄</td>
+            <td>120,000원</td>
+            <td>3200</td>
+            
+        </tr>
+        
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th id="총합" colspan="3" >총합</th>
+                <td id="price">1,420,000원</td>
+                <td id="amount">8486</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
