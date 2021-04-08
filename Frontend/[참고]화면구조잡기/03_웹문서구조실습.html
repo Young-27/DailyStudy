@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 1px solid red;
+            box-sizing: border-box;
+        }
+        .wrap{
+            width: 1000px;
+            height: 800px;
+            margin: auto;  
+        }
+        .wrap>div{width: 100%;}
+        #header, #footer{height: 20%;}
+        #content{height: 60%;}
+        
+        #header>div{height: 100%; float: left; border: 1px solid blue;}
+        #header_1{width: 30%;}
+        #header_2{width: 70%;}
+
+        #content>div{height: 100%; float: left; border:1px solid yellowgreen}
+        #content_1{width: 20%;}
+        #content_2{width: 50%;}
+        #content_3{width: 30%;}
+
+        #footer{border: 1px solid saddlebrown;}
+
+    </style>
+
+</head>
+<body>
+    <div class="wrap">
+        <div id="header">
+            <div id="header_1"></div>
+            <div id="header_2"></div>
+        </div>
+
+        <div id="content">
+            <div id="content_1"></div>
+            <div id="content_2"></div>
+            <div id="content_3"></div>
+        </div>
+
+        <div id="footer">
+
+        </div>
+    </div>
+</body>
+</html>
