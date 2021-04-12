@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #head{width: 800px; height: 150px;}
+
+        div, form{box-sizing: border-box;}
+
+
+        #head{position: relative;}
+        
+
+        #search_Form{
+            width: 80%;
+            height: 20%;
+            margin: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        
+        #search_Form>div{
+            float: left;
+            height: 100%;
+        }
+
+        #search_text{width: 80%;}
+        #search_btn{width: 20%;}
+        #search_form input{width: 100%; height: 100%;}
+       
+    </style>
+</head>
+<body>
+    <div id="head">
+
+        <form action="" id=search_Form>
+
+            <div id="search_text">
+                <input type="text" name="keyword">
+            </div>
+            <div id="search_btn">
+                <input type="submit" value="검색">
+            </div>
+
+        </form>
+
+    </div>
+</body>
+</html>

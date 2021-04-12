@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #content{width: 1000px; height: 400px;}
+    div{border: 1px solid black; box-sizing: border-box;}
+
+    #content>div{height: 100%; float: left;}
+    #content_1{width: 70%;}
+    #content_2{width: 30%;}
+
+    #content_1>#con_1{height: 30%;}
+    #content_1>#con_2{height: 10%; width: 78%;}
+    #content_1>#con_3{height: 60%;}
+   
+
+    #content_2>div{width: 100%;}
+    #content_2>#con_4{height: 35%;}
+    #content_2>#con_5{height: 65%;}
+
+    #con_1{text-align: center; line-height: 20px;}
+    #con_1>img{
+        width: 95%;
+        height: 95%;
+        
+    }
+    #con_3{text-align: center; line-height: 20px;}
+    #con_3>img{
+        width: 95%;
+        height: 95%;
+        
+    }
+
+    #content p, ul{line-height: 10px; font-size: 13px;}
+    ul>li{
+        list-style-type: none;
+        float: left;
+    }
+    li>a{
+        text-decoration: none;
+        color: black;
+        display: block;
+        
+        
+    }
+       
+
+
+</style>
+<body>
+    <div id="content">
+
+        <div id="content_1">
+
+            <div id="con_1">
+                <img src="image/banner.PNG">
+            </div>
+
+            <div id="con_2">
+                <p id="notice">
+                    &nbsp;&nbsp;안녕하세요 여기는 공지사항 제목이 들어오는 자리입니다.
+                </p>
+                
+            </div>
+
+            
+
+            <div id="con_3">
+                <img src="image/car.PNG">
+            </div>
+
+        </div>
+
+
+        <div id="content_2">
+            <div id="con_4"></div>
+            <div id="con_5"></div>
+        </div>
+
+    </div>
+</body>
+</html>

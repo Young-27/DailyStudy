@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div{box-sizing: border-box;}
+        .wrap{width: 1000px; height: 800px; margin: auto;}
+
+        .wrap>div{width: 100%; margin: 10px}
+        #header{height: 10%; }
+        #navigator{height: 5%}
+        #content{height: 75%}
+        #footer{height: 10%}
+        
+
+        #header>div, #content>div{height: 100%; float: left}
+        #header_1{width: 20%; text-align: center;}
+        #header_2{width: 80%;}
+
+        #content>div{height:100%; float: left;}
+        #content_1{width: 20%;}
+        #content_2{width: 25%;}
+        #content_3{width: 25%;}
+        #content_4{width: 30%;}
+
+        #content_2>div{height: 40%; width: 100%; text-align: center;}
+        #content_3>div{height: 40%; width: 100%; text-align: center;}
+
+        #header>div{height: 100%; float: left;}
+        #header_1{width: 20%;}
+        #header_2{width: 80%;}
+
+        #header_1>input{
+            width: 70%; 
+            height: 90%;          
+        }
+
+        #header_2>input{
+            width: 60%; 
+            height: 90%;   
+        }
+
+        #footer>input{
+            height: 80px;
+            width: 1000px;
+        }
+
+        #navigator{background-color: rgb(110, 206, 47);}
+        ul>li{
+            float: left;
+            list-style-type: none;
+            width: 25%;
+            text-align: center;
+        }
+        li>a{
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-size: 18px;
+            height: 100%;
+            width: 100%;
+            line-height: 40px;
+        }
+        li a:hover{color: white;}
+
+        #content_4>a{
+            text-decoration: none;
+            display: block;
+            float: left;
+            text-align: center;
+            width: 40%;
+            font-size: 12px;
+        }
+        
+        
+
+    </style>
+
+</head>
+<body>
+    <div class="wrap">
+        <div id="header">
+            <div id="header_1">
+                <img src="image/logo.jpg">
+            </div>
+            <div id="header_2">
+                <img src="image/mainlogo.jpg">
+            </div>
+        </div>
+
+        <div id="navigator">
+            
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Profile</a></li>
+                    <li><a href="">Board</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            
+        </div>
+
+        <div id="content">
+            <div id="content_1">
+                <img src="image/left_img.jpg" height="100%" width="100%">
+            </div>
+            <div id="content_2">
+                <div id="news1">
+                    <img src="image/main_img1.jpg" height="90%" width="90%"><br>
+                    나무를 심는 사람들
+                </div>
+                <div id="news2">
+                    <img src="image/main_img2.jpg" height="90%" width="90%"><br>
+                    아이들에게 녹색 미래를..
+                </div>         
+            </div>
+    
+            <div id="content_3">
+                <div id="news3">
+                    <img src="image/main_img3.jpg" height="90%" width="90%"><br>
+                    설악산을 살리는 길
+                </div>
+                <div id="news4">
+                    <img src="image/main_img4.jpg" height="90%" width="90%"><br>
+                    사라지는 북극곰들
+                </div>
+            </div>
+    
+            <div id="content_4">
+                <input type="text" name="userId" placeholder="ID를 입력하세요">
+                <input type="password" name="userPwd" placeholder="PW를 입력하세요">
+                <button style="">로그인</button>
+                <br>
+                <a href="">회원가입</a>
+                <a href="">ID/PW 찾기</a>
+                <br><br>
+                <img src="image/right_img.jpg" width="90%">
+                <br><br>
+                <img src="image/me_chat.jpg" width="90%">
+                
+            </div>
+
+        <div id="footer">
+            <img src="image/footer.JPG">
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>행 열 개수 각각 입력받아 테이블 만들기</h1>
+
+    <button onclick="createTable();">테이블 생성</button>
+    
+    
+
+    <script>
+        function createTable(){
+            var column = prompt("테이블 행의 개수는?");
+            var row = prompt("테이블 열의 개수는?");
+
+            
+            
+            var tableEl = "<table border = '1'>";
+            var num = 1;
+            for(var i=1; i<=column; i++){
+                tableEl += "<tr>"
+                for(var j=1; j<=row; j++){
+                    tableEl += "<td>" + num + "</td>";
+                    num++;
+                }
+                tableEl += "</tr>"
+            }
+            tableEl += "</table>"
+
+            document.write(tableEl);
+
+
+        }
+    </script>
+
+       <tr>
+           <td></td>
+           <td></td>
+       </tr>
+
+
+
+
+</body>
+</html>
