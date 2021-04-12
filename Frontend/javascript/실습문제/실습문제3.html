@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div{
+            border: 1px solid black;
+            width: 300px;
+            height: 200px;
+            background-color: wheat;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML 태그에 접근 테스트</h1>
+    <p>단, 구매자는 태그 이름으로 접근, 상품명은 아이디로 접근, 구매가격은 name값으로 접근할 것</p>
+    <!--태그이름과 name값으로 접근하면 배열로 담긴다!!!!!!!!!! => 인덱스 지정으로 해결-->
+    
+    구매자 : <input type="text" id="person" placeholder="구매자의 이름을 입력하세요">
+    <br><br>
+    상품명 : <input type="text" id="p_Name" placeholder="구매 상품명을 입력하세요">
+    <br><br>
+    가격 : <input type="text" name="price" placeholder="구매 가격을 입력하세요">
+    <br><br>
+    <button onclick="buyForm();">입력값 출력하기</button>
+    <br><br>
+    <div class="shopping_box" id="shopping_box"></div>
+
+    <script>
+        function buyForm(){
+            
+            var buyer = document.getElementsByTagName("input");
+            var p_Name = document.getElementById("p_Name");
+            var price = document.getElementsByName("price");
+
+            console.log(buyer);
+
+            var box = document.getElementById("shopping_box");
+            box.innerHTML = "구입자 : " + buyer[0].value + "님 <br>구입상품 : " + p_Name.value + "<br>구매가격 : " + price[0].value + "만원";
+            
+
+        }
+    </script>
+
+</body>
+</html>

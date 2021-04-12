@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div{
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+
+        .color_box2{
+            background-color: black;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>문제 1. 색상 선택후 변경 버튼을 클릭하면 색상이 변경되도록 만들어 보시오</h2> <!--모르겠당 ㅠ-->
+    <div id="color_box" class="color_box"></div>
+    <input type="color" id="color">
+    <button onclick="color_change();">변경</button>
+
+    <script>
+        function color_change(){
+
+            var color = document.getElementById("color");
+
+            console.log(color.style);
+
+            var color_box = document.getElementById("color_box");
+            color_box.style.backgroundColor = color.style.color;
+
+
+
+        }
+    </script>
+
+    <hr>
+
+    <h2>문제 2. 버튼에 따른 크기 조절이 가능하게 만들어 보시오</h2>
+    <div id="color_box2" class="color_box2"></div>
+    <button id="50" onclick="size_50();">50x50</button>
+    <button id="100" onclick="size_100();">원본(100x100)</button>
+    <button id="200" onclick="size_200();">200x200</button>
+
+    <script>
+        function size_50(){
+
+            var size_50 = document.getElementById("50");
+            var size_100 = document.getElementById("100");
+            var size_200 = document.getElementById("200");
+            var color_box2 = document.getElementById("color_box2");
+           
+            color_box2.style.width = "50px";
+            color_box2.style.height = "50px";
+        }
+        function size_100(){
+            color_box2.style.width = "100px";
+            color_box2.style.height = "100px";
+        }
+        function size_200(){
+            color_box2.style.width = "200px";
+            color_box2.style.height = "200px";
+            
+        }
+
+    </script>
+
+</body>
+</html>

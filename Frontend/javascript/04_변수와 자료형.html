@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>변수와 자료형</h1>
+    <h3>* 변수 선언 위치에 따른 전역변수/지역변수</h3>
+    <pre>
+    &lt;script&gt;
+        var 변수명;         // 전역변수 (global)
+
+        변수명;             // 전역변수 (global)
+
+        function 함수명(){
+            var 변수명;     // 지역변수 (local)
+
+            변수명;         // 전역변수 (global)
+        }
+
+    &lt;/script&gt;
+    </pre>
+
+    <script>
+
+        // 전역변수들은 자동으로 window객체의 필드로 등록
+        str = "전역변수";
+        var str2 = "var전역변수";
+
+        // window.onload == 해당 이 html문서가 다 로딩되고 나서 곧바로 실행할 함수 지정하는 구문
+        window.onload = function(){
+            
+            var str = "지역변수"    // 전역변수명과 중복
+            var str3 = "새로운지역변수";
+            str4 = "난뭘까요?";
+
+            console.log("---- str ----");
+            console.log(str); // 지역변수명과 전역변수명이 동일한 변수 호출시 지역변수 호출!!
+            // 전역변수에 접근하고자 할 때 => window. 또는 this.
+            console.log(window.str);
+            console.log(this.str);
+
+            console.log("---- str2 ----");
+            console.log(str2);
+            console.log(window.str2);
+            console.log(this.str2);
+
+            console.log("---- str3 ----");
+            console.log(str3);
+            console.log(window.str3); // undefined(정의되어있지 않다.)
+            console.log(this.str3);
+
+            console.log("---- str4 ----");
+            console.log(str4);
+            console.log(window.str4);
+            console.log(this.str4);
+        }
+
+        function test(){
+            console.log("전역변수들 출력!!");
+            console.log(str);
+            console.log(str2);
+            console.log(str4);
+        }
+
+    </script>
+
+    <button onclick="test();">클릭</button>
+
+    <hr>
+
+    <h3>* 자료형</h3>
+    <p>
+        변수 선언시 자료형을 별도로 지정하지 않음 (자료형의 개념이 없는건 아님!!) <br>
+        => 변수에 대입되는 값(리터럴)에 따라서 알아서 자료형이 자동으로 결정됨
+    </p>
+
+    <h4>자바스크립트의 자료형</h4>
+    <ul>
+        <li>string(문자열)</li>
+        <li>number(숫자)</li>
+        <li>boolean(논리값)</li>
+        <li>object(객체)</li>
+        <li>function(함수)</li>
+        <li>undefined(초기화가 안된 변수)</li>
+    </ul>
+
+    <button onclick="typeTest();">자료형테스트</button>
+    <div id="area" style="border: 1px solid black;"></div>
+
+    <script>
+        function typeTest(){
+
+            //var name = "홍길동";
+            var name = '홍길동';
+            var age = 20;
+            var flag = true;
+
+            var hobby = ["영화", "음악", "낮잠"];
+            var user = {
+                name:'김말똥',
+                age:30,
+                id:'user01'
+            };
+
+            var testFn = function(){
+                alert("ㅋㅋㅋ");
+            };
+
+            var noVal;
+
+            console.log(name);
+            console.log(age);
+            console.log(flag);
+            console.log(hobby);
+            console.log(user);
+            console.log(testFn);
+            console.log(noVal);
+
+            var divEl = document.getElementById("area");
+            // 자료형 확인시 사용되는 함수 : typeof(변수명)
+            divEl.innerHTML = name + "의 자료형 : " + typeof(name) + "<br>";
+            divEl.innerHTML += age + "의 자료형 : " + typeof(age) + "<br>";
+            divEl.innerHTML += flag + "의 자료형 : " + typeof(flag) + "<br>";
+            divEl.innerHTML += hobby + "의 자료형 : " + typeof(hobby) + "<br>";
+            divEl.innerHTML += user + "의 자료형 : " + typeof(user) + "<br>";
+            divEl.innerHTML += testFn + "의 자료형 : " + typeof(testFn) + "<br>";
+            divEl.innerHTML += noVal + "의 자료형 : " + typeof(noVal) + "<br>";
+            divEl.innerHTML += divEl + "의 자료형 : " + typeof(divEl) + "<br>";
+            
+            // 객체 내부의 속성에 접근 => .으로 접근
+            divEl.innerHTML += user.name + "의 나이는 " + user.age + "살이며, 아이디는 " + user.id;
+
+        }
+    </script>
+
+
+
+</body>
+</html>
