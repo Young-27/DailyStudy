@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체1</title>
+</head>
+<style>
+    .area{
+        background: lightgray;
+        border: 1px solid black;
+    }
+    .small{height: 200px;}
+    .big{height: 400px;}
+</style>
+<body>
+    <h1>객체</h1>
+
+    <h3>* 객체 선언 및 호출</h3>
+    <p>
+        객체는 중괄호{}를 사용해서 생성하고, <br>
+        중괄호 안에 이 객체에 필요로하는 속성들을 정의함 <br>
+        속성:속성값 의 형태로 정의함 (키:밸류) <br>
+        속성값으로는 모든 자료형의 값을 담을 수 있음 
+    </p>
+    <pre>
+    var 변수명 = {
+        속성명:속성값,
+        속성명:속성값,
+        속성명:속성값,
+        ....
+    };
+    </pre>
+
+    <button onclick="test1();">실행확인</button>
+    <div id="area1" class="area big"></div>
+
+    <script>
+        function test1(){
+            var arr = ["Dry Mango", 4000, "pickle", ["mango", "sugar"]];
+            // 자바스크립트에서의 배열 == 자바에서의 컬렉션(ArrayList)
+
+            var product = {
+                pName:"Dry Mango",
+                price:4000,
+                "kind":"pickle", // 속성명에 문자열의 형태로 제시해도 무방함
+                ingredient:["mango", "sugar"]
+            };
+            // 자바스크립트에서의 객체 == 자바에서의 컬렉션(HashMap)
+
+            console.log(product);
+            console.log(typeof(product));
+
+            var area1 = document.getElementById("area1");
+            area1.innerHTML += "product : " + product + "<br>";
+
+            // 해당 객체 내부의 각 속성에 접근하는 방법
+            // 방법1. 대괄호를 이용하는 방법 : 객체명["속성명"]
+            area1.innerHTML += "<b>객체명['속성명']으로 접근하기</b><br>";
+            area1.innerHTML += "product['pName'] : " + product['pName'] + "<br>";
+            area1.innerHTML += "product['price'] : " + product['price'] + "<br>";
+            area1.innerHTML += "product['kind'] : " + product["kind"] + "<br>";
+            area1.innerHTML += "product['ingredient'] : " + product['ingredient'] + "<br>";
+            area1.innerHTML += "product['ingredient'][0] : " + product['ingredient'][0] + "<br>";
+
+
+            // 방법2. .을 이용해는 방법 : 객체명.속성명
+            area1.innerHTML += "<b>객체명.속성명으로 접근하기 </b><br>";
+            area1.innerHTML += "product.pName : " + product.pName + "<br>";
+            area1.innerHTML += "product.price : " + product.price + "<br>";
+            area1.innerHTML += "product.kind : " + product.kind + "<br>";
+            area1.innerHTML += "product.ingredient : " + product.ingredient + "<br>";
+            area1.innerHTML += "product.ingredient[1] : " + product.ingredient[1] + "<br>";
+
+
+        }
+    </script>
+
+    <br>
+
+    <h3>* 객체 생성 특이케이스 (속성명 제시시 반드시 문자열 형태로 제시해야되는 케이스)</h3>
+
+    <button onclick="test2();">실행확인</button>
+    <div id="area2" class="area small"></div>
+
+    <script>
+        function test2(){
+            // 속성명 제시시 공백이나 특수문자가 포함될 경우 반드시 문자열의 형태로 제시해야됨
+            var user = {
+                "user name":"홍길동",
+                "age!!":20
+            }
+
+            //console.log(user);
+            var area2 = document.getElementById("area2");
+
+            // .을 이용 => 객체명.속성명
+            //area2.innerHTML += "user name : " + user."user name" + "<br>";
+            //ara2.innerHTML += "age!! : " + user.age!! + "<br>";
+
+            // 대괄호 이용 => 객체명['속성명']
+            area2.innerHTML += "user name : " + user["user name"] + "<br>";
+            area2.innerHTML += "age!! : " + user["age!!"];
+
+
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 객체에서의 반복문</h3>
+    <p>
+        객체가 가지고 있는 모든 속성들에 순차적으로 접근하고자 한다면 반복문 제시 가능 <br>
+        단, 단순 for loop문으로는 사용불가능하고 for in문만 사용 가능함
+    </p>
+
+    <button onclick="test3();">실행확인</button>
+    <div id="area3" class="area small"></div>
+
+    <script>
+        function test3(){
+            var area3 = document.getElementById("area3");
+
+            var arr = ["김말똥", 10, true];
+            for(var i in arr){
+                area3.innerHTML += arr[i] + "<br>";
+            }
+            // in 뒤에 배열 제시시
+            // 반복문 돌 때마다 0에서부터 마지막인덱스까지의 인덱스수가 앞쪽변수에 담김
+
+            var game = {
+                title:"오버워치",
+                price:35000,
+                language:"한국어지원",
+                supportOS:["window32", "window64"],
+                service:true
+            };
+
+            for(var key in game){ // "title" => "price" => ...
+                
+                // .을 통한 방법 => 객체명.속성명 => 진짜 game객체에 key라는 이름의 속성을 찾음
+                //area3.innerHTML += key + " : " + game.key + "<br>";
+                
+                // 대괄호를 통한 방법 => 객체명["속성명"]
+                area3.innerHTML += key + " : " + game[key] + "<br>";
+
+            }
+            // in 뒤에 객체 제시시
+            // 반복문 돌 때마다 해당 객체의 속성명들이 앞쪽의 변수에 담김
+
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 객체의 메소드 속성</h3>
+    <p>객체의 속성중 함수 자료형인 속성을 메소드라고 부른다!!!</p>
+
+    <button onclick="test4();">실행확인</button>
+    <div id="area4" class="area small"></div>
+
+    <script>
+        function test4(){
+            var area4 = document.getElementById("area4");
+
+            var name = "이선영";
+
+            var dog = {
+                name:"복실이",
+                kind:"비글",
+                eat:function(food){
+                    //area4.innerHTML += "eat메소드가 호출되었습니다.";
+                    //area4.innerHTML += food;
+
+                    // 비글종류인 복실이가 사과를 먹고 있어요
+                    // 메소드속성내에 같은 객체내의 속성을 호출할때는 this.붙여서 제시해야됨
+                    area4.innerHTML = this.kind + "종류인 " + this.name + "가 " + food + "를 먹고 있어요"
+                }
+            };
+
+            dog.eat("사과");
+
+            window.alert();
+        }
+    </script>
+
+    <hr>
+
+    <h3>* in과 with키워드</h3>
+    <p>
+        in : 객체 내부에 해당 속성이 있는지 확인해주는 키워드 <br>
+        with : 객체명 제시하는걸 생략할 수 있음 (코드를 줄여주는 키워드)
+    </p>
+
+    이름 : <input type="text" id="name"> <br>
+    국어 : <input type="number" id="kor"> <br>
+    수학 : <input type="number" id="math"> <br>
+    영어 : <input type="number" id="eng"> <br><br>
+
+    <button onclick="test5();">실행확인</button>
+    <div id="area5" class="area big"></div>
+
+    <script>
+        function test5(){
+            var name = document.getElementById("name").value;
+            var kor = Number(document.getElementById("kor").value); // "50" -> 50
+            var math = Number(document.getElementById("math").value);
+            var eng = Number(document.getElementById("eng").value);
+
+            var student = {
+                name:name,
+                kor:kor,
+                math:math,
+                eng:eng,
+                toString:function(){
+                    return this.name + " " + this.kor + " " + this.math + " " + this.eng;
+                },
+                getSum:function(){
+                    return this.kor + this.math + this.eng;
+                },
+                getAvg:function(){
+                    return this.getSum() / 3;
+                }
+            }
+
+            var area5 = document.getElementById("area5");
+
+            area5.innerHTML += "student : " + student + "<br>";
+
+            // "속성명" in 객체명 : 해당 객체 내에 해당 속성이 존재할경우 true반환, 아니면 false반환
+            area5.innerHTML += "name이라는 속성이 있나 : " + ("name" in student) + "<br>";
+            area5.innerHTML += "sum이라는 속성이 있나 : " + ("sum" in student) + "<br><br>";
+
+            with(student){
+                area5.innerHTML += "학생이름 : " + name + "<br>";
+                area5.innerHTML += "국어점수 : " + kor + "<br>";
+                area5.innerHTML += "수학점수 : " + math + "<br>";
+                area5.innerHTML += "영어점수 : " + eng + "<br>";
+                area5.innerHTML += "총점 : " + getSum() + "<br>";
+                area5.innerHTML += "평균 : " + getAvg() + "<br>";
+            }
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 객체의 속성 추가 및 제거</h3>
+
+    <button onclick="test6();">실행확인</button>
+    <div id="area6" class="area small"></div>
+
+    <script>
+        function test6(){
+            var student = {}; // object 빈 객체 생성
+
+            //console.log(student);
+
+            // 객체에 속성을 추가
+            student.name = "홍길동";
+            student.hobby = ["게임", "음악감상"];
+            student.dream = "프로게이머";
+            student.age = 20;
+
+            student.dream = "프로그래머"; // 객체내에 중복된 속성존재 불가
+
+            /*
+            with(student){ // with사용 -> 안담김
+                address = "서울";
+            }
+            */
+
+            //console.log(student);
+
+            var area6 = document.getElementById("area6");
+            area6.innerHTML += "student : " + student + "<br>";
+
+            // 메소드속성
+            student.toString = function(){
+                var str = "name : " + this.name + "<br>"
+                        + "hobby : " + this.hobby + "<br>"
+                        + "dream : " + this.dream + "<br>"
+                        + "age : " + this.age + "<br>";
+                
+                return str;
+            };
+
+            area6.innerHTML += student/*.toSTring()*/ + "<br>";
+
+            // 객체에 속성 제거
+            delete(student.hobby);
+            area6.innerHTML += student;
+
+        }
+    </script>
+
+
+
+
+
+</body>
+</html>

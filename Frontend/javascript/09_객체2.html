@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_객체2</title>
+</head>
+<style>
+    .area{
+        background: lightblue;
+        border: 1px solid black;
+        height: 250px;
+    }
+</style>
+<body>
+    <h3>* 객체 배열을 사용한 다량의 데이터 관리</h3>
+
+    <button onclick="test1();">실행확인</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        function test1(){
+            var student0 = {name:"김말똥", java:100, oracle:90, html:90, css:60};
+            var student1 = {name:"홍길동", java:40, oracle:100, html:30, css:70};
+            var student2 = {name:"강개순", java:30, oracle:80, html:100, css:50};
+            var student3 = {name:"이선영", java:100, oracle:100, html:100, css:100};
+
+            var students = [];
+
+            students.push(student0);
+            students.push(student1);
+            students.push(student2);
+            students.push(student3);
+
+            /*
+            console.log(students);
+            console.log(students[0].name);
+            */
+
+            /* 뒤늦게 속성작성 // 번거로우니 반복문 사용 !!
+            students[0].javascript = 100;
+            students[1].javascript = 100;
+            */
+
+            for(var i in students){
+                students[i].javascript = 100;
+                students[i].getSum = function(){
+                    return this.java + this. oracle + this.html + this.css + this.javascript;
+                };
+                students[i].getAvg = function(){
+                    return this.getSum() / 5;
+                }
+            }
+
+            console.log(students);
+
+            var area1 = document.getElementById("area1");
+            
+            for(var i in students){
+
+                with(students[i]){
+                    area1.innerHTML += "이름 : " + name
+                                + ", 총점 : " + getSum()
+                                + ", 평균 : " + getAvg() + "<br>";
+
+                }
+            }
+        }
+    </script>
+
+    <hr>
+
+    <h3>* 생성자 함수</h3>
+    <p>new 키워드를 사용해서 객체를 생성할 수 있는 함수를 의미 (함수명 제시시 첫글자를 대문자)</p>
+
+    <button onclick="test2();">실행확인</button>
+    <div id="area2" class="area"></div>
+
+    <script>
+        function test2(){
+
+            var student0 = new Student("홍길동", 100, 70, 90, 80, 30);
+            var student1 = new Student("김말똥", 80, 90, 100, 50, 70);
+            var student2 = new Student("홍길동", 80, 100, 60, 30, 70); 
+
+            //console.log(student0);
+
+            var students = [student0, student1, student2];
+            console.log(students);
+
+            for(var i in students){
+                document.getElementById("area2").innerHTML += students[i];
+            }
+            
+        }
+
+        function Student(name, java, oracle, html, css, javascript){
+
+            // 일반속성정의
+            this.name = name;
+            this.java = java;
+            this.oracle = oracle;
+            this.html = html;
+            this.css = css;
+            this.javascript = javascript;
+
+            // 메소드속성정의
+            this.getSum = function(){
+                return this.java + this.oracle + this.html + this.css + this.javascript;
+            }
+
+            this.getAvg = function(){
+                return this.getSum() / 5;
+            }
+
+            this.toString = function(){
+                return "이름 : " + this.name + ", 총점 : " + this.getSum() + ", 평균 : " + this.getAvg() + "<br>";
+            }           
+
+        }
+    </script>
+
+    <hr>
+
+    <h3>* Date 내장객체</h3>
+
+    <button onclick="test3()">실행확인</button>
+    <div id="area3" class="area"></div>
+
+    <script>
+        function test3(){
+            var area3 = document.getElementById("area3");
+
+            var date1 = new Date(); // 현재 날짜 및 시간
+
+            // 2021년 2월 15일로 셋팅
+            var date2 = new Date(2021, 2-1, 15);
+
+            // 시간까지
+            var date3 = new Date(2021, 1, 15, 17, 30, 23);
+
+            // 밀리세컨초까지
+            var date4 = new Date(2021, 1, 15, 17, 30, 23, 5000);
+
+            // 1s == 1000ms
+            // 5s == 5000ms
+
+            area3.innerHTML += "Date() : " + date1 + "<br>";
+            area3.innerHTML += "Date(년,월,일) : " + date2 + "<br>";
+            area3.innerHTML += "Date(년,월,일,시,분,초) : " + date3 + "<br>";
+            area3.innerHTML += "Date(년,월,일,시,분,초,밀리세컨) : " + date4 + "<br>";
+
+            area3.innerHTML += "년도 : " + date1.getFullYear() + "<br>";
+            area3.innerHTML += "월 : " + (date1.getMonth()+1) + "<br>";
+            area3.innerHTML += "일 : " + date1.getDate() + "<br>";
+            area3.innerHTML += "요일 : " + date1.getDay() + "<br>";
+            // 시:getHours() / 분:getMinutes() / 초:getSeconds()
+
+            // 종강 (2021년 8월 20일)일까지 남은 일수 d-day
+            var end = new Date(2021, 7, 20); // 종강날짜
+            var now = new Date(); // 현재날짜
+
+            area3.innerHTML += (end - now) + "<br>";
+            // 현재날짜부터 종강날짜까지 몇 밀리세컨초 남았는지 알려주고있음
+
+            // 1s == 1000ms
+            // 1m == 60s == 60*1000ms
+            // 1h == 60m == 60*60s == 60*60*1000ms
+            // 1d == 24h == 24*60m == 24*60*60s == 24*60*60s*1000ms
+            var dday = (end-now) / (24*60*60*1000);
+            
+            alert("종강까지 " + Math.ceil(dday) + "일 남았습니다.");
+
+        }
+
+
+    </script>
+
+
+
+
+
+</body>
+</html>
