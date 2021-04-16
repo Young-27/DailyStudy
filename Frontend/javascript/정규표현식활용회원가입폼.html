@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입폼</title>
+
+    <style>
+        div{
+            border: 1px solid lightgray;
+            height: auto;
+            width: auto;
+        }
+        p{
+            color: gray;
+            margin: 0;
+            margin-left: 10px;
+        }
+
+        button{
+            margin-left: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="signupForm">
+        <div id="signup_Box" class="area">
+            * 아이디 : <input type="text" id="userId" name="userId" required>
+            <p>첫 글자는 반드시 영문자로, 그리고 영문자, 숫자 포함하여 총 4~12자로 입력하시오.</p>
+            <br>
+            * 비밀번호 : <input type="password" id="userPwd1" name="userPwd1" required>
+            <p>영문자, 숫자, 특수문자 포함하여 총 8자~15자로 입력하시오.</p>
+            <br>
+            * 비밀번호 확인 : <input type="password" id="userPwd2" name="userPwd2" required>
+            <p>위의 비밀번호와 일치하게 입력하시오.</p>
+            <br>
+            * 이름 : <input type="text" id="userName" name="userName" required>
+            <p>한글로만 2글자 이상 입력하시오.</p>
+            <br>
+            * 이메일 : <input type="email" id="userEmail" name="userEmail">
+            <p>이메일 형식에 맞춰서 입력하시오.</p>
+            <br>
+            * 취미 :
+            <input list="hobby" placeholder="축구, 농구, 야구, 독서, 등">
+            <datalist id="hobby" name="hobby">
+                <option id="soccer" name="soccer">축구</option>
+                <option id="basketball" name="basketball">농구</option>
+                <option id="baseball" name="baseball">야구</option>
+                <option id="reading" name="reading">독서</option>
+            </datalist>
+            <br><br>
+            * 거주지 : 
+            <select name="address" id="address">
+                <option value="seoul" selected>서울</option>
+                <option value="incheon">인천</option>
+                <option value="busan">부산</option>
+            </select>
+            <br><br>
+            <button type="submit" onclick="return validate();">회원가입</button>
+            <button>취소</button>
+        </div>
+    </form>
+
+    <script>
+        function validate(){
+
+            var userId = document.getElementById("userId").value;
+            var userPwd1 = document.getElementById("userPwd1").value;
+            var userPwd2 = document.getElementById("userPwd2").value;
+            var userName = document.getElementById("userName").value;
+            var userEmail = document.getElementById("userEmail").value;
+            var hobby = document.getElementById("hobby").value;
+            var address = document.getElementById("address").value;
+
+            // 아이디 형식체크
+            var idForm = /^[a-zA-Z]\w{3,11}$/;
+
+            if(!idForm.test(userId)){
+                alert("아이디를 다시 입력해주세요");
+                return false;
+            }
+
+            // 비밀번호 형식체크 (특수문자 포함?!! 어떻게하지..)
+            var pwdForm = /^\S\w{7,14}$/;
+            if(!pwdForm.test(userPwd1)){
+                alert("비밀번호가 형식에 맞지 않습니다.");
+                return false;
+            }
+
+            // 비밀번호 확인
+            if(userPwd1 != userPwd2){
+                alert("비밀번호가 일치하는지 확인해주세요.");
+                return false;
+            }
+
+            // 이름 형식 체크
+            var nameForm = /^[가-힣]{2,}$/;
+            if(!nameForm.test(userName)){
+                alert("이름이 형식에 맞지 않습니다.")
+                return false;
+            }
+
+            
+
+
+        }
+    </script>
+
+
+
+</body>
+</html>
