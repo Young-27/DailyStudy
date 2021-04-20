@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제02_jQuery</title>
+    <style>
+        div{
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <h2>문제 1. 색상 선택 후 변경 버튼을 클릭하면 색상이 변경되도록 만들어 보시오</h2>
+    <div id="box1"></div>
+    <input type="color" id="colorSelect">
+    <button id="colorChange">변경</button>
+
+    <script>
+        $(function(){
+       
+            $("#colorChange").click(function(){
+                $("#box1").css("backgroundColor", $("#colorSelect").val());
+            })
+          
+        })
+    </script>
+
+    <hr>
+    <br><br>
+
+    <h2>문제 2. 버튼에 따른 크기 조절이 가능하게 만들어 보시오</h2>
+    <div id="box2"></div>
+    <button id="50">50x50</button>
+    <button id="100">원본(100x100)</button>
+    <button id="200">200x200</button>
+
+    <script>
+        $(function(){
+
+            $("#50").click(function(){
+                $("#box2").css({width:50, height:50});
+            })
+
+            $("#100").click(function(){
+                $("#box2").css({width:100, height:100});
+            })
+
+            $("#200").click(function(){
+                $("#box2").css({width:200, height:200});
+            })
+
+        })
+    </script>
+</body>
+</html>
