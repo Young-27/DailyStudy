@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10_추가적인메소드</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        .highlight-0{background: orangered}
+        .highlight-1{background: lightcoral}
+        .highlight-2{background: wheat}
+        .highlight-3{background: lightgreen}
+        .highlight-4{background: dodgerblue}
+    </style>
+<body>
+    
+    <h3>* each 메소드</h3>
+    <p>
+        배열의 모든 인덱스에 순차적으로 접근하고자 할때, <br>
+        객체가 가지고 있는 모든 속성에 순차적으로 접근하고자 할 때 <br>
+        사용하는 for in문과 유사하게 수행되는 메소드
+    </p>
+
+    <pre>
+    1) $.each(객체|배열, function([매개변수1, 매개변수2]){
+            순차적으로 접근해서 실행할 내용;
+       });
+
+    2) 객체|배열.each(function([매개변수1, 매개변수2]){
+            순차적으로 접근해서 실행할 내용;
+       });
+
+       만약 객체를 제시했다면,
+       첫번째 매개변수에는 순차적으로 접근된 객체의 속성명(키 값)이 담김
+       두번째 매개변수에는 해당 속성값(밸류)이 담김
+
+       만약 배열을 제시했다면,
+       첫번째 매개변수에는 순차적적으로 접근된 배열의 인덱스수가 담김
+       두번째 매개변수에는 해당 인덱스값이 담김
+    </pre>
+
+    <div id="area1"></div>
+
+    <script>
+        $(function(){
+            var arr = ["강", "남", "하", "동"];
+
+            /*for(var i in arr){}*/
+            /*
+            $.each(arr, function(index, value){
+                console.log("인덱스 : " + index + ", 값 : " + value);
+            })
+            */
+
+            $(arr).each(function(index, value){ // 배열에 $로 감싸면 제이쿼리 문구(?)로 만들어짐 감싸지않으면 오류,,
+                console.log("인덱스 : " + index + ", 값 : " + value);
+            });
+
+            var student = {
+                name:"홍길동",
+                age:20,
+                address:"서울"
+            };
+
+            $.each(student, function(key, value){
+                console.log("속성명 : " + key + ", 속성값 : " + value);
+            });
+
+            // 객체배열 만들기
+            var links = [{name:"네이버", link:"http://www.naver.com"},
+                         {name:"구글", link:"http://www.google.com"},
+                         {name:"다음", link:"http://www.daum.net"}];
+            
+            var output = "";
+
+            // <a href="xxxxx">xxx</a>
+            $.each(links, function(index, item){
+                output += "<a href='" + item.link + "'>" + item.name + "</a><br>";
+            })
+
+            $("#area1").html(output);
+
+        })
+    </script>
+
+    <br><br>
+
+    <div id="wrap">
+        <h1>item-1</h1>
+        <h1>item-2</h1>
+        <h1>item-3</h1>
+        <h1>item-4</h1>
+        <h1>item-5</h1>
+    </div>
+
+    <script>
+        $(function(){
+            // [h1, h1, h1, ...]
+            $("#wrap").children().each(function(index, el){ // el : 순차적으로 접근된 h1요소객체
+                //console.log(el); // <h1> 태그까지 담겨있음(문자열x)
+                //el.addClass("highlight-" + index); // 오류
+
+                // el : javaScript방식으로 선택된 요소객체가 담기게 됨! (즉, 직접 속성에 접근해서 값 변경)
+                //el.className = "highlight-" + index; // --> 제대로 실행됨
+                
+                // 자바스크립트 --> jQuery
+                // $(el).addClass("highlight-" + index); // --> 제대로 실행됨
+
+                // 간편한 방법 (매개변수 사용X)
+                // $(this) : 순차적으로 접근되는 해당 요소객체
+                $(this).addClass("highlight-" + index);
+
+            })
+        })
+    </script>
+
+    <div id="test">
+        안녕하세요
+    </div>
+
+    <script>
+        $(function(){
+            var div = document.getElementById("test");
+            //div.style.backgroundColor = "pink";
+            $(div).css("backgroundColor", "pink");
+        })
+    </script>
+
+    <hr>
+
+    <h3>* is 메소드</h3>
+    <p>
+        $("선택자").is("선택자") <br>
+        선택된 요소가 내가 전달한 전달값과 일치하는지 판단해서 그에 해당하는 논리값(true/false) 반환
+    </p>
+
+    <h3 class="test">test1</h3>
+    <h3>test2</h3>
+    <h3 class="test">test3</h3>
+    <h3 class="test">test4</h3>
+    <h3>test5</h3>
+    <h3 class="test">test6</h3>
+    
+    <script>
+        $(function(){
+
+            $("h3").each(function(){
+
+                // 현재 순차적으로 접근하는 h3요소가 test클래스를 가지고 있을 경우 => 배경색 변경
+                if($(this).is(".test")){
+                    $(this).css("backgroundColor", "orange");
+                }else{
+                    $(this).css("backgroundColor", "purple");
+                }
+
+            })
+
+        })
+    </script>
+
+
+
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09_요소생성및제거</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        .added{color:palegreen;}
+
+        .item{
+            background-color: yellowgreen;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 5px;
+        }
+        .item span{
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .dgreen{background: darkgreen}
+    </style>
+</head>
+<body>
+    <h1>요소 생성 및 제거</h1>
+
+    <h3>* 동적으로 요소 생성</h3>
+
+    <button id="btn">요소생성</button>
+
+    <div id="area1"></div>
+
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                // <p>~~~~~</p>
+
+                // 1. 문자열로 만드는 방법
+                var el1 = "<p>Create Element By Text</p>";
+
+                // 2. DOM 메소드로 만드는 방법 (createElement, createTextNode)
+                var el2 = document.createElement("p"); // <p></p>
+                var text = document.createTextNode("Create Element By DOM"); // Create Element By DOM
+                el2.appendChild(text); // <p>Create Element By DOM</p>
+
+                // 3. jQuery로 만드는 방법
+                var el3 = $("<p></p>").text("Create Element By jQuery");
+
+                console.log(el1);
+                console.log(el2);
+                console.log(el3);
+
+                $("#area1").append(el1, el2, el3);
+
+            })
+        })
+    </script>
+
+    <hr>
+
+    <h3>* 삽입 관련 메소드 part1</h3>
+    <p>
+        선택된 요소를 기준으로 새로이 생성된 요소를 추가하는 메소드 <br><br>
+
+        $(A).append(B) : A요소 내의 뒷부분에 B를 추가 (자손/하위) <br>
+        $(A).prepend(B) : A요소 내의 앞부분에 B를 추가 (자손/하위) <br><br>
+
+        $(A).before(B) : A요소 앞부분에 B를 추가 (동위) <br>
+        $(A).after(B) : A요소 뒷부분에 B를 추가 (동위)
+    </p>
+
+    <h3>* 삽입 관련 메소드 part2</h3>
+    <p>
+        $(B).appendTo(A) : B를 A요소 내의 뒷부분에 추가 (자손/하위) <br>
+        $(B).preparedTo(A) : B를 A요소 내의 앞부분에 추가 (자손/하위) <br><br>
+
+        $(B).insertBefore(A) : B를 A요소 앞에 추가 (동위) <br>
+        $(B).insertAfter(A) : B를 A요소 뒤에 추가 (동위)
+    </p>
+
+    <h1 id="test1">
+        <span>A</span>
+    </h1>
+    <h1 id="test2">
+        <span>A</span>
+    </h1>
+    <h1 id="test3">
+        <span>A</span>
+    </h1>
+    <h1 id="test4">
+        <span>A</span>
+    </h1>
+
+    <script>
+        $(function(){
+            /*
+            $("#test1").append("<span class='added'>B</span>");
+            $("#test2").prepend("<span class='added'>B</span>");
+            $("#test3").before("<span class='added'>B</span>");
+            $("#test4").after("<span class='added'>B</span>");
+            */
+
+            $("<span class='added'>B</span>").appendTo("#test1");
+            $("<span class='added'>B</span>").prependTo("#test2");
+            $("<span class='added'>B</span>").insertBefore("#test3");
+            $("<span class='added'>B</span>").insertAfter("#test4");
+        })
+    </script>
+
+    <h3>* 요소객체 복제 메소드</h3>
+
+    <p>
+        var 변수 = $("선택자").clone([true|false]) : 선택된 요소를 복제해서 반환해주는 메소드 <br>
+        true|false : 해당 선택된 요소에 걸려있는 이벤트까지도 복사할껀지 지정 (기본값 false)
+    </p>
+
+    <button id="clone">복제</button>
+
+    <div id="clone-test">
+
+        <!-- 복제할 요소 -->
+        <div id="item1" class="item">
+            <span>안녕</span>
+        </div>
+
+    </div>
+
+    <div id="clone-result">
+
+    </div>
+
+    <script>
+        $(function(){
+
+            // 복제할 요소에 hover이벤트 추가해놓기
+            $(".item").hover(function(){ // mouseenter
+                $(this).addClass("dgreen");
+            }, function(){ // mouseout
+                $(this).removeClass("dgreen");
+            });
+
+            // 복제 버튼 클릭시 해당 요소 복사해서 또다른 div에 붙여넣기
+            $("#clone").click(function(){
+                //var copy = $("#item1").clone(true); // 기본값 false
+                //$("#clone-result").append(copy); // 1. 변수에 담아서 append
+
+                //$("#clone-result").append($("#item1").clone(true)); // 2. 한 줄에 append 사용
+
+                $("#item1").clone(true).appendTo("#clone-result"); // 3. appendTo 사용
+                // 결과 모두 같음 !!
+
+            });
+
+        })
+    </script>
+
+    <h3>* 요소 객체 제거 및 잘라내기 메소드</h3>
+
+    <p>
+        $("선택자").empty() : 선택된 요소의 모든 하위 요소들 제거시켜주는 메소드 <br>
+
+        var 변수 = $("선택자").remove()/.detach() : 선택된 요소 제거후 해당 제거된 요소를 반환 (잘라내기) <br>
+        > remove() : 잘라내기 시 잘라낸 요소의 이벤트 안가져봄 <br>
+        > detach() : 잘라내기 시 잘라낸 요소의 이벤트까지도 가져옴 <br>
+    </p>
+
+    <button id="empty">empty</button>
+    <button id="remove">remove</button>
+    <button id="detach">detach</button>
+    <br><br>
+
+    <div id="remove-test" style="border: 3px solid red; width: 110px; height: 110px;">
+
+        <!-- 제거할 요소 -->
+        <div id="item2" class="item">
+            <span>안녕</span>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div id="remove-result" style="border: 3px dashed blue; height: 110px; width: 110px;">
+
+    </div>
+
+    <script>
+        $(function(){
+            $("#empty").click(function(){
+                $("#remove-test").empty();
+            })
+
+            $("#remove").click(function(){
+                var el = $("#item2").remove(); // 이벤트는 안가져옴
+                $("#remove-result").append(el);
+            })
+
+            $("#detach").click(function(){
+                var el = $("#item2").detach(); // 이벤트까지도 가져옴
+                $("#remove-result").append(el);
+            })
+        })
+    </script>
+
+    <hr>
+
+    <div id="test" class="item">
+        <button class="copy">복제</button>
+        <button class="delete">삭제</button>
+    </div>
+
+    <div id="result">
+    
+    </div>
+
+    <script>
+        $(function(){
+            
+            $(".copy").click(function(){
+                $(this).parent().clone(true).appendTo("#result");
+            });
+
+            $(".delete").click(function(){
+                $(this).parent().remove();
+            })
+
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>

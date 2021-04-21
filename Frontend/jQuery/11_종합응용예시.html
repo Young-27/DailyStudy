@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11_종합응용예시</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    
+    <h2>게시판 리스트</h2>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td>3</td>
+                <td>세번째 글 제목</td>
+                <td>user01</td>
+                <td>23</td>
+                <td>2020-09-23</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>두번째 글 제목</td>
+                <td>user02</td>
+                <td>15</td>
+                <td>2020-09-02</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>첫번째 글 제목</td>
+                <td>admin</td>
+                <td>230</td>
+                <td>2020-07-02</td>
+            </tr>
+        </tbody>   
+    </table>
+
+    <br><br>
+
+    선택된 게시글 정보 : 
+    <label id="l1">글번호</label> /
+    <label id="l2">제목</label> /
+    <label id="l3">작성자</label> /
+    <label id="l4">조회수</label> /
+    <label id="l5">작성일</label>
+
+    <script>
+        $(function(){
+            $("tbody>tr").click(function(){
+                //console.log($(this).children().eq(0).text());
+
+                // 현재 클릭이벤트가 발생한 해당 tr요소의 자손들(td들)에 순차적으로 접근
+                $(this).children().each(function(index, el){
+                    // index : 순차적으로 접근할때마다의 인덱스 수
+                    // el : 순차적으로 접근되는 요소객체(td)
+                    //console.log($(el).text());
+                    $("#l" + (index+1)).text($(el).text());
+
+                })
+
+            });
+        })
+    </script>
+
+    <hr>
+
+    <button class="btn btn-outline-warning btn-sm">로그인</button>
+    <a class="btn btn-warning btn-sm">회원가입</a>
+
+    <br><br>
+
+    <form class="form-inline" action="/action_page.php">
+        <label for="email" class="mr-sm-2">Email address:</label>
+        <input type="email" class="form-control mb-2 mr-sm-2" placeholder="Enter email" id="email">
+        <label for="pwd" class="mr-sm-2">Password:</label>
+        <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter password" id="pwd">
+        <div class="form-check mb-2 mr-sm-2">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox"> Remember me
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </form>
+
+
+    <!-- Button to Open the Modal -->
+    <!-- data-model="#myModal" : 아이디가 myModal인 data-model을 찾아서~~ -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+    </button>
+  
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+            Modal body..
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+    
+        </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
