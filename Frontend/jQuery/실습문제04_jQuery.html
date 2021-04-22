@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제04_jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        input{
+            width: 800px;
+        }
+        div{
+            width: 100%;
+            height: 200px;
+            border: 1px solid red;
+            margin: auto;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>기본 문법 문제</h1>
+    <p>문제1. 다음 보기에 있는 텍스트 필드에 작성한 문자열의 길이를 알아올 수 있도록 구현하시오.</p>
+
+    <fieldset>
+        <legend>보기</legend>
+        <input type="text" placeholder="글자를 작성해보세요" id="userWrite">   
+    </fieldset>
+
+    <br>
+
+    <div class="write_box" id="write_box"></div>
+    <button onclick="text_Num();">확인하기</button>
+
+    <script>
+        function text_Num(){
+            /*
+            var userWrite = document.getElementById("userWrite");
+            var box = document.getElementById("write_box");
+
+            box.innerHTML = "보기의 문자열 길이는 " + userWrite.value.length + "글자 입니다."; 
+            */
+
+            $(function(){
+                $("#write_box").html("보기의 문자열 길이는 " + $("#userWrite").val().length + "글자 입니다.");
+            })
+
+        }
+        
+    </script>
+
+    <br><br>
+
+    <p>문제2. 다음 보기에 있는 문자열을 ,(콤마) 를 기준으로 잘라내어 하나하나 출력하시오</p>
+    <fieldset>
+        <legend>보기</legend>
+        <p id=food>콜라,사이다,햄버거,피자,한약,마요네즈,참치,김밥,라면</p>
+    </fieldset>
+    <br>
+    <div class="example_box" id="example_box"></div>
+    <button onclick="example_Num();">확인하기</button>
+
+    <script>
+        function example_Num(){
+
+            /*
+            var food = document.getElementById("food").innerHTML.split(",");
+            var box = document.getElementById("example_box");
+
+            //console.dir(food);
+            /*
+            box.innerHTML = "1. "
+            var num = 1;
+            for(var i=0; i<food.innerHTML.length; i++){
+            
+                if(food.innerHTML.charAt(i) != ","){
+                    box.innerHTML += food.innerHTML.charAt(i);
+                }else{
+                    num++;
+                    box.innerHTML += "<br>" + num + ". ";
+                }
+
+            }
+            */
+            /*
+            for(var i=0; i<food.length; i++){
+                box.innerHTML += (i+1) + ". " + food[i] + "<br>";
+            }
+            */
+           
+           var f = "";
+           for(var i=0; i<$("#food").html().split(",").length; i++){
+               f += (i + ". " + $("#food").html().split(",")[i] + "<br>");
+           }
+           $("#example_box").html(f);
+            
+            
+
+            
+ 
+        }
+    </script>
+</body>
+</html>

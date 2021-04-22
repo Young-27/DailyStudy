@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15_시각적인효과메소드3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        div{
+            background: beige;
+            width: 300px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 10px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        p{
+            border: 1px solid lightgray;
+            width: 300px;
+            height: 100px;
+            margin-top: 5px;
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <h3>* slideDown()과 slidUp()</h3>
+
+    <div>Q. 반품 언제되나요?</div>
+    <p>A. 지금 확인중입니다.</p>
+
+    <div>Q. 상품 위치를 알고 싶습니다.</div>
+    <p>A. 배송 조회 해보세요. 거기 다 나와요.</p>
+
+    <div>Q. 이 사이즈 있나요?</div>
+    <p>A. 없어요.</p>
+
+    <div>Q. 전화 통화 가능한 시간을 알려주세요.</div>
+    <p>A. 플러스친구 카톡을 이용하면 24시간 내에 답변드리겠습니다.</p> 
+
+    <div>Q. 판매자가 연락이 안됩니다.</div>
+    <p>A. 신고하세요.</p>
+
+
+    <script>
+        $(function(){
+            $("div").click(function(){
+                // $(this) : 클릭이벤트가 발생한 div요소
+                // $(this).next() : 클릭이벤트가 발생한 div요소 뒤에있는 p요소
+
+                var $p = $(this).next(); // jQuery방식으로 선택된 요소를 담아둘때 변수명앞에 $
+
+                if($p.css("display") == "none"){
+                    
+                    $(this).siblings("p").slideUp();
+
+                    // 보여지게끔
+                    $p.slideDown(); // 시간부여도 가능
+                }else{
+                    // 사라지게끔
+                    $p.slideUp();
+                }
+
+            })
+        })
+    </script>
+
+
+</body>
+</html>

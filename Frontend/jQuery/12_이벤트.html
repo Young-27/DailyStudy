@@ -66,6 +66,138 @@
         })
     </script>
 
+    <br><br>
+
+    <h3>* 방법3</h3> <!-- 중요 (동적으로 만들어낸 요소들까지 이벤트를 적용하기 위해 사용)-->
+    <pre>
+    $("상위요소선택자").on("이벤트명","하위요소선택자",function(){
+        선택된 상위요소 안에 존재하는 해당 하위요소에 해당 이벤트가 발생했을때 실행할 내용;
+    })
+    </pre>
+
+    <div id="wrap">
+        <h4>h4 클릭해보시오</h4>
+        <h5>h5 클릭해보시오</h5>
+    </div>
+
+    <script>
+        $(function(){
+            // $("#wrap h4").on("click", function(){});
+            $("#wrap").on("click", "h4", function(){
+                alert("클릭되었습니다.");
+                $(this).html("안녕");
+            });
+
+            $(document).on("click", "h4 , h5", function(){
+                $(this).css("color", "pink");
+            })
+        })
+    </script>
+
+    <hr>
+
+    <h3>* 단, 동적으로 만들어진 요소에도 동일한 이벤트를 적용시키고자 한다면 반드시 방법3로 해야됨!</h3>
+    <!-- 동적으로 만들어진 요소 : 처음에 문서 로딩시에는 없다가 나중에 새로이 만들어지는 요소 -->
+
+    <div id="wrap2" style="border: 1px solid red;">
+        <h6>기존에 존재하는 요소</h6>
+        
+    </div>
+
+    <script>
+        $(function(){
+
+            // 방법1. 이벤트메소드  => 동적으로 만들어진 요소에 이벤트 적용안됨
+            /*
+            $("#wrap2>h6").click(function(){
+                $("#wrap2").append("<h6>클릭으로 인해 동적으로 만들어진 요소</h6>");
+            });
+            */
+
+            // 방법2. on메소드      => 동적으로 만들어진 요소에 이벤트 적용안됨
+            /*
+            $("#wrap2>h6").on("click", function(){
+                $("#wrap2").append("<h6>클릭으로 인해 동적으로 만들어진 요소</h6>");
+            })
+            */
+
+            // 방법3.               => 동적으로 만들어진 요소에도 이벤트 적용됨!!
+            $("#wrap2").on("click"," h6", function(){
+                $("#wrap2").append("<h6>클릭으로 인해 동적으로 만들어진 요소</h6>");
+            })
+
+        })
+    </script>
+
+    <hr>
+
+    <h3>* 일회성 이벤트</h3>
+    <p>이벤트를 딱 한번만 연결할 때 사용</p>
+
+    <h6 id="test3">단 한번만 실행~!!!!!!</h6>
+
+    <script>
+        $(function(){
+            $("#test3").one("click", function(){
+                alert("처음이자 마지막 이벤트 발생");
+            })
+        })
+    </script>
+
+    <hr>
+
+    <h3>* 키보드 관련 이벤트</h3>
+
+    <p>
+        - keydown / keypress : 키가 눌려질때 발생하는 이벤트 <br>
+        > keydown : 키보드의 모든 키가 눌려질때 발생됨 <br>
+        > keypress : 키보드의 펑션키, 기능키, 한글 제외한 나머지 키가 눌려질때
+        <br>
+        - keyup : 키가 떼어질때 발생하는 이벤트
+    </p>
+
+    <input type="text" id="test4">
+
+    <script>
+        $(function(){
+            $("#test4").keyup(function(){
+                //console.log("눌려졌음");
+                console.log($(this).val().length);
+            });
+        })
+    </script> 
+
+    <h3>* 동적으로 글자수 세기</h3>
+    <div>
+        150자 내로 작성하시오 <br>
+        <textarea id="content" cols="30" rows="10" style="resize: none;" maxlength="150"></textarea>
+        <br>
+        <span id="count">0</span> / 150
+    </div>
+
+    <script>
+        $(function(){
+
+            $("#content").keyup(function(){
+                $("#count").text($(this).val().length);
+            })
+
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 
 
 </body>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제05_jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <h1>간이 계산기 만들기</h1>
+    첫번째 값 : <input type="number" id="num1">
+    <br>
+    두번째 값 : <input type="number" id="num2">
+    <br>
+    <input type="button" value="+" onclick="caclulator(this.value);">
+    <input type="button" value="-" onclick="caclulator(this.value);">
+    <input type="button" value="*" onclick="caclulator(this.value);">
+    <input type="button" value="/" onclick="caclulator(this.value);">
+    <input type="button" value="%" onclick="caclulator(this.value);">
+    <br><br>
+    계산결과 : <label id="result"></label>
+
+    <script>
+
+        function caclulator(val){
+
+            /*
+            var num1 = document.getElementById("num1");
+            var num2 = document.getElementById("num2");
+            var result = document.getElementById("result");
+
+            switch(val){
+                case "+" : result.innerHTML = Number(num1.value) + Number(num2.value); break;
+                case "-" : result.innerHTML = Number(num1.value) - Number(num2.value); break;
+                case "*" : result.innerHTML = Number(num1.value) * Number(num2.value); break;
+                case "/" : result.innerHTML = Number(num1.value) / Number(num2.value); break;
+                case "%" : result.innerHTML = Number(num1.value) % Number(num2.value); break;
+            }
+            */
+
+           
+            switch(val){
+                case "+" : $("#result").text(Number($("#num1").val()) + Number($("#num2").val())); break;
+                case "-" : $("#result").text(Number($("#num1").val()) - Number($("#num2").val())); break;
+                case "*" : $("#result").text(Number($("#num1").val()) * Number($("#num2").val())); break;
+                case "/" : $("#result").text(Number($("#num1").val()) / Number($("#num2").val())); break;
+                case "%" : $("#result").text(Number($("#num1").val()) % Number($("#num2").val())); break;
+            }
+                
+
+            
+
+        }
+
+    </script>
+</body>
+</html>

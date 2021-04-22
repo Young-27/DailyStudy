@@ -36,13 +36,14 @@
 
     <h2>문제 2. 버튼에 따른 크기 조절이 가능하게 만들어 보시오</h2>
     <div id="box2"></div>
-    <button id="50">50x50</button>
-    <button id="100">원본(100x100)</button>
-    <button id="200">200x200</button>
+    <button onclick="size(50);">50x50</button>
+    <button onclick="size(100);">원본(100x100)</button>
+    <button onclick="size(200);">200x200</button>
 
     <script>
+        /*
         $(function(){
-
+            
             $("#50").click(function(){
                 $("#box2").css({width:50, height:50});
             })
@@ -56,6 +57,18 @@
             })
 
         })
+        */
+
+        function size(num){
+
+            
+            $("#box2").css({width:num + "px", height:num + "px"});
+            
+            
+            
+
+        }
+        
     </script>
 </body>
 </html>

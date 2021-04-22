@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14_시각적인효과메소드2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div style="width: 50px; height: 50px; background: red; opacity: 0.5;"></div>
+    <!-- opacity : 투명도 -->
+
+    <h3>* fadeIn()과 fadeOut(), fadeToggle()</h3>
+    <p>선택된 요소가 점점 투명해지면서 사라지고 점점 선명해지면서 보여지게 해주는 메소드</p>
+
+    <button id="fadeOut">숨기기</button>
+    <button id="fadeIn">보여주기</button>
+    <button id="fadeToggle">토글</button>
+    <br><br>
+
+    <img id="flower2" src="resources/image/flower2.PNG">
+
+    <script>
+        $(function(){ // 이펙트메소드
+            $("#fadeOut").click(function(){
+                $("#flower2").fadeOut(2000);
+            });
+
+            $("#fadeIn").click(function(){
+                $("#flower2").fadeIn(2000);
+            });
+            
+            $("#fadeToggle").click(function(){
+                $("#flower2").fadeToggle(1000);
+            });
+            
+        })
+    </script>
+
+</body>
+</html>
