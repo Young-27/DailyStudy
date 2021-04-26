@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+
+	<!-- 
+		* web.xml 파일 
+		- 배포서술자(DD, Deployment Descriptor)라고 해서 해당 웹 애플리케이션의 기본적인 설정을 위해 작성하는 파일
+		- 해당 웹 애플리케이션을 구동시키는 서버 start시 제일 먼저 읽혀지는 파일
+		- 개발자가 web.xml을 수정하지 않고도 개발 및 운영이 가능하지만 
+		     규모가 커지고 다양한 Filter, Servlet, Wrapper 등등을 사용하게 되면
+		     직접 수정을 해야되는 경우도 있음
+	-->
+
+  <display-name>1_Servlet</display-name>
+  
+  <!-- 
+  	* welcome-file : 처음에 url로 이 애플리케이션 루트로 요청시 제일 먼저 보여지게 되는 메인페이지 지정해놓는 것
+   -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

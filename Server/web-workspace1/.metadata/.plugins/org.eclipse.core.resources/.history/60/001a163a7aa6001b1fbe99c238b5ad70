@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>GET 방식으로 요청 후 응답페이지 받아보기</h1>
+	
+	<p>
+		특징1. GET방식으로 요청하는건 URL의 Header영역에 데이터들을 포함시켜 요청함 <br>
+		=> 사용자가 입력한 값(데이터)들이 URL에 노출됨 <br>
+		=> 보안유지가 불가능함 <br>
+		=> 즉, 로그인이나 회원가입 같은 경우 GET방식이 부적합 함 <br><br>
+		
+		특징2. Header 영역은 전송하는 길이에 제한이 있음 <br>
+		=> 방대한 데이터를 담았을 경우 초과된 데이터는 절단돼서 넘어감 <br>
+		=> 즉, 게시판 작성 같은 경우 GET방식에 부적합함 <br><br>
+		
+		특징3. 장점이라고 한다면 URL에 데이터가 노출되어있기 때문에 즐겨찾기(북마크) 가능(즐겨찾기 해놨다가 해당 그 url 재요청 가능)
+	</p>
+	
+	
+	<form action="" method="">
+	
+	
+	
+	</form>
+	
+	
+</body>
+</html>
