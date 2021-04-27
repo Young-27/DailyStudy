@@ -1,6 +1,8 @@
 package com.kh.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +41,6 @@ public class RequestGetServlet extends HttpServlet {
 		 * 따라서 request의 parameter영역으로부터 전달된 데이터 뽑는 메소드
 		 * > request.getParameter("키값") : String (그에 해당하는 value값)
 		 * > request.getParameterValues("키값") : String[] (그에 해당하는 value값들)
-		 * 
 		 */
 		
 		String name = request.getParameter("name"); // "홍길동" / ""
@@ -76,6 +77,69 @@ public class RequestGetServlet extends HttpServlet {
 		*/
 		
 		// 위와 같은 요청 처리 다 했다는 가정하에 사용자가 보게될 응답 페이지 만들어서 전달할거임!!
+		// 즉, 여기 Java코드 내에 사용자가 보게될 응답 html을 만드는 구문을 작성할거임!
+		
+		// 장점 : Java코드 내에 작성하기 때문에 반복문이나 조건문, 유용한 메소드 같은걸 활용할 수 있음
+		// 단점 : 복잡할 것, 혹시라도 후에 html을 수정하고자 할 때 Java 코드내에서 자바코드를 수정하기
+		//		수정된 내용을 다시 반영시키고자 한다면 서버 재실행(리스타트) 해야됨
+		
+		// * response 객체를 통해 사용자에게 html(응답화면) 전달
+		// 1) 이제부터 내가 출력할 내용은 문서형태의 html이고 문자셋은 utf-8이다 라는 걸 지정
+		response.setContentType("text/html; charset=UTF-8");
+		// 2) 응답하고자 하는 사용자(요청했던 사용자)와의 스트림(클라이언트와의 통로) 생성
+		PrintWriter out = response.getWriter();
+		// 3) 저 스트림을 통해 응답 html구문을 한줄씩 출력
+		out.println("<html>");
+		out.println("<head>");
+		
+		out.println("<style>");
+		
+		out.println("h2{color:red}");
+		out.println("#name{color:orange}");
+		out.println("#age{color:yellow}");
+		out.println("#city{color:blue}");
+		out.println("#height{color:green}");
+		out.println("#gender{color:purple}");
+		
+		out.println("</style>");
+		
+		out.println("</head>");
+		out.println("<body>");
+		
+		out.println("<h2>개인정보응답화면</h2>");
+		
+		//out.println("<span id='name'>" + name + "</span>님은");
+		out.printf("<span id='name'>%s</span>님은 ", name);
+		out.printf("<span id='age'>%d</span>살이며, ", age);
+		out.printf("<span id='city'>%s</span>에 살고  ", city);
+		out.printf("키는 <span id='height'>%.1f</span>cm이고 ", height);
+		out.print("성별은 ");
+		if(gender == null) {
+			out.print("선택을 안했습니다. <br>");
+		}else {
+			if(gender.equals("M")) {
+				out.print("<span id='gender'>남자</span>입니다. <br>");
+			}else {
+				out.print("<span id='gender'>여자</span>입니다. <br>");
+			}
+		}
+		
+		out.print("좋아하는 음식은 ");
+		if(foods == null) {
+			out.print("없습니다. <br>");
+		}else {
+			
+			out.print("<ul>");
+			for(int i=0; i<foods.length; i++) {
+				out.printf("<li>%s</li>", foods[i]);
+			}
+			out.print("</ul>");
+			
+		}
+		
+		out.println("</body>");
+		out.println("</html>");
+		
 		
 	}
 
