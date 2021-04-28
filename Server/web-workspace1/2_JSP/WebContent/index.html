@@ -39,7 +39,42 @@
 	
 	<a href="views/01_ScriptingElement.jsp">View detail &raquo;</a>
 	
-	<h3>2. 지시어 (Directive)</h3>
+	<h3>2. 지시어 (Directive) &lt;%@ page|include|taglib 속성="속성값" ... %&gt;</h3>
+	<p>JSP page 전체에 영향을 미치는 정보를 기술 할 때 쓰임</p>
+	
+	<ol>
+		<li>
+			page 지시어 : 현재의 jsp 페이지를 처리하는데 필요한 각종 속성을 기술하는 부분 <br>
+			<ul>
+				<li>language : 사용할 스크립트 언어 유형을 지정</li>
+				<li>contentType : 웹 브라운저가 받아 볼 해당 페이지의 형식, 인코딩 방식 지정</li>
+				<li>pageEncoding : jsp파일에 기록된 자바코드의 인코딩 방식 지정</li>
+				<li>import : 자바의 import와 같은 의미</li>
+				<li>errorPage : 해당 jsp상에 오류가 발생했을 경우 보여줄 에러페이지의 경로 지정</li>
+			</ul>
+			<a href="views/02_directivePage.jsp">View detail &raquo;</a>
+		</li>
+		<li>
+			include 지시어 : jsp파일에 또다른 jsp를 포함시키고자 할 때 사용하는 지시어 <br>
+			<a href="views/03_directiveInclude.jsp">View detail &raquo;</a>
+		</li>
+		<li>
+			taglib 지시어 : JSP 기능을 좀 더 확장할 수 있는 인자로 추가적인 라이브러리를 등록하는 구문
+		</li>
+	</ol>
+	
+	<hr>
+	
+	<h2>피자주문페이지 -- 주문요청 --> 주문요청을 받아서 처리해주는 Servlet --> 피자결제페이지(응답jsp)</h2>
+	<a href="views/04_pizzaOrderForm.jsp">피자 주문 페이지</a>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </body>
 </html>
