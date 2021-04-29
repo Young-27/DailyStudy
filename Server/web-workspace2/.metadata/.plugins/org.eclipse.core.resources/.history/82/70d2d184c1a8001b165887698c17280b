@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 
+		
+		* 회원서비스		| C (Insert) | R (Select) | U (Update) | D (Delete)
+		=====================================================================
+			로그인		|			 |		O	  |			   |
+			회원가입		|	   O 	 |			  |			   |
+			마이페이지		|			 |	    O	  |			   |
+		
+	 -->
+	
+	
+	
+	잘 실행되나?
+
+</body>
+</html>

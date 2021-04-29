@@ -1,0 +1,21 @@
+package com.kh.common;
+
+import java.sql.Connection;
+import java.util.Properties;
+
+public class JDBCTemplate {
+
+	// 1. Connection객체 생성(DB접속)한 후 해당 Connection 반환하는 메소드
+	public static Connection getConnection() {
+		
+		Properties prop = new Properties(); // Map계열컬렉션(key-value)
+		
+		
+		// 1) jdbc driver 등록
+		
+		// 2) DB와 접속된 Connection 객체 생성
+		
+	}
+	
+	
+}
