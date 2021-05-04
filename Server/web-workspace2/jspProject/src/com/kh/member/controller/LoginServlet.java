@@ -85,6 +85,7 @@ public class LoginServlet extends HttpServlet {
 			// Servlet에서 JSP내장객체인 session에 접근하고자 한다면 우선 세션 객체를 얻어와야됨
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("alertMsg", "성공적으로 로그인 되었습니다.");
 			
 			// 1. 포워딩방식 응답뷰 출력하기 
 			//    해당 선택된 jsp가 보여질 뿐 url에는 여전히 현재 이 서블릿 매핑값이 남아있을 것
