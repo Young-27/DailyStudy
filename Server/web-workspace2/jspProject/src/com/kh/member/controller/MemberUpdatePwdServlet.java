@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
+
 /**
- * Servlet implementation class MyPageServlet
+ * Servlet implementation class MemberUpdatePwdServlet
  */
-@WebServlet("/myPage.me")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/updatePwd.me")
+public class MemberUpdatePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageServlet() {
+    public MemberUpdatePwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +32,21 @@ public class MyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// url로 직접 요청도 가능하기 때문에
-		// 로그인 전 요청 시 => 마이페이지 alert
-		// 로그인 후 요청 시 => 마이페이지 포워딩
-		HttpSession session = request.getSession();
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
+		String updatePwd = request.getParameter("updatePwd");
 		
-		if(session.getAttribute("loginUser") == null) { // 로그인 전
-			
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
-			response.sendRedirect(request.getContextPath());
-			
-			
-		}else{ // 로그인 후
-			request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
+		Member updateMem = new MemberService().updatePwdMember(userId, userPwd, updatePwd);
+		
+		HttpSession session = request.getSession();
+		if(updateMem == null) { // 실패 => 마이페이지 alert
+			session.setAttribute("alertMsg", "비밀번호 변경에 실패했습니다.");
+		}else { // 성공 => 마이페이지 alert
+			session.setAttribute("alertMsg", "성공적으로 비밀번호가 변경 되었습니다.");
+			session.setAttribute("loginUser", updateMem);
 		}
 		
-		
-		
+		response.sendRedirect(request.getContextPath() + "/myPage.me");
 		
 	}
 

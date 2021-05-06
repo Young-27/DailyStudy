@@ -42,5 +42,77 @@ public class MemberService {
 		return result;
 		
 	}
+	
+	public Member updateMember(Member m) {
+		Connection conn = getConnection();
+		int result = new MemberDao().updateMember(conn, m);
+		
+		Member updateMem = null;
+		if(result > 0) {
+			commit(conn);
+			// 갱신된 회원 객체 다시 조회해오기
+			updateMem = new MemberDao().selectMember(conn, m.getUserId());
+			
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return updateMem;
+		
+		
+	}
+	
+	
+	public Member updatePwdMember(String userId, String userPwd, String updatePwd) {
+	
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updatePwdMember(conn, userId, userPwd, updatePwd);
+		
+		Member updateMem = null;
+		if(result > 0) {
+			commit(conn);
+			updateMem = new MemberDao().selectMember(conn, userId);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return updateMem;
+		
+	}
+	
+	public Member deleteMember(String userId, String userPwd) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, userId, userPwd);
+		
+		Member delMem = null;
+		if(result > 0) {
+			commit(conn);
+			delMem = new MemberDao().selectMember(conn, userId);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return delMem;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
