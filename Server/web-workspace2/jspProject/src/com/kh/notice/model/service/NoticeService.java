@@ -25,27 +25,89 @@ public class NoticeService {
 		
 	}
 	
-	public Notice insertNotice(Notice n) {
+	public int insertNotice(Notice n) {
 		
 		Connection conn = getConnection();
 		int result = new NoticeDao().insertNotice(conn, n);
 		
-		Notice list = null;
-		
 		if(result > 0) {
 			commit(conn);
-			list = new Notice(
-							 n.getNoticeNo(),
-							 n.getNoticeTitle(),
-							 n.getNoticeContent(),
-							 n.getNoticeWriter()); 
 		} else {
 			rollback(conn);
 		}
 		
-		return list;
+		return result;
 		
 		
 	}
+	
+	
+	public int increaseCount(int noticeNo) {
+		Connection conn = getConnection();
+		int result = new NoticeDao().increaseCount(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	public Notice selectNotice(int noticeNo) {
+		
+		Connection conn = getConnection();
+		Notice n = new NoticeDao().selectNotice(conn, noticeNo);
+		close(conn);
+		return n;
+		
+	}
+	
+	public int updateNotice(Notice n) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().updateNotice(conn, n);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
+	
+	public int deleteNotice(int noticeNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().deleteNotice(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -7,23 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.vo.Member;
 import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeInsertController
+ * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/insert.no")
-public class NoticeInsertController extends HttpServlet {
+@WebServlet("/update.no")
+public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeInsertController() {
+    public NoticeUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,36 +33,25 @@ public class NoticeInsertController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		HttpSession session = request.getSession();
-		
-		String userNo = Integer.toString((((Member)session.getAttribute("loginUser")).getUserNo()));
+		int noticeNo = Integer.parseInt(request.getParameter("nno"));
 		String noticeTitle = request.getParameter("title");
 		String noticeContent = request.getParameter("content");
-		//String noticeWriter = Integer.toString(((Member)session.getAttribute("loginUser")).getUserNo()); // "1"
-		
-		//Notice n = new Notice(noticeTitle, noticeContent, noticeWriter);
 		
 		Notice n = new Notice();
-		n.setNoticeWriter(userNo);
+		n.setNoticeNo(noticeNo);
 		n.setNoticeTitle(noticeTitle);
 		n.setNoticeContent(noticeContent);
 		
-		//Notice list = new NoticeService().insertNotice(n);
+		int result = new NoticeService().updateNotice(n);
 		
-		int result = new NoticeService().insertNotice(n);
-		
-		if(result > 0) { // 성공했을 경우 => /jsp/list.no		url 요청 => 리스트페이지가 보여지게끔
+		if(result > 0) { // 성공 => /detail.no?nno=해당글번호  url재요청 => 상세보기 페이지 보이게
 			
-			//session.setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다.");
-			//response.sendRedirect(request.getContextPath() + "/list.no");
+			request.getSession().setAttribute("alertMsg", "공지사항 수정을 성공했습니다.");
+			response.sendRedirect(request.getContextPath() + "/detail.no?nno=" + n.getNoticeNo());
 			
-			request.getSession().setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.no");
-		} else {
-			request.setAttribute("errorMsg", "공지사항 등록 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		} else { // 실패 => 에러페이지로 보여지도록 에러문구
+			request.setAttribute("errorMsg", "수정에 실패했습니다.");
 		}
-		
 		
 		
 	}
