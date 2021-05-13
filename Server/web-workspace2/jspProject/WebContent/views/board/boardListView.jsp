@@ -4,6 +4,11 @@
 <% 
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -40,10 +45,12 @@
 
 
         <!-- 로그인한 회원만 보여지는 버튼 -->
-        <div align="right" style="width: 850px;">
-            <a href="">글작성</a>
-            <br><br>
-        </div>
+        <% if(loginUser != null){ %>
+	        <div align="right" style="width: 850px;">
+	            <a href="<%= contextPath %>/enrollForm.bo" class="btn btn-secondary btn-sm">글작성</a>
+	            <br><br>
+	        </div>
+	    <% } %>
 
         <table align="center" class="list-area">
             <thead>
@@ -74,8 +81,7 @@
 	                	</tr>
                 	<% } %>         	
             	<% } %>
-            
-                
+            	
             </tbody>
         </table>
 
@@ -83,16 +89,42 @@
 
         <div align="center" class="paging-area">
 			
-			<% if(pi.getStartPage() != 1){ %> <!-- 왼쪽버튼 눌렀을때 빈페이지가 뜨지 않도록 조건설정 -->
+			<% if(currentPage != 1){ %>
+				<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=currentPage-1%>';"> &lt; </button>
+			<% } %>
+			
+			<% for(int p=startPage; p<=endPage; p++){ %>
+				
+				<% if(p != currentPage){ %>
+            		<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%= p %>';"><%= p %></button>
+            	<% } else { %> <!-- 지금 보고있는 페이지일 경우 클릭이 되지 않게 설정 -->
+            		<button disabled><%= p %></button>
+            	<% } %>	
+            		
+            <% } %>
+            
+            <% if(currentPage != maxPage){ %>
+            	<button onclick="location.href='<%=contextPath%>/list.bo?currentPage=<%=currentPage+1%>';"> &gt; </button>
+            <% } %>
+			
+        </div>
+        
+        
+        
+        <div style="display:none"> <!-- 내가 해본거,, -->
+        	<% if(pi.getStartPage() != 1){ %> <!-- 왼쪽버튼 눌렀을때 빈페이지가 뜨지 않도록 조건설정 -->
             	<button> <a href="<%=contextPath + "/list.bo?currentPage=" + (pi.getStartPage() - 1)%>">&lt;</a> </button>
             <% } else { %>
             	<button> <a href="<%=contextPath + "/list.bo?currentPage=" + (pi.getStartPage())%>">&lt;</a> </button>
             <% } %>
 			
+			
 			<!-- 최대 페이징 수(10) 만큼 버튼이 반복되게 하기 -->
-			<% for(int i=pi.getStartPage(); i<=pi.getEndPage(); i++){ %>
+			<% for(int i=pi.getStartPage(); i<=pi.getEndPage(); i++){ %> 
             	<button><a href="<%=contextPath + "/list.bo?currentPage=" + i%>"><%=i%></a></button>
             <% } %>
+            
+            
             
             <% if((pi.getEndPage()+1) <= pi.getMaxPage()){ %> <!-- 오른쪽버튼 눌렀을때 빈페이지가 뜨지 않도록 조건설정 -->
             	<button> <a href="<%=contextPath + "/list.bo?currentPage=" + (pi.getEndPage() + 1)%>"> &gt; </a> </button>
