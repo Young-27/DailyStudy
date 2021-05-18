@@ -1,0 +1,16 @@
+package com.kh.board.model.vo;
+
+public class Board {
+	
+	private int boardNo;
+	private int boardType;
+	private String category;
+	private String boardTitle;
+	private String boardContent;
+	private String boardWriter;
+	private int count;
+	private date createDate;
+	private String status;
+	
+	
+}

@@ -1,0 +1,100 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="com.kh.common.model.vo.PageInfo, java.util.ArrayList, com.kh.board.model.vo.Board" %>
+<% 
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+    .outer{
+        width: 1000px;
+        height: 550px;
+        background-color:lightsteelblue;
+        color: lightyellow;
+        margin: auto;
+        margin-top: 50px;
+    }
+    .list-area{
+        border: 1px solid lightyellow;
+        text-align: center;
+    }
+    .list-area>tbody>tr:hover{
+        background-color: gray;
+        cursor: pointer;
+    }
+</style>
+<body>
+	
+	<%@include file="../common/menubar.jsp"%>
+
+    <div class="outer">
+        <br>
+        <h2 align="center">일반게시판</h2>
+        <br>
+
+
+        <!-- 로그인한 회원만 보여지는 버튼 -->
+        <div align="right" style="width: 850px;">
+            <a href="">글작성</a>
+            <br><br>
+        </div>
+
+        <table align="center" class="list-area">
+            <thead>
+                <tr>
+                    <th width="70">글번호</th>
+                    <th width="70">카테고리</th>
+                    <th width="300">제목</th>
+                    <th width="100">작성자</th>
+                    <th width="50">조회수</th>
+                    <th width="100">작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            	<% if(list.isEmpty()){ %>
+            		<tr>
+            			<td colspan="6">조회된 리스트가 없습니다.</td>
+            		</tr>
+            	<% } else { %>
+            		<% for(Board b : list){ %>
+				   		<tr>
+		                    <td><%= b.getBoardNo() %></td>
+		                    <td><%= b.getCategory() %></td>
+		                    <td><%= b.getBoardTitle() %></td>
+		                    <td><%= b.getBoardWriter() %></td>
+		                    <td><%= b.getCount() %></td>
+		                    <td><%= b.getCreateDate() %></td>
+	                	</tr>
+                	<% } %>         	
+            	<% } %>
+            
+                
+            </tbody>
+        </table>
+
+        <br><br>
+
+        <div align="center" class="paging-area">
+
+            <button> <a href="<%=contextPath + "/list.bo?currentPage=" +)%>">&lt;</a> </button>
+			
+			<!-- 최대 페이징 수(10) 만큼 버튼이 반복되게 하기 -->
+			<% for(int i=pi.getStartPage(); i<=pi.getEndPage(); i++){ %>
+            	<button><a href="<%=contextPath + "/list.bo?currentPage=" + i%>"><%=i%></a></button>
+            <% } %>
+
+            <button> <a href="<%=contextPath + "/list.bo?currentPage=" + pi.getStartPage()%>>&gt;</a> </button>
+
+        </div>
+
+    </div>
+	
+</body>
+</html>

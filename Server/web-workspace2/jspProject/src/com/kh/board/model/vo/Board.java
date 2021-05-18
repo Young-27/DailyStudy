@@ -14,6 +14,8 @@ public class Board {
 	private Date createDate;
 	private String status;
 	
+	private String titleImg; // "resources/thumbnail_upfiles/~~~~.png"
+	
 	public Board() {}
 
 	public Board(int boardNo, int boardType, String category, String boardTitle, String boardContent,
@@ -30,7 +32,6 @@ public class Board {
 		this.status = status;
 	}
 	
-	
 
 	public Board(int boardNo, String category, String boardTitle, String boardWriter, int count, Date createDate) {
 		super();
@@ -39,6 +40,18 @@ public class Board {
 		this.boardTitle = boardTitle;
 		this.boardWriter = boardWriter;
 		this.count = count;
+		this.createDate = createDate;
+	}
+	
+
+	public Board(int boardNo, String category, String boardTitle, String boardContent, String boardWriter,
+			Date createDate) {
+		super();
+		this.boardNo = boardNo;
+		this.category = category;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardWriter = boardWriter;
 		this.createDate = createDate;
 	}
 
@@ -112,6 +125,14 @@ public class Board {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public String getTitleImg() {
+		return titleImg;
+	}
+
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
 	}
 
 	@Override

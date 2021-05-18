@@ -1,0 +1,16 @@
+package com.kh.board.model.service;
+
+import static com.kh.common.JDBCTemlplate.*;
+
+import java.sql.Connection;
+
+public class BoardService {
+
+	public int selectListCount() {
+		
+		Connection conn = getConnection();
+		
+	}
+	
+	
+}

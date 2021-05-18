@@ -1,0 +1,17 @@
+package com.kh.common;
+
+import java.io.File;
+
+import com.oreilly.servlet.multipart.FileRenamePolicy;
+
+public class MyFileRenamePolicy implements FileRenamePolicy{
+	
+	// 기존의 파일(원본파일)을 전달 받아서 파일명 수정 작업 후 수정된 파일을 반환해주는 메소드
+	@Override
+	public File rename(File arg0) {
+		return null;
+	}
+	
+	
+
+}

@@ -1,0 +1,18 @@
+package com.kh.board.model.vo;
+
+import java.sql.Date;
+
+public class Board {
+	
+	private int boardNo;
+	private int boardType;
+	private String category;
+	private String boardTitle;
+	private String boardContent;
+	private String boardWriter;
+	private int count;
+	private Date createDate;
+	private String status;
+	
+	
+}

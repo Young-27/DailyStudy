@@ -91,7 +91,7 @@
     	$(function(){
     		$(".list-area>tbody>tr").click(function(){
     			//console.log("클릭됨");
-    			var nno = $(this).children().eq(0).text(); // eq????.text???!
+    			var nno = $(this).children().eq(0).text(); 
     			//console.log(nno);
     			
     			// 요청할url?키=밸류&키=밸류	=> 요청시 전달값(?키=밸류) == 쿼리스트링
