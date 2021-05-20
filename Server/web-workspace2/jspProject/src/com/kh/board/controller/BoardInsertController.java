@@ -55,7 +55,7 @@ public class BoardInsertController extends HttpServlet {
 			 * 1mbyte == 1024kbyte == 1024*1024byte
 			 * 10byte == 10*1024*1024byte
 			 */
-			int maxSize = 10*1024*1024;
+			int maxSize = 10*1024*1024; 
 			
 			// 1_2. 전달된 파일을 저장할 서버의 폴더 경로 알아내기 (String savePath)
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles/"); 
