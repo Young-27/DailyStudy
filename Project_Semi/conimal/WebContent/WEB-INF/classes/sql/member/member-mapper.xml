@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	   <entry key="loginMember">
+      SELECT
+             MEM_NO
+           , MEM_ID
+           , MEM_PWD
+           , MEM_NAME
+           , EMAIL
+           , ENROLL_DATE
+           , STATUS
+           , MEM_CODE
+             , SH_NAME
+             , SH_PHONE
+             , SH_ADDRESS
+             , SH_ABOUT
+             , ADMISSION
+             , SH_LOCAL
+             , REF_TYPE
+        FROM MEMBER
+          LEFT JOIN SHELTER USING(MEM_NO)
+       WHERE MEM_ID = ?
+         AND MEM_PWD = ?
+         AND STATUS = 'Y'
+   </entry>
+	
+	
+	<entry key="insertMember">
+		INSERT
+		    INTO MEMBER 
+		    (
+		         MEM_NO
+		       , MEM_ID
+		       , MEM_PWD
+		       , MEM_NAME
+		       , EMAIL
+		       , MEM_CODE
+		    )
+		    VALUES
+		    (
+		        SEQ_UNO.NEXTVAL
+		      , ?
+		      , ?
+		      , ?
+		      , ?
+		      , '3'
+		    )
+	</entry>
+	
+	<entry key="idCheck">
+		SELECT
+				COUNT(*)
+		 FROM MEMBER
+		 WHERE MEM_ID = ?
+	 </entry>
+	
+		<entry key="searchMember">
+			SELECT 
+			        MEM_NO
+			      , MEM_ID
+			      , MEM_PWD
+			      , MEM_NAME
+			      , EMAIL
+			      , ENROLL_DATE
+			      , STATUS
+			      , MEM_CODE
+			FROM MEMBER
+			WHERE MEM_NAME = ?
+			 AND EMAIL = ?
+			 AND STATUS = 'Y'
+		
+		</entry>
+		
+		
+		<entry key="searchPwdMember">
+			SELECT 
+			        MEM_NO
+			      , MEM_ID
+			      , MEM_PWD
+			      , MEM_NAME
+			      , EMAIL
+			      , ENROLL_DATE
+			      , STATUS
+			      , MEM_CODE
+			FROM MEMBER
+			WHERE MEM_NAME = ?
+			 AND EMAIL = ?
+			 AND MEM_ID=?
+			 AND STATUS = 'Y'
+		
+		</entry>
+		
+		<entry key="changePwdMember">
+			UPDATE 
+			      MEMBER
+			  SET MEM_PWD=?
+			WHERE MEM_NO=? 
+		</entry>
+		
+		<entry key="insertSh">
+			INSERT
+			  INTO MEMBER
+			     (
+			  	   MEM_NO
+			  	 , MEM_ID
+			     , MEM_PWD
+			     , MEM_NAME
+			     , EMAIL
+			     , MEM_CODE
+			     , STATUS
+			     )
+			     VALUES
+			     (
+			     SEQ_UNO.NEXTVAL
+			     , ?
+			     , ?
+			     , ?
+			     , ?
+			     , ?
+			     , 'N'
+			     )
+		</entry>
+		
+		<entry key="selectMember">
+		SELECT 
+		       MEM_NO
+		     , MEM_ID
+		     , MEM_PWD
+		     , MEM_NAME
+		     , EMAIL
+		     , ENROLL_DATE
+		     , STATUS
+		     , MEM_CODE
+		     , SH_NAME
+		     , SH_PHONE
+		     , SH_ADDRESS
+		     , SH_ABOUT
+		     , ADMISSION
+		     , SH_LOCAL
+		     , REF_TYPE
+		  FROM MEMBER
+		  LEFT JOIN SHELTER USING (MEM_NO)
+		 WHERE STATUS = 'Y'
+		   AND MEM_NO = ?
+		 ORDER 
+		    BY ENROLL_DATE DESC
+	</entry>
+	
+	<entry key="selectMember1">
+		SELECT 
+		       MEM_NO
+		     , MEM_ID
+		     , MEM_PWD
+		     , MEM_NAME
+		     , EMAIL
+		     , ENROLL_DATE
+		     , STATUS
+		     , MEM_CODE
+		     , SH_NAME
+		     , SH_PHONE
+		     , SH_ADDRESS
+		     , SH_ABOUT
+		     , ADMISSION
+		     , SH_LOCAL
+		     , REF_TYPE
+		  FROM MEMBER
+		  LEFT JOIN SHELTER USING (MEM_NO)
+		 WHERE STATUS = 'Y'
+		   AND MEM_ID = ?
+		 ORDER 
+		    BY ENROLL_DATE DESC
+	</entry>
+	
+	<entry key="updateMember">
+	UPDATE MEMBER
+	   SET EMAIL = ?
+	 WHERE MEM_ID = ? 
+	
+	</entry>
+	
+	<entry key="updatePwdMember">
+	UPDATE MEMBER
+	   SET MEM_PWD = ?
+	 WHERE MEM_ID = ?
+	   AND MEM_PWD = ? 
+	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE
+		       MEMBER
+		   SET STATUS = 'N'
+		 WHERE MEM_ID = ?
+		   AND MEM_PWD = ?
+	</entry>
+	
+	<entry key="imDeleteMember">
+		UPDATE
+			   MEMBER
+		   SET STATUS = 'N'
+		 WHERE MEM_NO = ?
+	</entry>
+	
+	<entry key="selectMemberList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                  SELECT 
+		                         MEM_NO
+		                       , MEM_ID
+		                       , MEM_PWD
+		                       , MEM_NAME
+		                       , EMAIL
+		                       , ENROLL_DATE
+		                       , STATUS
+		                       , MEM_CODE
+		                    FROM MEMBER
+		                   WHERE STATUS = 'Y'
+		                   ORDER 
+		                      BY ENROLL_DATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="searchMemberList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                  SELECT 
+		                         MEM_NO
+		                       , MEM_ID
+		                       , MEM_PWD
+		                       , MEM_NAME
+		                       , EMAIL
+		                       , ENROLL_DATE
+		                       , STATUS
+		                       , MEM_CODE
+		                    FROM MEMBER
+		                   WHERE STATUS = 'Y'
+		                     AND MEM_ID LIKE '%' || ? || '%'
+		                   ORDER 
+		                      BY ENROLL_DATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+		
+	</entry>
+	
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT
+  		  FROM MEMBER
+  		 WHERE STATUS = 'Y'
+	</entry>
+	
+	<entry key="searchListCount">
+		SELECT COUNT(*) COUNT
+  		  FROM MEMBER
+  		 WHERE STATUS = 'Y'
+  		   AND MEM_ID LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="imUpdateMember">
+		UPDATE 
+			   MEMBER
+		   SET MEM_NAME = ?,
+		       EMAIL = ?
+		 WHERE MEM_NO = ?
+	</entry>
+	
+	<entry key="imUpdateShelter">
+		UPDATE 
+		  	   SHELTER
+		   SET 
+	           SH_PHONE = ?,
+	           SH_ADDRESS = ?,
+	           SH_ABOUT = ?
+		 WHERE MEM_NO = ?
+	</entry>
+
+
+</properties>

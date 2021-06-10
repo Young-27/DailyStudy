@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM VOLUNTEER     
+	</entry>
+	
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       VOL_NO
+		                     , VOL_TITLE
+		                     , VOL_WRITEDATE
+		                     , MEM_ID
+		                     , VOL_COUNT
+		                  FROM VOLUNTEER
+		                  JOIN MEMBER USING(MEM_NO)
+		                 ORDER
+		                    BY VOL_WRITEDATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE
+		       VOLUNTEER
+		   SET VOL_COUNT = VOL_COUNT + 1
+		 WHERE VOL_NO = ?      
+	</entry>
+	
+	<entry key="selectVolunteer">
+		SELECT
+		       VOL_TITLE
+		     , SH_NAME
+		     , SPERIOD
+		     , SH_PHONE
+		     , SH_ADDRESS
+		     , VOL_CONTENT
+		  FROM VOLUNTEER
+		  JOIN SHELTER USING(MEM_NO)
+		 WHERE VOL_NO = ? 
+	</entry>
+	
+	<entry key="selectListCountByKeyword">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM VOLUNTEER 
+		 WHERE VOL_TITLE LIKE ? 
+	</entry>
+	
+	<entry key="selectByKeyword">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       VOL_NO
+		                     , VOL_TITLE
+		                     , VOL_WRITEDATE
+		                     , MEM_ID
+		                     , VOL_COUNT
+		                  FROM VOLUNTEER
+		                  JOIN MEMBER USING(MEM_NO)
+		                 ORDER BY VOL_WRITEDATE DESC
+		                ) A
+                 WHERE VOL_TITLE LIKE ?
+		        )
+		 WHERE RNUM BETWEEN ? AND ?		 
+	</entry>
+	
+	<entry key="selectVolunteerList">
+	SELECT VOL_NO, VOL_TITLE, VOL_WRITEDATE, MEM_NO, VOL_COUNT
+	FROM VOLUNTEER V JOIN MEMBER M USING(MEM_NO)
+	ORDER BY VOL_WRITEDATE DESC </entry>
+	
+</properties>

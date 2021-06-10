@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectDogCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM ANIMAL
+		 WHERE AN_SPECIES = '강아지'
+	</entry>
+	<entry key="selectAnimalList">
+		SELECT 
+		AN_NO, AN_TITLE, AN_PLACE, AN_DATE, AN_SPECIES, AN_WRITEDATE, AN_CONTENT
+		FROM ANIMAL A
+		JOIN MEMBER M USING(MEM_NO) 
+	</entry>
+
+	<entry key="insertAnimal">
+		INSERT
+		INTO ANIMAL
+		(AN_NO, AN_TITLE, AN_PLACE, AN_DATE, AN_SPECIES, AN_GENDER, AN_CONTENT, MEM_NO)
+		VALUES
+		(SEQ_ANO.NEXTVAL, ?, ?, ?, ?, ?, ?, ?) 
+	</entry>
+	
+	<entry key="selectCatCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM ANIMAL
+		 WHERE AN_SPECIES = '고양이'
+	</entry>
+	
+	<entry key="selectDogList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       AN_NO 
+		                     , AN_TITLE
+		                  FROM ANIMAL
+		                 WHERE AN_SPECIES = '강아지'
+		                 ORDER
+		                    BY AN_WRITEDATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectCatList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       AN_NO 
+		                     , AN_TITLE
+		                  FROM ANIMAL
+		                 WHERE AN_SPECIES = '고양이'
+		                 ORDER
+		                    BY AN_WRITEDATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE
+		       ANIMAL
+		   SET AN_COUNT = AN_COUNT + 1
+		 WHERE AN_NO = ?     
+	</entry>
+	
+	<entry key="selectAnimal">
+		SELECT
+		       AN_NO
+		     , SH_NAME
+		     , AN_GENDER
+		     , AN_DATE
+		     , AN_PLACE
+		     , AN_CONTENT
+		  FROM ANIMAL
+		  JOIN SHELTER USING(MEM_NO)
+		 WHERE AN_NO = ?
+	</entry>
+	
+	<entry key="insertBookMark">
+		INSERT
+		  INTO BOOKMARK
+		     (
+		       MEM_NO
+		     , BINFO_NO
+		     , MARK_DATE
+		     )
+		VALUES
+		     (
+		       ?
+		     , ?
+		     , SYSDATE
+		     )     
+	</entry>
+	
+	<entry key="selectDogCountByKeyword">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM ANIMAL
+		 WHERE AN_CONTENT LIKE ?
+		   AND AN_SPECIES = '강아지'
+	</entry>
+	
+	<entry key="selectDogListByKeyword">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       AN_NO 
+		                     , AN_TITLE
+		                  FROM ANIMAL
+		                 WHERE AN_SPECIES = '강아지'
+                           AND AN_CONTENT LIKE ?
+		                 ORDER
+		                    BY AN_WRITEDATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectCatCountByKeyword">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM ANIMAL
+		 WHERE AN_CONTENT LIKE ?
+		   AND AN_SPECIES = '고양이'
+	</entry>
+	
+	<entry key="selectCatListByKeyword">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       AN_NO 
+		                     , AN_TITLE
+		                  FROM ANIMAL
+		                 WHERE AN_SPECIES = '고양이'
+                           AND AN_CONTENT LIKE ?
+		                 ORDER
+		                    BY AN_WRITEDATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="insertAnimal">
+		INSERT
+		  INTO ANIMAL
+		     (  AN_NO
+		     , AN_TITLE
+		     , AN_PLACE
+		     , AN_DATE
+		     , AN_SPECIES
+		     , AN_GENDER
+		     , AN_CONTENT
+		     , MEM_NO
+		     )
+		     VALUES
+		     (
+		     SEQ_ANO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+
+	<entry key="insertAttachment">
+		INSERT
+		  INTO ATTACHMENT
+		     ( FILE_NO
+		     , REF_BNO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		     )
+		     VALUES
+		     (
+		     SEQ_FNO.NEXTVAL
+		     , SEQ_ANO.CURRVAL
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+	
+	
+</properties>

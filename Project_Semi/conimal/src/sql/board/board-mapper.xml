@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                  SELECT B_NO, REF_TYPE, TITLE, WRITER, B_DATE, B_COUNT
+		                  FROM 
+		                       (
+		                        SELECT ADOPT_NO AS B_NO, REF_TYPE, ADOPT_TITLE AS TITLE, ADOPT_WRITER AS WRITER, ADOPT_DATE AS B_DATE, COUNT AS B_COUNT
+		                          FROM ADOPT
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT AN_NO, REF_TYPE, AN_TITLE, MEM_NO, AN_WRITEDATE, AN_COUNT
+		                          FROM ANIMAL
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT CPOST_NO, REF_TYPE, CPOST_TITLE, CUSER_ID, CPOST_DATE, CPOST_COUNT
+		                        FROM C_POST
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT DO_NO, REF_TYPE, DO_TITLE, MEM_NO, DO_WRITEDATE, DO_COUNT
+		                        FROM DONATION
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT VOL_NO, REF_TYPE, VOL_TITLE, MEM_NO, VOL_WRITEDATE, VOL_COUNT
+		                         FROM VOLUNTEER
+		                        )
+		                    ORDER
+		                       BY B_DATE DESC
+		                ) A
+		        )
+	</entry>
+	
+	<entry key="selectBoardList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                  SELECT B_NO, REF_TYPE, TITLE, WRITER, B_DATE, B_COUNT
+		                  FROM 
+		                       (
+		                        SELECT ADOPT_NO AS B_NO, REF_TYPE, ADOPT_TITLE AS TITLE, ADOPT_WRITER AS WRITER, ADOPT_DATE AS B_DATE, COUNT AS B_COUNT
+		                          FROM ADOPT
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT AN_NO, REF_TYPE, AN_TITLE, MEM_NO, AN_WRITEDATE, AN_COUNT
+		                          FROM ANIMAL
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT CPOST_NO, REF_TYPE, CPOST_TITLE, CUSER_ID, CPOST_DATE, CPOST_COUNT
+		                        FROM C_POST
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT DO_NO, REF_TYPE, DO_TITLE, MEM_NO, DO_WRITEDATE, DO_COUNT
+		                        FROM DONATION
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT VOL_NO, REF_TYPE, VOL_TITLE, MEM_NO, VOL_WRITEDATE, VOL_COUNT
+		                         FROM VOLUNTEER
+		                        )
+		                    ORDER
+		                       BY B_DATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="searchListCount">
+		SELECT COUNT(*) COUNT
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                  SELECT B_NO, REF_TYPE, TITLE, WRITER, B_DATE, B_COUNT
+		                  FROM 
+		                       (
+		                        SELECT ADOPT_NO AS B_NO, REF_TYPE, ADOPT_TITLE AS TITLE, ADOPT_WRITER AS WRITER, ADOPT_DATE AS B_DATE, COUNT AS B_COUNT
+		                          FROM ADOPT
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT AN_NO, REF_TYPE, AN_TITLE, MEM_NO, AN_WRITEDATE, AN_COUNT
+		                          FROM ANIMAL
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT CPOST_NO, REF_TYPE, CPOST_TITLE, CUSER_ID, CPOST_DATE, CPOST_COUNT
+		                        FROM C_POST
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT DO_NO, REF_TYPE, DO_TITLE, MEM_NO, DO_WRITEDATE, DO_COUNT
+		                        FROM DONATION
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT VOL_NO, REF_TYPE, VOL_TITLE, MEM_NO, VOL_WRITEDATE, VOL_COUNT
+		                         FROM VOLUNTEER
+		                        )
+		                    ORDER
+		                       BY B_DATE DESC
+		                ) A
+		        )
+  		 WHERE TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="searchBoardList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                  SELECT B_NO, REF_TYPE, TITLE, WRITER, B_DATE, B_COUNT
+		                  FROM 
+		                       (
+		                        SELECT ADOPT_NO AS B_NO, REF_TYPE, ADOPT_TITLE AS TITLE, ADOPT_WRITER AS WRITER, ADOPT_DATE AS B_DATE, COUNT AS B_COUNT
+		                          FROM ADOPT
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT AN_NO, REF_TYPE, AN_TITLE, MEM_NO, AN_WRITEDATE, AN_COUNT
+		                          FROM ANIMAL
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT CPOST_NO, REF_TYPE, CPOST_TITLE, CUSER_ID, CPOST_DATE, CPOST_COUNT
+		                        FROM C_POST
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT DO_NO, REF_TYPE, DO_TITLE, MEM_NO, DO_WRITEDATE, DO_COUNT
+		                        FROM DONATION
+		                      
+		                        UNION ALL
+		                    
+		                        SELECT VOL_NO, REF_TYPE, VOL_TITLE, MEM_NO, VOL_WRITEDATE, VOL_COUNT
+		                         FROM VOLUNTEER
+		                        )
+		                    WHERE TITLE LIKE '%' || ? || '%'
+		                    ORDER
+		                       BY B_DATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+</properties>

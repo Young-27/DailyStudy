@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectListCount1">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM ( select DO_NO,
+					        	   DO_TITLE,
+					        	   DO_CONTENT,
+					        	   DO_WRITEDATE,
+					        	   DO_ADMISSION,
+					        	   a.MEM_NO,
+					        	   a.REF_TYPE,
+					        	   DO_COUNT,
+					        	   SH_NAME,
+					        	   SH_PHONE,
+					        	   FILE_NO,
+					        	   REF_NO,
+					        	   ORIGIN_NAME,
+					        	   CHANGE_NAME,
+					        	   FILE_PATH,
+					        	   UPLOAD_DATE
+					        	   
+					       
+							from donation a, attachment b, shelter c
+							where (a.ref_type=b.ref_type and a.do_no=b.ref_no and c.mem_no=a.mem_no) and (do_title like ? or do_content like ? or sh_name like ?)
+							order by do_writedate desc)	
+	</entry>
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM DONATION     
+	</entry>
+	
+<entry key="selectPostList">
+SELECT DO_NO, 
+	   DO_TITLE,
+	   DO_CONTENT,
+	   DO_WRITEDATE, 
+	   DO_ADMISSION,
+	    MEM_NO,
+	     REF_TYPE, 
+	     DO_COUNT
+	     FROM DONATION D JOIN MEMBER M 
+	     USING(MEM_NO)
+	     ORDER BY DO_WRITEDATE DESC
+ </entry>
+ 
+<entry key="selectDonationList">
+	 
+ SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (		                      
+		                         
+					        select DO_NO,
+					        	   DO_TITLE,
+					        	   DO_CONTENT,
+					        	   DO_WRITEDATE,
+					        	   DO_ADMISSION,
+					        	   a.MEM_NO,
+					        	   b.REF_TYPE,
+					        	   DO_COUNT,
+					        	   SH_NAME,
+					        	   SH_PHONE,
+					        	   FILE_NO,
+					        	   REF_NO,
+					        	   ORIGIN_NAME,
+					        	   CHANGE_NAME,
+					        	   FILE_PATH,
+					        	   UPLOAD_DATE
+					        	   
+					       
+							from donation a, attachment b, shelter c
+							where (a.ref_type=b.ref_type and a.do_no=b.ref_no and c.mem_no=a.mem_no) and (do_title like ? or do_content like ? or sh_name like ?)
+							order by do_writedate desc
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       DO_NO
+		                     , DO_TITLE
+		                     , MEM_ID
+		                     , DO_COUNT
+		                     , DO_WRITEDATE
+		                  FROM DONATION
+		                  JOIN MEMBER USING(MEM_NO)
+		                 ORDER
+		                    BY DO_WRITEDATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectDonation1">
+		select DO_NO,
+			   DO_TITLE,
+			   DO_CONTENT,
+			   DO_WRITEDATE,
+			   DO_ADMISSION,
+			   a.MEM_NO,
+			   b.REF_TYPE,
+			   DO_COUNT,
+			   SH_NAME,
+			   SH_PHONE,
+			   FILE_NO,
+			   REF_NO,
+			   ORIGIN_NAME,
+			   CHANGE_NAME,
+			   FILE_PATH,
+			   UPLOAD_DATE
+			 
+					       
+		from donation a, attachment b, shelter c
+		where (a.ref_type=b.ref_type and a.do_no=b.ref_no and c.mem_no=a.mem_no) and do_no =?
+		order by do_writedate desc 
+	</entry>
+	<entry key="increaseCount">
+		UPDATE
+		       DONATION
+		   SET DO_COUNT = DO_COUNT + 1
+		 WHERE DO_NO = ?    
+	</entry>
+	
+	<entry key="selectDontion">
+		SELECT
+		       DO_TITLE
+		     , SH_NAME
+		     , SH_PHONE
+		     , SH_ADDRESS
+		     , DO_CONTENT
+		  FROM DONATION
+		  JOIN SHELTER USING(MEM_NO)
+		 WHERE DO_NO = ?    
+	</entry>
+	<entry key="approveDonation">
+		UPDATE 
+		       Donation
+		   SET do_admission = ?
+		    
+		 WHERE do_no = ?
+	</entry>
+	
+	
+	<entry key="deleteDonation">
+		delete from  DONATION		   
+		 WHERE DO_NO = ?
+	</entry>
+<entry key="selectListCountByKeyword">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM DONATION 
+		 WHERE DO_TITLE LIKE ? 
+	</entry>
+	
+	<entry key="selectByKeyword">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       DO_NO
+		                     , DO_TITLE
+		                     , MEM_ID
+		                     , DO_COUNT
+		                     , DO_WRITEDATE
+		                  FROM DONATION
+		                  JOIN MEMBER USING(MEM_NO)
+		                 ORDER BY DO_WRITEDATE DESC
+		                ) A
+                 WHERE DO_TITLE LIKE ?
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectPostList">SELECT DO_NO, 
+									   DO_TITLE, 
+									   DO_CONTENT, 
+									   DO_WRITEDATE,
+									   DO_ADMISSION,
+									   MEM_NO, 
+									   REF_TYPE, 
+									   DO_COUNT
+									   FROM DONATION D JOIN MEMBER M USING(MEM_NO)
+									   ORDERBY DO_WRITEDATE DESC 
+  </entry>
+  
+  <entry key="insertSh">INSERT INTO MEMBER(
+  									MEM_NO, 
+  									MEM_ID, 
+  									MEM_PWD, 
+  									MEM_NAME, 
+  									EMAIL, 
+  									MEM_CODE, 
+  									STATUS)
+  						VALUES(SEQ_UNO.NEXTVAL, 
+  											  ?, 
+  											  ?, 
+  											  ?, 
+  											  ?, 
+  											  ?, 
+  											  'N')
+  </entry>
+
+<entry key="updateMember">UPDATE MEMBER SET EMAIL = ?WHERE MEM_ID = ? </entry>
+
+
+
+<entry key="updatePwdMember">UPDATE MEMBER SET MEM_PWD = ?WHERE MEM_ID = ?AND MEM_PWD = ? </entry>
+
+<entry key="deleteMember">UPDATE MEMBER SET STATUS = 'N'WHERE MEM_ID = ?AND MEM_PWD = ? </entry>
+
+	
+</properties>

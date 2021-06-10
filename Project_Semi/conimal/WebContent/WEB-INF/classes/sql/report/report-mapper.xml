@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="reportListCount">
+		SELECT COUNT(*) COUNT
+  		FROM REPORT
+	</entry>
+	
+	<entry key="selectReportList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+				         SELECT REPORT_UNIQUE
+						      , M.MEM_ID
+						      , R.REF_TYPE
+						      , REF_NO
+						      , C.CPOST_TITLE
+						      , ADOPT_TITLE
+						      , AN_TITLE
+						      , DO_TITLE
+						      , VOL_TITLE
+						      , REPORT_REASON
+						      , REPORT_DATE
+						   FROM REPORT R
+						   LEFT JOIN MEMBER M ON (R.MEM_NO = M.MEM_NO)
+						   LEFT JOIN REPORT_REASON RE ON (RE.REPORT_NO = R.REPORT_NO)
+					 	   LEFT JOIN C_POST C ON (R.REF_TYPE = C.REF_TYPE)
+						   LEFT JOIN ANIMAL AN ON (R.REF_TYPE = AN.REF_TYPE)
+						   LEFT JOIN ADOPT A ON (R.REF_TYPE = A.REF_TYPE)
+						   LEFT JOIN DONATION D ON (R.REF_TYPE = D.REF_TYPE)
+						   LEFT JOIN VOLUNTEER V ON (R.REF_TYPE = V.REF_TYPE)
+						  WHERE REF_NO = ADOPT_NO
+						     OR REF_NO = AN_NO
+						     OR REF_NO = CPOST_NO
+						     OR REF_NO = DO_NO
+						     OR REF_NO = VOL_NO
+					 	  ORDER
+					 	     BY REPORT_DATE DESC
+				         ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="insertReport">
+		INSERT
+		  INTO REPORT
+		     (
+		       REPORT_UNIQUE
+		     , MEM_NO
+		     , REF_TYPE
+		     , REF_NO
+		     , REPORT_NO
+		     , REPORT_DATE
+		     )
+		VALUES
+		     (
+		       SEQ_RNO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , SYSDATE
+		     )
+	</entry>
+</properties>

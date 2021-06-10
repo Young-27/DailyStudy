@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+	<entry key="selectIntroduce">
+		SELECT
+				INTRO_NO,
+				INTRO_CONTENT,
+				INTRO_TITLE,
+				REF_TYPE
+		FROM INTRODUCE
+		WHERE INTRO_NO = ?
+	</entry>
+	
+	<entry key="updateIntroduce">
+	update introduce
+	 set intro_title=?, 
+	 intro_content=?
+	 where intro_no=?		
+	
+	</entry>
+	
+	<entry key="insertAttachment">
+		INSERT
+		  INTO ATTACHMENT
+		  (
+		    FILE_NO
+		  , REF_NO
+		  , REF_TYPE
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , FILE_PATH
+		  )
+		  VALUES
+		  (
+		    SEQ_FNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		 
+		  )
+	</entry>
+	
+	<entry key="deleteAttachment">
+		delete from ATTACHMENT where ref_no=? and ref_type=?
+	</entry>
+	
+	<entry key="selectAttachment">
+		select
+			file_no,
+			ref_type,
+			ref_no,
+			origin_name,
+			change_name,
+			file_path,
+			upload_date
+		from ATTACHMENT
+		where  ref_no= ? 
+		and ref_type= ?
+	</entry>
+	
+	
+
+	
+</properties>
