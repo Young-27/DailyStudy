@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectCustomerList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                 SELECT 
+		                        QUE_NO
+		                      , MEM_ID
+		                      , QUE_TITLE
+		                      , QUE_DATE
+		                      , ANS_STATUS
+		                   FROM CUSTOMER
+		                   JOIN MEMBER ON (QUE_ID = MEM_NO)
+		                  ORDER
+		                     BY QUE_DATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectCustomerDetail">
+		SELECT 
+		       QUE_NO
+		     , MEM_ID
+		     , QUE_TITLE
+		     , QUE_CONTENT
+		     , QUE_DATE
+		     , ANS_STATUS
+		     , ANS_CONTENT
+		     , ANS_DATE
+		  FROM CUSTOMER
+		  JOIN MEMBER ON (QUE_ID = MEM_NO)
+		 WHERE QUE_NO = ?
+	</entry>
+	
+	<entry key="updateAnswer">
+		UPDATE CUSTOMER
+		   SET
+		       ANS_STATUS = 'Y'
+		     , ANS_CONTENT = ?
+		     , ANS_DATE = SYSDATE
+		 WHERE QUE_NO = ?
+	</entry>
+
+</properties>

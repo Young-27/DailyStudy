@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                 SELECT 
+		                        AN_NO,
+		                        AN_TITLE,
+		                        AN_PLACE,
+		                        AN_DATE,
+		                        AN_SPECIES,
+		                        AN_GENDER,
+		                        AN_WRITEDATE,
+		                        AN_CONTENT,
+		                        MEM_NO,
+		                        REF_TYPE,
+		                        AN_COUNT
+		                    FROM ADOPT A
+		                    JOIN MEMBER M ON (A.ADOPT_WRITER = M.MEM_NO)
+		                   ORDER 
+		                      BY ADOPT_DATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+</properties>
