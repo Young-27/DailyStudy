@@ -41,7 +41,14 @@ public class ThumbnailInsertController extends HttpServlet {
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
-			// 1_1. 전송용량제한
+			// 1_1. 전송용량제한 (기본 : byte)
+			/*
+			 * byte => kbyte => mbyte => gbyte => tbyte ..
+			 * 
+			 * 1kbyte == 1024byte
+			 * 1mbyte == 1024kbyte == 1024*1024byte
+			 * 10byte == 10*1024*1024byte
+			 */
 			int maxSize = 10 * 1024 * 1024;
 			
 			// 1_2. 저장할 폴더의 물리적인 경로

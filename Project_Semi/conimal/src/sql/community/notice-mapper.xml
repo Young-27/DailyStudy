@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM ( select notice_no,
+       notice_mem,
+       notice_title,
+       notice_content,
+       notice_date,
+       ref_type
+       
+		from NOTICE
+		where notice_title like ? or notice_content like ?
+		order by notice_no asc)		
+	</entry>
+	
+<entry key="selectNoticeList">
+	  SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                 select notice_no,
+       notice_mem,
+       notice_title,
+       notice_content,
+       notice_date,
+       ref_type
+       
+		from NOTICE
+		where notice_title like ? or notice_content like ?
+		order by notice_date desc
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectNotice">
+		select notice_no,
+       notice_mem,
+       notice_title,
+       notice_content,
+       notice_date,
+       ref_type
+       
+		from NOTICE
+		where notice_no =?
+		order by notice_no asc
+	</entry>
+	
+	<entry key="insertNotice">
+		insert into Notice(notice_no,
+						  notice_mem,
+						  notice_title,
+						  notice_content)
+			 values(SEQ_NNO.nextval,?,?,?)
+	</entry>
+	
+	<entry key="updateNotice">
+		UPDATE 
+		       NOTICE
+		   SET NOTICE_TITLE = ?
+		     , NOTICE_CONTENT = ?
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	<entry key="deleteNotice">
+		delete from  NOTICE		   
+		 WHERE NOTICE_NO = ?
+	</entry>
+
+	
+</properties>

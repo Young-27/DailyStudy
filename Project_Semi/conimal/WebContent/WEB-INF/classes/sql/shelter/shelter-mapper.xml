@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectListCount1">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM ( select mem_no,
+       sh_name,
+       sh_phone,
+       sh_address,
+       sh_about,
+       admission,
+       sh_local,
+       ref_type,
+        enroll_date        
+       
+		from shelter c join member b using (mem_no)
+		where sh_name like ? or sh_local like ?)		
+	</entry>
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM SHELTER
+	</entry>
+	
+<entry key="selectShelterList">
+	  SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                 select mem_no,
+       sh_name,
+       sh_phone,
+       sh_address,
+       sh_about,
+       admission,
+       sh_local,
+       ref_type,
+       enroll_date       
+       
+		from shelter c join member b using (mem_no)
+		where admission='N' and (sh_name like ? or sh_local like ?)
+		order by enroll_date asc
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       MEM_NO 
+		                     , SH_NAME
+		                  FROM SHELTER
+		                 ORDER
+		                    BY MEM_NO
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectShelter">
+		select  mem_no,
+       sh_name,
+       sh_phone,
+       sh_address,
+       sh_about,
+       admission,
+       sh_local,
+       ref_type,
+       enroll_date       
+       
+		from shelter a join member b using (mem_no)
+		where mem_no =?
+		order by enroll_date asc
+	</entry>
+	
+
+	<entry key="approveShelter">
+		UPDATE 
+		       shelter
+		   SET admission = ?
+		    
+		 WHERE mem_no = ?
+	</entry>
+	
+	<entry key="deleteShelter">
+		delete from  shelter		   
+		 WHERE mem_no = ?
+	</entry>
+	<entry key="selectListCountByKeyword">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM SHELTER
+		 WHERE SH_NAME LIKE ? 
+	</entry>
+	
+	<entry key="selectListByKeyword">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       MEM_NO 
+		                     , SH_NAME
+		                  FROM SHELTER
+		                 ORDER
+		                    BY MEM_NO
+		                ) A
+                 WHERE SH_NAME LIKE ?       
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="insertShelter">
+		INSERT INTO SHELTER
+					(MEM_NO, 
+					 SH_NAME, 	
+					 SH_PHONE, 
+					 SH_ADDRESS, 
+					 SH_ABOUT, 
+					 SH_LOCAL)
+					 VALUES
+					 (SEQ_UNO.CURRVAL,
+					  ?, 
+					  ?, 
+					  ?, 
+					  ?, 
+					  ?) 
+	</entry>
+
+	<entry key="insertAttachment">
+		INSERT INTO ATTACHMENT(FILE_NO, 
+							  REF_TYPE, 
+							  REF_BNO, 
+							  ORIGIN_NAME, 
+							  CHANGE_NAME, 
+							  FILE_PATH)
+				   VALUES(SEQ_FNO.NEXTVAL, 
+				   						?, 
+				   		  SEQ_BNO.CURRVAL, 
+				   		  				?, 
+				   		  				?, 
+				   		  				?)
+	 </entry>
+	 
+	 <entry key="updateShelter">
+	 UPDATE SHELTER
+	    SET SH_PHONE = ?
+	    , SH_ADDRESS = ?
+	    , SH_ABOUT = ?
+	    , SH_LOCAL = ?
+	  WHERE MEM_NO = ?
+	 </entry>
+
+
+	
+	
+
+</properties>

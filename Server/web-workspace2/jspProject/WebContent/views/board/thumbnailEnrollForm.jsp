@@ -83,7 +83,7 @@
                 function loadImg(inputFile, num){
                     // inputFile : 현재 변호가 생긴 input type="file" 요소객체
                     // num : 몇번째 input요소인지 확인 후 해당 그 영역에 미리보기 하기 위해서
-                    //console.log(inputFile.files.length);
+                    //console.log(inputFile.files.length); => "1"
                 
                     if(inputFile.files.length == 1){ 
                 		// 선택된 파일이 존재할 경우 

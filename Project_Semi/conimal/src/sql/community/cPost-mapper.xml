@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT
+		FROM (SELECT 
+				  CPOST_NO
+				, CUSER_NAME
+				, CPOST_TITLE
+				, CPOST_CONTENT
+				, CPOST_COUNT
+				, CPOST_DATE
+				FROM C_POST C
+				WHERE CPOST_TITLE LIKE ? OR CPOST_CONTENT LIKE ? 
+				ORDER BY 
+						CPOST_NO ASC)
+	</entry>
+	
+	<entry key="selectList">
+			  SELECT * 
+				FROM(
+					      SELECT ROWNUM RNUM, A.*
+					        FROM (
+					           SELECT
+					                    CPOST_NO
+					                  , CUSER_NAME
+					                  , CPOST_TITLE
+					                  , CPOST_CONTENT
+                                      , CPOST_COUNT
+					                  , CPOST_DATE
+					             FROM C_POST
+		                         WHERE CPOST_TITLE LIKE ? OR CPOST_CONTENT LIKE ?
+		                         ORDER 
+					                BY CPOST_DATE DESC
+					                ) A
+					      )
+					 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="increaseCount">
+			
+		UPDATE
+		    C_POST
+		 SET CPOST_COUNT = CPOST_COUNT +1
+		 WHERE CPOST_NO = ?
+		   AND REF_TYPE = 'POST'
+	
+	</entry>
+	
+	<entry key="selectCpost">
+		SELECT 
+			    CPOST_NO
+			  , CUSER_NAME
+			  , CPOST_TITLE
+              , CPOST_COUNT
+			  , CPOST_CONTENT
+              , CPOST_DATE
+            FROM C_POST CP
+			WHERE CPOST_NO = ?
+	</entry>
+	
+	
+	<entry key="selectAttachment">
+		SELECT 
+		      FILE_NO
+		    , ORIGIN_NAME
+		    , CHANGE_NAME
+		    , FILE_PATH
+		FROM ATTACHMENT 
+		WHERE REF_NO = ?
+		  AND REF_TYPE = 'POST'
+	</entry>
+	
+	<entry key="insertCpost">
+		INSERT
+		    INTO C_POST
+		    (
+		      CPOST_NO
+		    , CUSER_ID
+		    , CUSER_NAME
+		    , CPOST_TITLE
+		    , CPOST_COUNT
+		    , CPOST_CONTENT
+		    , CPOST_DATE
+		    , REF_TYPE
+		    )
+		   VALUES
+		    (
+		      SEQ_CPNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , 0
+		    , ?
+		    , SYSDATE
+		    , 'POST'
+		    )
+	</entry>
+	
+	<entry key="insertAttachmentList">
+		INSERT 
+		   INTO ATTACHMENT
+		   (
+		      FILE_NO
+		    , REF_TYPE 
+		    , REF_NO
+		    , ORIGIN_NAME
+		    , CHANGE_NAME
+		    , FILE_PATH
+		    , UPLOAD_DATE
+		    , FILE_LEVEL
+		    )
+		    VALUES
+		    (
+		      SEQ_FNO.NEXTVAL
+		    , 'POST'
+		    , SEQ_CPNO.CURRVAL
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    , ?
+		    )
+	</entry>
+	
+	<entry key="selectReplyList">
+	        
+		SELECT 
+		       RE_NO
+		     , CUSER_NAME
+		     , TO_CHAR(WRITTEN_DATE,'YY/MM/DD HH24:MM') WRITTEN_DATE
+		     , REPLY_CONTENT
+		  FROM REPLY R
+		 WHERE CPOST_NO = ?
+		 ORDER 
+		   BY WRITTEN_DATE DESC
+	</entry>
+	<entry key="insertReply">
+		INSERT 
+		    INTO REPLY
+		    (
+		      RE_NO
+		    , CPOST_NO
+		    , MEM_NO
+		    , CUSER_NAME
+		    , WRITTEN_DATE
+		    , REPLY_CONTENT
+		    )
+		    VALUES
+		    (
+		      SEQ_RNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    , ?
+		    )
+	</entry>
+	
+	<entry key="updateCpost">
+		UPDATE
+		      C_POST
+		  SET  CPOST_TITLE = ?
+		     , CPOST_CONTENT = ?
+		WHERE CPOST_NO = ?
+	</entry>
+	
+	<entry key="updateAttachment">
+		 UPDATE
+		        ATTACHMENT
+		    SET ORIGIN_NAME = ?
+		      , CHANGE_NAME = ?
+		      , FILE_PATH = ?
+		      , UPLOAD_DATE = SYSDATE
+		 WHERE FILE_NO =?
+	</entry>
+	
+	<entry key="insertNewAttachment">
+		INSERT 
+		   INTO ATTACHMENT
+		   (
+		      FILE_NO
+		    , REF_TYPE 
+		    , REF_NO
+		    , ORIGIN_NAME
+		    , CHANGE_NAME
+		    , FILE_PATH
+		    , UPLOAD_DATE
+		    , FILE_LEVEL
+		    )
+		    VALUES
+		    (
+		      SEQ_FNO.NEXTVAL
+		    , 'POST'
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    , 1
+		    )
+	</entry>
+	
+	<entry key="selectAttachment">
+		SELECT 
+		       FILE_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		  FROM ATTACHMENT 
+		 WHERE REF_NO = ?
+	</entry>
+	
+	<entry key="deleteCpost">
+		DELETE 
+			FROM C_POST
+		WHERE CPOST_NO=?
+	</entry>
+	
+	<entry key="deleteAttachment">
+		DELETE 
+			FROM ATTACHMENT
+		WHERE REF_NO=?
+	</entry>
+	
+	<entry key="deleteReply">
+		DELETE 
+			 FROM REPLY
+		WHERE CPOST_NO=?
+	</entry>
+	
+	
+	
+	
+</properties>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		SELECT COUNT(*) COUNT
+		FROM (SELECT 
+			            ADOPT_NO
+			          , MEM_NAME
+			          , ADOPT_TITLE
+			          , ADOPT_CONTENT
+			          , ADOPT_DATE
+			          , COUNT
+			        FROM ADOPT A
+			        JOIN MEMBER M ON (A.ADOPT_WRITER = M.MEM_NO)
+			        WHERE ADOPT_TITLE LIKE ? OR ADOPT_CONTENT LIKE ? 
+			        ORDER BY 
+			                ADOPT_NO ASC
+			    )
+	</entry>
+	
+	<entry key="selectList">
+			SELECT * 
+				FROM(
+					      SELECT ROWNUM RNUM, A.*
+					        FROM (
+					           SELECT
+					                    ADOPT_NO
+					                  , MEM_NAME
+					                  , ADOPT_TITLE
+					                  , ADOPT_CONTENT
+					                  , ADOPT_DATE
+					                  , COUNT
+					             FROM ADOPT B
+					             JOIN MEMBER M ON (ADOPT_WRITER = M.MEM_NO)
+		                         WHERE ADOPT_TITLE LIKE ? OR ADOPT_CONTENT LIKE ?
+		                         ORDER 
+					                BY ADOPT_DATE DESC
+					                ) A
+					      )
+					 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="increaseCount">
+			
+		UPDATE
+		    ADOPT
+		 SET COUNT = COUNT +1
+		 WHERE ADOPT_NO = ?
+		   AND REF_TYPE = 'ADOPT'
+	
+	</entry>
+	
+	<entry key="selectAdopt">
+		SELECT 
+			    ADOPT_NO
+			  , ADOPT_WRITER
+			  , MEM_NO
+              , ADOPT_TITLE
+			  , COUNT
+              , ADOPT_CONTENT
+              , ADOPT_DATE
+            FROM ADOPT
+			WHERE ADOPT_NO = ?
+	</entry>
+	
+	<entry key="selectAttachment">
+		SELECT 
+		       FILE_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		  FROM ATTACHMENT 
+		 WHERE REF_NO = ?
+		   AND REF_TYPE='ADOPT'
+	</entry>
+	
+		<entry key="insertAdopt">
+		INSERT
+		    INTO ADOPT
+		    (
+		      ADOPT_NO
+		    , ADOPT_WRITER
+		    , MEM_NO
+		    , ADOPT_TITLE
+		    , ADOPT_CONTENT
+		    , ADOPT_DATE
+		    , COUNT
+		    , REF_TYPE
+		    )
+		   VALUES
+		    (
+		      SEQ_ADNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+            , 0
+		    , 'ADOPT'
+		    )
+	</entry>
+	
+	<entry key="insertAttachmentList">
+		INSERT 
+		   INTO ATTACHMENT
+		   (
+		      FILE_NO
+		    , REF_TYPE 
+		    , REF_NO
+		    , ORIGIN_NAME
+		    , CHANGE_NAME
+		    , FILE_PATH
+		    , UPLOAD_DATE
+		    , FILE_LEVEL
+		    )
+		    VALUES
+		    (
+		      SEQ_FNO.NEXTVAL
+		    , 'POST'
+		    , SEQ_CPNO.CURRVAL
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    , ?
+		    )
+	</entry>
+	<entry key="updateAdopt">
+		UPDATE
+		      ADOPT
+		  SET  MEM_NO = ?
+		  	 , ADOPT_TITLE = ?
+		     , ADOPT_CONTENT = ?
+		WHERE ADOPT_NO = ?
+	</entry>
+	<entry key="updateAttachment">
+		 UPDATE
+		        ATTACHMENT
+		    SET ORIGIN_NAME = ?
+		      , CHANGE_NAME = ?
+		      , FILE_PATH = ?
+		      , UPLOAD_DATE = SYSDATE
+		 WHERE FILE_NO =?
+	</entry>
+	<entry key="insertNewAttachment">
+		INSERT 
+		   INTO ATTACHMENT
+		   (
+		      FILE_NO
+		    , REF_TYPE 
+		    , REF_NO
+		    , ORIGIN_NAME
+		    , CHANGE_NAME
+		    , FILE_PATH
+		    , UPLOAD_DATE
+		    , FILE_LEVEL
+		    )
+		    VALUES
+		    (
+		      SEQ_FNO.NEXTVAL
+		    , 'POST'
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    , 1
+		    )
+	</entry>
+	
+	
+	
+	
+</properties>
