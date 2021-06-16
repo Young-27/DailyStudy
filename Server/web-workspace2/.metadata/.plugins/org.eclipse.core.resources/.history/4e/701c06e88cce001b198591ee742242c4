@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h2>EL 연산</h2>
+	
+	<h1>1. 산술 연산</h1>
+	<%-- <%= (int)request.getAttribute("big") + (int)request.getAttribute("small") %> --%>
+	
+	10 + 3 = ${ big + small } <br>
+	10 - 3 = ${ big - small } <br>
+	10 x 3 = ${ big * small } <br>
+	10 / 3 = ${ big / small } 또는 ${ big div small } <br>
+	10 % 3 = ${ big % small } 또는 ${ big mod small } <br><br>
+	
+	<h3>2. 숫자간 대소 비교 연산</h3>
+	10 &gt; 3 = ${ big > small } 또는 ${ big gt small } <br>
+	10 &lt; 3 = ${ big < small } 또는 ${ big lt small } <br>
+	10 &gt;= 3 = ${ big >= small } 또는 ${ big ge small } <br>
+	10 &lt;= 3 = ${ big <= small } 또는 ${ big le small } <br><br>
+	
+	<h3>3. 동등 비교 연산</h3>
+	sOne과 sTwo이 일치합니까 : ${ sOne == sTwo } 또는 ${ sOne eq sTwo } <br>
+	<!-- el에서의 == 비교는 자바에서의 equals()와 같은 동작을 함 -->
+	
+</body>
+</html>

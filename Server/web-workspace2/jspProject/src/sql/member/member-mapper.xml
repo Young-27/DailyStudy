@@ -23,6 +23,24 @@
 	
 	</entry>
 	
+	<entry key="selectMember">
+		SELECT 
+			   USER_NO
+		     , USER_ID
+		     , USER_PWD
+		     , USER_NAME
+		     , PHONE
+		     , EMAIL
+		     , ADDRESS
+		     , INTEREST
+		     , ENROLL_DATE
+		     , MODIFY_DATE
+		     , STATUS
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
 	<entry key="insertMember">
 	
 		INSERT 
@@ -51,6 +69,23 @@
 			
 	</entry>
 	
-
+	<entry key="idCheck">
+		SELECT
+			   COUNT(*)
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+	</entry>
+	
+	<entry key="updateMember">
+		UPDATE	
+		       MEMBER
+		   SET USER_NAME = ?
+		     , PHONE = ?
+		     , EMAIL = ?
+		     , ADDRESS = ?
+		     , INTEREST = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE USER_ID = ?
+	</entry>
 
 </properties>

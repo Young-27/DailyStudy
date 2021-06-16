@@ -130,7 +130,7 @@ public class BoardInsertController extends HttpServlet {
 				}
 				
 				request.setAttribute("errorMsg", "게시글 작성 실패");
-				request.getRequestDispatcher("view/common/errorPage.jsp").forward(request, response);
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 				
 			}
 			

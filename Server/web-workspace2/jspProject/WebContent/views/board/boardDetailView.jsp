@@ -67,10 +67,12 @@
 
         <div align="center">
             <a href="">목록가기</a>
-
-            <!-- 로그인 한 사용자가 게시글작성자일 경우-->
-            <a href="<%=contextPath%>/updateForm.bo?bno=<%=b.getBoardNo()%>" class="btn btn-warning btn-sm">수정하기</a>
-            <a href="">삭제하기</a>
+			
+			<% if(loginUser != null && loginUser.getUserId()==b.getBoardWriter()){ %>
+	            <!-- 로그인 한 사용자가 게시글작성자일 경우-->
+	            <a href="<%=contextPath%>/updateForm.bo?bno=<%=b.getBoardNo()%>" class="btn btn-warning btn-sm">수정하기</a>
+	            <a href="">삭제하기</a>
+	        <% } %>
         </div>
 
         <br>
@@ -79,47 +81,87 @@
 
             <table border="1" align="center">
                 <thead>
-                    <!--로그인이 되어있을 경우-->
-                    <!--
-                    <tr>
-                        <th>댓글작성</th>
-                        <td>
-                            <textarea rows="3" cols="50" style="resize: none;"></textarea>
-                        </td>
-                        <td><button>댓글등록</button></td>
-                    </tr>
-                    -->
+                	<%if(loginUser != null){ %>
+                    	<!--로그인이 되어있을 경우-->
+                    
+	                    <tr>
+	                        <th>댓글작성</th>
+	                        <td>
+	                            <textarea id="replyContent" rows="3" cols="50" style="resize: none;"></textarea>
+	                        </td>
+	                        <td><button onclick="insertReply();">댓글등록</button></td>
+	                    </tr>
+                   
+                    <%}else{ %>
 
-                    <!-- 로그인이 되어있지 않을 경우-->
-                    <tr>
-                        <th>댓글작성</th>
-                        <td>
-                            <textarea rows="3" cols="50" style="resize: none; color:gray" readonly>로그인 후 이용가능한 서비스입니다.</textarea>
-                        </td>
-                        <td><button disabled>댓글등록</button></td>
-                    </tr>
-
+	                    <!-- 로그인이 되어있지 않을 경우-->
+	                    <tr>
+	                        <th>댓글작성</th>
+	                        <td>
+	                            <textarea rows="3" cols="50" style="resize: none; color:gray" readonly>로그인 후 이용가능한 서비스입니다.</textarea>
+	                        </td>
+	                        <td><button disabled>댓글등록</button></td>
+	                    </tr>
+						
+					<%} %>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>admin</td>
-                        <td>댓글내용~~</td>
-                        <td>2021-05-16</td>
-                    </tr>
-                    <tr>
-                        <td>admin</td>
-                        <td>댓글내용~~</td>
-                        <td>2021-05-16</td>
-                    </tr>
-
-                    <tr>
-                        <td>admin</td>
-                        <td>댓글내용~~</td>
-                        <td>2021-05-16</td>
-                    </tr>
+                    
 
                 </tbody>
             </table>
+            
+            <script>
+            	$(function(){
+            		selectReplyList();
+            		
+            		setInterval(selectReplyList, 1000); // 댓글 실시간 확인 가능
+            	})
+            	
+            	function insertReply(){
+            		$.ajax({
+            			url:"rinsert.bo",
+            			data:{
+            				content:$("#replyContent").val(),
+            				bno:<%=b.getBoardNo()%>
+            			},
+            			type:"post",
+            			success:function(result){
+            				
+            				if(result > 0){ // 댓글작성 성공 => 갱신된 댓글 리스트 조회
+            					selectReplyList();
+            					$("#replyContent").val("");
+            				}
+            				
+            			}, error:function(){
+            				console.log("댓글 작성용 ajax통신실패");
+            			}
+            		});
+            	}
+            	
+            	function selectReplyList(){
+            		$.ajax({
+            			url:"rlist.bo",
+            			data:{bno:<%=b.getBoardNo()%>},
+            			success:function(list){
+            				console.log(list); // [{}, {}, ..] | []
+            				var result = "";
+            				for(var i in list){
+            					result += "<tr>"
+				                       +     "<td>" + list[i].replyWriter + "</td>"
+				                       +     "<td>" + list[i].replyContent + "</td>"
+				                       +     "<td>" + list[i].createDate + "</td>"
+				                       +  "</tr>";
+            				}
+            				
+            				$("#reply-area tbody").html(result);
+            			},error:function(){
+            				console.log("댓글리스트 조회용 ajax통신 실패");
+            			}
+            		})
+            	}
+            </script>
+            
             <br><br>
 
         </div>

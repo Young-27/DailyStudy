@@ -5,10 +5,6 @@
 <fullyQualifiedTypeName name="com.kh.notice.model.dao.NoticeDao"/>
 <fullyQualifiedTypeName name="com.kh.common.JDBCTemplate"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="com.kh.member.model.vo.Member"/>
-<fullyQualifiedTypeName name="java.util.Properties"/>
-<fullyQualifiedTypeName name="java.sql.Connection"/>
-<fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
 <fullyQualifiedTypeName name="com.kh.board.model.vo.Category"/>
@@ -16,4 +12,10 @@
 <fullyQualifiedTypeName name="org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload"/>
 <fullyQualifiedTypeName name="com.kh.board.model.vo.Board"/>
 <fullyQualifiedTypeName name="com.kh.board.model.vo.Attachment"/>
+<fullyQualifiedTypeName name="com.kh.model.vo.Member"/>
+<fullyQualifiedTypeName name="com.kh.member.model.vo.Member"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
 </qualifiedTypeNameHistroy>

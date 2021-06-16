@@ -1,0 +1,27 @@
+package com.kh.test.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+import com.kh.test.model.vo.Test;
+
+public class TestDao {
+	
+	public List<Test> selectList(){
+		
+		List<Test> list = new List<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManger.getConnection("jdbc:oracle:thin:@192.168.10.3:1521:xe");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

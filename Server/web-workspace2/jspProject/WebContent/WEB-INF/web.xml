@@ -9,4 +9,22 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 어노테이션을 사용하지 않을경우, xml로 서블릿 매핑하기 -->
+  <!-- 1. 해당 클래스를 Servlet으로 등록하는 태그 -->
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<servlet-class>com.kh.member.controller.LoginServlet</servlet-class>
+  </servlet>
+  
+  <!-- 2. Servlet클래스를 mapping하는 태그 -->
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/login.me</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 
+  	장점 : 한 눈에 볼 수 있음
+  	단점 : 코드길어짐, 번거로움, 충돌가능성 있음
+   -->
 </web-app>

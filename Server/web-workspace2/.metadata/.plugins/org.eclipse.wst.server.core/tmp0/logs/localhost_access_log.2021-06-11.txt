@@ -1,0 +1,17 @@
+127.0.0.1 - - [11/Jun/2021:19:28:14 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:16 +0900] "GET /jsp/ HTTP/1.1" 200 4723
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:16 +0900] "GET /favicon.ico HTTP/1.1" 404 818
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:18 +0900] "GET /jsp/enrollForm.me HTTP/1.1" 200 8545
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:25 +0900] "GET /jsp/idCheck.me?checkId=11 HTTP/1.1" 200 5
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:42 +0900] "POST /jsp/insert.me HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:42 +0900] "GET /jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:42 +0900] "GET /jsp/ HTTP/1.1" 200 4773
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:49 +0900] "GET /jsp/idCheck.me?checkId=11 HTTP/1.1" 200 5
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:30:52 +0900] "GET /jsp/idCheck.me?checkId=1122 HTTP/1.1" 200 5
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:31:10 +0900] "GET /jsp/enrollForm.me HTTP/1.1" 200 8531
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:31:11 +0900] "GET /jsp/enrollForm.me HTTP/1.1" 200 8531
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:31:14 +0900] "GET /jsp/idCheck.me?checkId=lsy6877 HTTP/1.1" 200 5
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:31:18 +0900] "GET /jsp/idCheck.me?checkId=aaaaa HTTP/1.1" 200 5
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:31:31 +0900] "GET /jsp/insert.me?userId=aaaaa&userPwd=1234&userName=1234&phone=&email=&address=&phone=01033333333&address=%EC%84%9C%EC%9A%B8%EC%8B%9C&address=%EA%B0%95%EB%82%A8%EA%B5%AC HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:31:31 +0900] "GET /jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [11/Jun/2021:19:31:31 +0900] "GET /jsp/ HTTP/1.1" 200 4773

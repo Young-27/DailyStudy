@@ -51,6 +51,7 @@ public class NoticeUpdateController extends HttpServlet {
 			
 		} else { // 실패 => 에러페이지로 보여지도록 에러문구
 			request.setAttribute("errorMsg", "수정에 실패했습니다.");
+			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
 		
 		

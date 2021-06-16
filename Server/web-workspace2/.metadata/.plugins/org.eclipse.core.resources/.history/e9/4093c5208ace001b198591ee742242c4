@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<h2>EL 연산</h2>
+	
+	<h1>1. 산술 연산</h1>
+	<%-- <%= (int)request.getAttribute("big") + (int)request.getAttribute("small") %> --%>
+	
+	
+</body>
+</html>
