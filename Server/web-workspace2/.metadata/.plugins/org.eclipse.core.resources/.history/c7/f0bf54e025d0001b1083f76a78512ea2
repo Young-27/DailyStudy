@@ -1,0 +1,137 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="com.kh.common.model.vo.PageInfo, java.util.ArrayList, com.kh.board.model.vo.Board" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+    .outer{
+        width: 1000px;
+        height: 550px;
+        background-color:lightsteelblue;
+        color: lightyellow;
+        margin: auto;
+        margin-top: 50px;
+    }
+    .list-area{
+        border: 1px solid lightyellow;
+        text-align: center;
+    }
+    .list-area>tbody>tr:hover{
+        background-color: gray;
+        cursor: pointer;
+    }
+</style>
+<body>
+	
+	<%@include file="../common/menubar.jsp"%>
+
+    <div class="outer">
+        <br>
+        <h2 align="center">일반게시판</h2>
+        <br>
+
+        <!-- 로그인한 회원만 보여지는 버튼 -->
+	    <c:if test="${ !empty loginUser }">
+	    	<div align="right" style="width: 850px;">
+	            <a href="enrollForm.bo" class="btn btn-secondary btn-sm">글작성</a>
+	            <br><br>
+	        </div>
+	    </c:if>
+
+        <table align="center" class="list-area">
+            <thead>
+                <tr>
+                    <th width="70">글번호</th>
+                    <th width="70">카테고리</th>
+                    <th width="300">제목</th>
+                    <th width="100">작성자</th>
+                    <th width="50">조회수</th>
+                    <th width="100">작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+            	<c:choose>
+	            	<c:when test="${ empty list }">
+	            		<tr>
+	            			<td colspan="6">조회된 리스트가 없습니다.</td>
+	            		</tr>
+	            	</c:when>
+	            	<c:otherwise>
+	            		<c:forEach var="b" items=${ list }>
+	            			<tr>
+			                    <td>${ b.boardNo }</td>
+			                    <td>${ b.category }</td>
+			                    <td>${ b.boardTitle }</td>
+			                    <td>${ b.boardWriter }</td>
+			                    <td>${ b.count }</td>
+			                    <td>${ b.createDate }</td>
+		                	</tr>
+	            		</c:forEach>
+	            	</c:otherwise>
+            	</c:choose>
+            </tbody>
+        </table>
+        
+        <script>
+        	$(function(){
+        		$(".list-area>tbody>tr").click(function(){
+        			location.href = "detail.bo?bno=" + $(this).children().eq(0).text();
+        		})
+        	})
+        
+        </script>
+
+        <br><br>
+
+        <div align="center" class="paging-area">
+			<c:if test="${ currentPage != 1}">
+				<button onclick="location.href='list.bo?currentPage=${ currentPage - 1 }';"> &lt; </button>
+			</c:if>
+			<c:forEach var="p" begin="${ startPage }" end="${ endPage }">
+				<c:choose>
+					<c:when test="${ p != currentPage }">
+						<button onclick="location.href='list.bo?currentPage=${ p }';">${ p }</button>
+					</c:when>
+					<c:otherwise>
+						<button disabled>${ p }/button>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${ currentPage != maxPage }">
+				<button onclick="location.href='list.bo?currentPage=${ currentPage + 1 }';"> &gt; </button>
+			</c:if>            
+        </div>
+        
+        
+        
+        <div style="display:none"> <!-- 내가 해본거,, -->
+        	<% if(pi.getStartPage() != 1){ %> <!-- 왼쪽버튼 눌렀을때 빈페이지가 뜨지 않도록 조건설정 -->
+            	<button> <a href="<%=contextPath + "/list.bo?currentPage=" + (pi.getStartPage() - 1)%>">&lt;</a> </button>
+            <% } else { %>
+            	<button> <a href="<%=contextPath + "/list.bo?currentPage=" + (pi.getStartPage())%>">&lt;</a> </button>
+            <% } %>
+			
+			
+			<!-- 최대 페이징 수(10) 만큼 버튼이 반복되게 하기 -->
+			<% for(int i=pi.getStartPage(); i<=pi.getEndPage(); i++){ %> 
+            	<button><a href="<%=contextPath + "/list.bo?currentPage=" + i%>"><%=i%></a></button>
+            <% } %>
+            
+            
+            
+            <% if((pi.getEndPage()+1) <= pi.getMaxPage()){ %> <!-- 오른쪽버튼 눌렀을때 빈페이지가 뜨지 않도록 조건설정 -->
+            	<button> <a href="<%=contextPath + "/list.bo?currentPage=" + (pi.getEndPage() + 1)%>"> &gt; </a> </button>
+            <% } else { %> 
+				<button> <a href="<%=contextPath + "/list.bo?currentPage=" + (pi.getEndPage())%>"> &gt; </a> </button>
+			<% } %>
+        </div>
+
+    </div>
+	
+</body>
+</html>

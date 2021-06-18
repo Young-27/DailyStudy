@@ -1,0 +1,205 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    .outer{
+        background:rgb(175, 194, 230);
+        color: rgb(247, 247, 247);
+        width: 1000px;
+        margin: auto;
+        margin-top: 50px;
+    }
+    #mypage table{margin:auto;}
+    #mypage input{margin:5px;}
+</style>
+</head>
+<body>
+	
+	<jsp:include page="../common/menubar.jsp"/>
+
+    <div class="outer">
+        <br>
+        <h2 align="center">마이페이지</h2>
+    
+        <form action="${ contextPath }/update.me" id="mypage" method="post">
+    
+            <!-- 아이디, 비번, 이름, 전화번호, 이메일, 주소, 취미 -->
+            <table>
+                <tr>
+                    <td>* 아이디</td>
+                    <td><input type="text" name="userId" maxlength="12" value="${userId}" readonly></td>
+                </tr>
+                
+                <tr>
+                    <td>* 이름</td>
+                    <td><input type="text" name="userName" maxlength="6" required value="${userName}"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;전화번호</td>
+                    <td><input type="text" name="phone" placeholder="- 포함해서 입력" value="${phone}"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;이메일</td>
+                    <td><input type="email" name="email" value="${email}"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;주소</td>
+                    <td><input type="text" name="address" value="${address}"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;관심분야</td>
+                    <td colspan="2">
+    
+                        <input type="checkbox" name="interest" id="sports" value="운동">
+                        <label for="sports">운동</label>
+    
+                        <input type="checkbox" name="interest" id="climbing" value="등산">
+                        <label for="climbing">등산</label>
+    
+                        <input type="checkbox" name="interest" id="fishing" value="낚시">
+                        <label for="fishing">낚시</label>
+    
+                        <br>
+    
+                        <input type="checkbox" name="interest" id="cooking" value="요리">
+                        <label for="cooking">요리</label>
+    
+                        <input type="checkbox" name="interest" id="game" value="게임">
+                        <label for="game">게임</label>
+    
+                        <input type="checkbox" name="interest" id="movie" value="영화">
+                        <label for="movie">영화</label>
+    
+                    </td>
+                </tr>
+            </table>
+            <script>
+            	$(function(){
+            		var interest = "<%=interest%>";
+            		// "" | "운동,등산,게임"
+            		
+            		$("input[type=checkbox]").each(function(){
+            			
+            			// 순차적으로 접근한 input요소의 value값이 interest에 포함되어있을 경우
+            			// => 해당 input요소에 checked속성 부여
+                        if(interest.search($(this).val()) != -1){
+                            $(this).attr("checked", true);
+                        } 
+
+            			
+            		});
+            		
+            	});
+            </script>
+    
+            <br><br>
+    
+            <div align="center">
+                <button type="submit" class="btn btn-secondary btn-sm">정보변경</button>
+                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updatePwdForm">비밀번호변경</button>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteForm">회원탈퇴</button>
+            </div>
+            <br><br>
+        </form>
+	</div>
+	
+	<!-- 회원탈퇴 버튼 클릭시 보여질 Modal -->
+	<div class="modal" id="deleteForm">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">회원탈퇴</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" align="center">
+	        
+	        <b>탈퇴 후 복구가 불가능합니다. <br>정말로 탈퇴 하시겠습니까?</b> <br><br>
+	        
+	        <form action="<%= contextPath %>/delete.me" method="post">
+	        	
+	        	<input type="hidden" name="userId" value="<%=userId%>">
+	        	비밀번호 : <input type="password" name="userPwd" required>
+	        	
+	        	<br><br>
+	        	
+	        	<button type="submit" class="btn btn-danger btn-sm">탈퇴하기</button>
+	        	
+	        </form>
+		        	
+	        
+	      </div>
+	
+	
+	
+	
+	
+	<!-- 부트스트랩 사용 -->
+	<!-- 비밀번호 변경 버튼 클릭시 보여질 Modal -->
+	<div class="modal" id="updatePwdForm">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">비밀번호 변경</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" align="center">
+	        
+	        <form action="<%= contextPath %>/updatePwd.me" method="post">
+	        
+	        	<!-- 현재비밀번호, 변경할비밀번호, 변경할비밀번호 재입력 -->
+	        	<input type="hidden" name="userId" value="<%=userId%>">
+	        	<table>
+					<tr>
+						<td>현재 비밀번호</td>
+						<td><input type="password" name="userPwd" required></td>
+					</tr>
+					<tr>
+						<td>변경할 비밀번호</td>
+						<td><input type="password" name="updatePwd" required></td>
+					</tr>
+					<tr>
+						<td>변경할 비밀번호 재입력</td>
+						<td><input type="password" name="checkPwd" required></td>
+					</tr>	        		
+	        	</table>
+	        	<br>
+	        	<button type="submit" class="btn btn-secondary btn-sm" onclick="return validatePwd();">비밀번호 변경</button>
+	        	
+	        </form>
+	        
+	        <script>
+	        	function validatePwd(){
+	        		
+	        		if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()){
+	        			alert("비밀번호가 일치하지 않습니다.");
+	        			return false; // 비밀번호 변경 요청이 안되게 막음
+	        		}
+	        		
+	        	}
+	        </script>
+	        
+	        
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+	
+</body>
+</html>

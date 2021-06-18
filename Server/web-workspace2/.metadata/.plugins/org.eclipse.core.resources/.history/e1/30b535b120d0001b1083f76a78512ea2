@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.kh.notice.model.vo.Notice"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+    .outer{
+        background: powderblue;
+        color:white;
+        width: 1000px;
+        height: 500px;
+        margin: auto;
+        margin-top: 50px;
+    }
+    #detail-area{border:1px solid white;}
+</style>
+<body>
+
+	<%@ include file="../common/menubar.jsp" %>
+
+    <div class="outer">
+        <br><h2 align="center">공지사항 상세보기</h2> <br>
+
+        <table id="detail-area" align="center" border="1">
+
+            <tr>
+                <th width="70">제목</th>
+                <td width="350" colspan="3">${ noticeTitle }</td>
+            </tr>
+            <tr>
+                <th>작성자</th>
+                <td>${ noticeWriter }</td>
+                <th>작성일</th>
+                <td>${ createDate }</td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td colspan="3">
+                    <p style="height: 150px;">${ noticeContent }</p>
+                </td>
+            </tr>
+
+        </table>
+        <br><br>
+
+        <div align="center">
+            <a href="list.no" class="btn btn-secondary btn-sm">목록가기</a>
+            
+            <!-- 현재 로그인한 사용자가 해당 글을 작성한 작성자일 경우 -->
+            <c:if test="${ !empty loginUser and loginUser.userId eq noticeWriter }">
+            	<a href="updateForm.no?nno= ${ noticeNo }%>" class="btn btn-warning btn-sm">수정하기</a>
+	            <a href="delete.no?nno= ${ noticeNo }>" class="btn btn-danger btn-sm">삭제하기</a>
+            </c:if>
+        </div>
+
+    </div>
+    
+    
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.kh.board.model.vo.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+    .outer{
+        background-color: lightsteelblue;
+        color: lightyellow;
+        width: 1000px;
+        height: 550px;
+        margin: auto;
+        margin-top: 50px;
+    }
+
+    #update-form>table{border:1px solid lightyellow;}
+    #update-form input, #update-form textarea{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+</style>
+<body>
+
+	<%@ include file="../common/menubar.jsp" %>
+	
+    <div class="outer">
+        <br><h2 align="center">일반게시판 수정하기</h2><br>
+            
+		
+        <form action="update.bo" id="update-form" method="post" enctype="multipart/form-data">
+        
+        	<input type="hidden" name="bno" value="${ b.boardNo }">
+
+            <!--카테고리, 제목, 내용, 첨부파일, 작성자 회원번호-->
+            <table align="center">
+                <tr>
+                    <th width="70">카테고리</th>
+                    <td width="500">
+                        <select name="category">
+                            <c:forEach var="c" items="${ list }">
+                            	<option value="${ c.categoryNo }">${ c.categoryName }</option>
+                            </c:forEach>
+                        </select>
+                        <script>
+                        	$(function(){
+                        		$("#update-form option").each(function(){
+                        			if($(this).text() == "${ b.category }")
+                        				$(this).attr("selected", true);
+                        		})
+                        	})
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <th>제목</th>
+                    <td><input type="text" name="title" required value="${ b.boardTitle }"></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <textarea name="content" rows="10" required>${ b.boardContent }</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>첨부파일</th>
+                    <td>
+                        <c:choose>
+                        	<c:when test="${ at! = null }">
+	                       		${ at.originName }
+	                        	<input type="hidden" name="originFileNo" value="${ at.fileNo }">
+	                        	<input type="hidden" name="originFileName" value="${ at.changeName }">
+	                        	<input type="file" name="reUpfile">
+                        	</c:when>
+                        	<c:otherwise>
+                        		<input type="file" name="reUpfile">
+                        	</c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+
+            <div align="center">
+                <button type="submit">작성하기</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
