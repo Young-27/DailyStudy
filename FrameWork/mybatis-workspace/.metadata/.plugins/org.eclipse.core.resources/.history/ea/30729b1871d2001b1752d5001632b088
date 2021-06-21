@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 
+	* configuration
+	 마이바티스 설정과 관련된 기본 세팅들을 선언하는 영역
+ -->
+<configuration>
+	
+	<settings>
+		<!-- 만약에 null로 데이터가 전달되었다면 빈칸이 아닌 null로 인식해라 라는 뜻 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+</configuration>

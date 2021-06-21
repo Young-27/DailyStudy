@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 
+	* configuration
+	 마이바티스 설정과 관련된 기본 세팅들을 선언하는 영역
+ -->
+<configuration>
+	
+	<settings>
+		<!-- 만약에 null로 데이터가 전달되었다면 빈칸이 아닌 null로 인식해라 라는 뜻 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+	<!-- VO/DTO 클래스들의 풀클래스명을 단순한 클래스명으로 사용하기 위해서 별칭을 등록할 수 있는 영역 -->
+	<typeAliases>
+	 
+	</typeAliases>
+	
+	<!-- DB를 연결할 설정에 대한 정보를 기술하는 영역 -->
+	<environments default="development">
+	
+		<environment id="devlopment">
+			<!-- 
+				* transactionManager는 JDBC와 MANAGED 둘 중 하나를 선택할 수 있음
+				- JDBC : 트랜잭션을 내가 직접 관리하겠다 (수동 commit)
+				- MANAGED : 트랜잭션에 대해 어떠한 영향도 행사하지 않겠다 (자동 commit)
+			 -->
+			<transactionManager type="JDBC"/>
+			<!-- 
+				* dataSource는 POOLED와 UNPOOLED 둘 중 하나를 선택할 수 있음 (ConnectionPool을 사용할건지 안할건지에 대한 여부)
+				- POOLED : 사용하겠다.
+				- UNPOOLED : 사용하지 않겠다.
+			 -->
+			<dataSource type="POOLED">
+				<property name="" value="" />
+				<property name="" value="" />
+				<property name="" value="" />
+				<property name="" value="" />
+			</dataSource>
+		</environment>
+	
+	</environments>
+	
+</configuration>

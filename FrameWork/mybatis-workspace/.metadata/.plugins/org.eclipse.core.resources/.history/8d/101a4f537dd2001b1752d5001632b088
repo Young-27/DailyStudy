@@ -1,0 +1,16 @@
+package com.kh.mybatis.common.template;
+
+import org.apache.ibatis.session.SqlSession;
+
+public class Template {
+	// 마이바티스 방식
+	
+	public static SqlSession getSqlSession() {
+		
+		// driver클래스경로, 어떤 url에 어떤 계정에 접속할건지 계정 정보 => 환경설정파일 mybatis-config.xml
+		
+	}
+	
+	
+	
+}
