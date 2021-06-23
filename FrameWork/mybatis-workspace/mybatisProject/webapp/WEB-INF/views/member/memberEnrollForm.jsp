@@ -15,7 +15,7 @@
         <h1 align="center">회원가입</h1>
         <br>
 
-        <form id="enroll-form" action="" method="post">
+        <form id="enroll-form" action="insert.me" method="post">
             <table align="center">
                 <tr>
                     <td>* ID</td>

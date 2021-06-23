@@ -13,8 +13,8 @@
         font-size:12px;
     }
     .nav-area{
-        background:black;
-        color:white;
+        background:gold;
+        color:midnightblue;
         height:50px;
     }
     .menu{
@@ -25,12 +25,12 @@
         vertical-align:middle;
         font-weight:bold;
     }
-    .menu:hover{background:darkgray; cursor:pointer}
+    .menu:hover{background:ivory; cursor:pointer}
 
     .outer{
         width:900px;
-        background:black;
-        color:white;
+        background:gold;
+        color:midnightblue;
         margin:auto;
         margin-top:50px;
     }
@@ -38,7 +38,7 @@
 </head>
 <body>
 
-    <h1 align="center">Welcome to MyBatis World!!</h1>
+    <h1 align="center" style="color: midnightblue;">Welcome to MyBatis World!!</h1>
     <br>
 
     <div class="login-area" align="right">
@@ -46,7 +46,7 @@
     	<c:choose>
 			<c:when test="${ empty loginUser }">
 		        <!--로그인 전에 보여질 폼-->
-		        <form action="" method="post">
+		        <form action="login.me" method="post">
 		            <table>
 		                <tr>
 		                    <td>아이디</td>
@@ -72,12 +72,12 @@
 		            <table>
 		                <tr>
 		                    <td colspan="2">
-		                        <h3>xxx님 환영합니다.</h3>
+		                        <h3>${ loginUser.userName }님 환영합니다.</h3>
 		                    </td>
 		                </tr>
 		                <tr>
 		                    <td><a href="">마이페이지</a></td>
-		                    <td><a href="">로그아웃</a></td>
+		                    <td><a href="logout.me">로그아웃</a></td>
 		                </tr>
 		            </table>
 		        </div>
@@ -91,7 +91,7 @@
     <div class="nav-area" align="center">
         <div class="menu">HOME</div>
         <div class="menu">공지사항</div>
-        <div class="menu">게시판</div>
+        <div class="menu" onclick="location.href='list.bo?currentPage=1';">게시판</div>
         <div class="menu">ETC</div>
     </div>
 

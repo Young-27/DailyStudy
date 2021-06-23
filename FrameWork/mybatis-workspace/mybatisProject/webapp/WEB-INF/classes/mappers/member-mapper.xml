@@ -3,5 +3,95 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
-
+	
+	<!-- 
+		* resultMap 마이바티스 핵심 기능 중 하나!
+		  ResultSet으로부터 조화된 컬럼값 하나씩 뽑아서 내가 지정한 자바 객체에 담는 JDBC코드를 줄여주는 역할 수행
+		  
+		  id : 고유한 id
+		  type : ResultSet에 조회된 값 뽑아서 어떤 타입의 객체에 담을건지 기술(풀클래스명 또는 config에 등록된 별칭)
+	 -->
+	<resultMap id="memberResultSet" type="com.kh.mybatis.member.model.vo.Member">
+		<!-- 
+			column : 조회된 컬럼중에 어떤 컬럼을 뽑을 건지 (DB의 해당 컬럼명)
+			property : 그 뽑은 값을 해당 타입의 객체에 어떤 필드에 담을건지 (자바 vo의 필드명)
+			
+		 -->
+		 <result column="user_no" property="userNo" />
+		 <result column="user_id" property="userId" />
+		 <result column="user_pwd" property="userPwd" />
+		 <result column="user_name" property="userName" />
+		 <result column="email" property="email" />
+		 <result column="birthday" property="birthday" />
+		 <result column="gender" property="gender" />
+		 <result column="phone" property="phone" />
+		 <result column="address" property="address" />
+		 <result column="enroll_date" property="enrollDate" />
+		 <result column="modify_date" property="modifyDate" />
+		 <result column="status" property="status" />
+		 <!-- 
+		 	순서 상관X
+		  -->
+	</resultMap>
+	
+	<!-- 
+		실행하고자하는 sql문 종류에 따른 태그 안에 sql문 작성함
+		dao에서 해당 sql문 찾아서 실행할 수 있도록 고유한 id 부여해야됨 (필수 속성 : id)
+		혹시라도 해당 sql문에 전달된 객체가 있다면 parameterType속성에 해당 객체의 타입(풀클래스명 또는 별칭)
+		
+		id : 외부(DAO)에서 참조하기 위한 sql문의 고유 아이디
+		parameterType : 해당 sql문에 전달된 객체의 타입(풀클래스명) 또는 config문서에 등록된 별칭
+		
+		?(홀더) 대신에 해당 sql문에 전달된 객체로부터 값을 꺼낼 때 #{필드명 또는 변수명 또는 키값} 이용
+	 -->
+	
+	<insert id="insertMember" parameterType="com.kh.mybatis.member.model.vo.Member">
+		insert
+		  into member
+		  (
+		    user_no
+		  , user_id
+		  , user_pwd
+		  , user_name
+		  , email
+		  , birthday
+		  , gender
+		  , phone
+		  , address
+		  )
+		  values
+		  (
+		    seq_uno.nextval
+		  , #{userId}
+		  , #{userPwd}
+		  , #{userName}
+		  , #{email}
+		  , #{birthday}
+		  , #{gender}
+		  , #{phone}
+		  , #{address}
+		  )
+	</insert>
+	
+	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
+	<!-- parameterType에 풀클래스명 대신 별칭 씀!! (mybatis-config typeAlias에 등록해놓았음 )-->
+		select
+			   user_no
+			 , user_id
+			 , user_pwd
+			 , user_name
+			 , email
+			 , birthday
+			 , gender
+			 , phone
+			 , address
+			 , enroll_date
+			 , modify_date
+			 , status
+		  from member
+		 where user_id = #{userId}
+		   and user_pwd = #{userPwd}
+		   and status = 'Y'
+	</select>
+	
 </mapper>
