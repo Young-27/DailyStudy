@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 
+		* root-context.xml 문서는 서버 구동시 web.xml을 거쳐서 바로 로딩 되는 문서 (pre-loading 되는 설정 파일)
+		     따라서 서버 스타트와 동시에 바로 셋팅(빈으로 등록) 해야되는 내용들을 작성하는 설정파일
+		     주로  DB연결 설정, 트랜잭션 처리, AOP 관련, 내 외부 모듈연동 등등
+	 -->	
+	 
+	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+	 	<property name="userName" value="spring" />
+	 	<property name="password" value="spring" />
+	 </bean>
+	 
+	 <!-- 내부적으로 알아서 진행
+	 	BasicDataSource dataSource = new BasicDataSource();
+	 	dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+	 	dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+	 	dataSource.setUserName("spring");
+	 	dateSource.setPassword("spring");
+	  -->
+	  
+	  <bean id="" class="">
+	  	
+	  </bean>
+	  
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+</beans>
