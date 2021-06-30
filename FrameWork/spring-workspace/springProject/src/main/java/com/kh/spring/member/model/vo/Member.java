@@ -1,7 +1,42 @@
 package com.kh.spring.member.model.vo;
 
-public class Member {
+import java.sql.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+/*
+ *  * Lombok(롬복)
+ *  
+ *  1. 라이브러리 다운 후 적용 (maven)
+ *  2. 다운로드 된 jar 찾아서 설치 (작업중인 ide 선택해서 설치)
+ *     - 압축풀기로 열리는 경우 cmd에서 java -jar lombok-1.18.12.jar 명령어 입력
+ *  3. ide 재실행
+ */
+@NoArgsConstructor
+@AllArgsConstructor // 모든 매개변수생성자 만들어짐
+@Setter
+@Getter
+@ToString
+public class Member {
+	
+	private String userId;
+	private String userPwd;
+	private String userName;
+	private String email;
+	private String gender;
+	private String age;
+	private String phone;
+	private String address;
+	private Date enrollDate;
+	private Date modifyDate;
+	private String status;
+	
+	// private String pName; => private String productName; 으로 하는걸 권장!!
+	// 즉, 필드명 지을때 소문자 두글자 이상으로 시작할 것
 	
 	
 }

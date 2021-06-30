@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="com.kh.spring" />
+	
+	<!-- 
+		* 사용자가 어떤 url로 서비스 요청시 이 문서가 읽혀진다고 보면됨!
+		  HandlerMapping을 통해서 어떤 url로 요청시 어떤 Controller를 실행시킬건지 알아내야됨 => 해당 Controller가 실행되도록
+		  
+		  1. 그때마다 실행할 Controller 클래스들이 빈으로 등록되어있어야됨
+		  2. 어떤 url로 요청시 어떤 Controller를 구동시킬건지 매핑시키는 HandlerMapping 관련한 클래스도 빈으로 등록되어있어야됨
+		  
+	 -->
+	 <!-- xml방식
+	 <beans:bean id="loginController" class="com.kh.spring.member.controller.loginController"/>
+	 <beans:bean id="logoutController" class="com.kh.spring.member.controller.logoutController"/>
+	 
+	 <beans:bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	 	<beans:property name="mapping">
+		 	<beans:props>
+		 		<beans:prop key="login.me">loginController</beans:prop>
+		 		<beans:prop key="logout.me">logoutController</beans:prop>
+		 	</beans:props>
+	 	</beans:property>
+	 </beans:bean>
+	 -->
+	 <!-- 
+	 	위의 방식이 xml방식
+	 		=> 각 url 요청때마다 실행시킬 controller클래스들을 따로따로 만들어야됨
+	 		> 장점 : 등록된 bean들을 한 xml문서내에서 한 눈에 볼 수 있어서 관리의 편의성은 높을 수 있음
+	 		> 단점 : 하지만 bean 개수가 많아지면  오히려 관리하기 어려움 / 여러 개발자가 같은 xml설정 파일을 수정하면서 충돌이 발생되기 쉽다.
+	 		
+	 		
+	  -->
+	 
+	 
+	
+</beans:beans>

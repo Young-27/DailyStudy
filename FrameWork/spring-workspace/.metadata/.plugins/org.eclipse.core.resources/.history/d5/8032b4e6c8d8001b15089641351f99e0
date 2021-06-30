@@ -1,0 +1,8 @@
+package com.kh.spring.member.model.dao;
+
+import org.springframework.stereotype.Repository;
+
+@Repository // DB와 접근하는 클래스에 부여하는 어노테이션으로 Component의 구체화된 개념
+public class MemberDao {
+	
+}

@@ -1,0 +1,13 @@
+package com.kh.spring.member.model.service;
+
+import com.kh.spring.member.model.vo.Member;
+
+public interface MemberService {
+	
+	// 로그인용 서비스
+	Member loginMember(Member m);
+	
+	// 회원가입용 서비스
+	int insertMember(Member m);
+	
+}

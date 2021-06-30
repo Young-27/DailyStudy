@@ -17,9 +17,5 @@
 		<mapper resource="mappers/board-mapper.xml" />
 	</mappers>
 	
-	
-	
-	
-	
 
 </configuration>

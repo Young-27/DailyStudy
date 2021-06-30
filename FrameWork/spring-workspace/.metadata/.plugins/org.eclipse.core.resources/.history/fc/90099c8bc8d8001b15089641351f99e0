@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMappaer">
+	
+	<resultMap id="selectResultSet" type="com.kh.spring.member.model.vo.Member">
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+		<result column="" property=""/>
+	</resultMap>
+	
+	<select id="loginMember" resultMap="selectResultSet">
+		select 
+			   user_id
+			 , user_pwd
+			 , user_name
+			 , email
+			 , gender
+			 , age
+			 , phone
+			 , address
+			 , enroll_date
+			 , modify_date
+			 , status
+		  from member
+		 where user_id = ?
+		   and user_pwd = ?
+		   and status = 'Y'		
+	</select>
+	
+</mapper>

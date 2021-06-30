@@ -1,0 +1,173 @@
+package com.kh.spring.member.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.spring.member.model.service.MemberService;
+import com.kh.spring.member.model.vo.Member;
+
+@Controller // Controller타입의 어노테이션을 붙여주면 빈 스캐닝을 통해 자동으로 빈 등록
+public class MemberController {
+	
+	//private MemberService mService = new MemberServiceImpl(); // new --사용 => 결합도가 높아진다는 단점
+	
+	@Autowired
+	private MemberService mService;
+	
+	/*
+	@RequestMapping(value="login.me") // RequestMapping타입의 어노테이션을 붙여줌으로써 HandleMapping 등록
+	public void loginMember() {
+		
+	}
+	
+	@RequestMapping(value="insert.me")
+	public void insertMember() {
+		
+	}
+	*/
+	
+	// * 파라미터(요청시 전달값)을 받는 방법 (요청시 전달되는 값들 처리방법)
+	/*
+	 *  1. HttpServletRequest를 통해 전달받기 (기존의 jsp/servlet 때의 방식)
+	 *     해당 메소드의 매개변수로 HttpServletRequest를 추가해두면
+	 *     스프링컨테이너가 해당 메소드 호출시(실행시) 자동으로  해당 객체를 인자로 주입해 줌
+	 */
+	/*
+	@RequestMapping("login.me")
+	public String loginMember(HttpServletRequest request) {
+		
+		String userId = request.getParameter("id");
+		String userPwd = request.getParameter("pwd");
+		
+		System.out.println("ID : " + userId);
+		System.out.println("PWD : " + userPwd);
+		
+		return "main"; // main.jsp 응답
+		
+	}
+	*/
+	
+	/*
+	 *  2. @RequestParam 어노테이션 방식
+	 *     스프링에서 조금 더 간단하게 파라미터를 받아올 수 있는 방법 제공
+	 *     request.getParameter("키"):"밸류"의 역할을 대신해주는 어노테이션
+	 *     
+	 *     - 기본적으로 자주 안쓰이지만 default값을 세팅해 놓을 때 쓰임
+	 */
+	/*
+	@RequestMapping("login.me")
+	public String loginMember(@RequestParam(value="id", defaultValue="aaa") String userId, 
+							  @RequestParam(value="pwd") String userPwd) {
+		
+		System.out.println("ID : " + userId);
+		System.out.println("PWD : " + userPwd);
+		
+		return "main";
+	}
+	*/
+	
+	/*
+	 *  3. @RequestParam 어노테이션을 생략하는 방법
+	 *     위의 어노테이션을 생략해도 파라미터 값을 가져와서 기록할 수 있음
+	 *     ** 단, 매개변수명을 name값(키값)과 동일하게 세팅해둬야 자동으로 값이 주입된다.
+	 */
+	/*
+	@RequestMapping("login.me")
+	public String loginMember(String userId, String userPwd) {
+		
+		System.out.println("ID : " + userId);
+		System.out.println("PWD : " + userPwd);
+		
+		Member m = new Member();
+		m.setUserId(userId);
+		m.setUserPwd(userPwd);
+		
+		return "main";
+	}
+	*/
+	
+	
+	/*
+	 *  4. 커맨드 객체 방식
+	 *     매개변수로 요청시 전달값들을 담고자 하는 vo클래스 타입을 셋팅한 후
+	 *     요청시 전달값의 키값(name값)을 vo클래스에 담고자하는 필드명으로 작성
+	 *     
+	 *     스프링컨테이너가 해당 객체를 기본생성자로 생성 후 setter메소드 찾아서
+	 *     요청시 전달값을 해당 필드에 담아줌
+	 *     
+	 *     *** 반드시 name 속성값과 담고자하는 필드명이 동일해야함!!
+	 */
+	/*
+	@RequestMapping("login.me")
+	public String loginMember(Member m) {
+		
+		Member loginUser = mService.loginMember(m);
+		
+		if(loginUser == null) { // 로그인 실패 => 에러페이지
+			System.out.println("로그인 실패");
+		}else { // 로그인 성공 => 메인페이지
+			System.out.println("로그인 성공");
+		}
+		
+		return "main"; // main.jsp 응답
+	}
+	*/
+	
+	// * 요청 처리 후 응답페이지로 포워딩 또는 url재요청, 응답데이터 담는 방법
+	/*
+	 * 1. Model객체를 사용하는 방법
+	 *    응답 뷰로 전달하고자 하는 데이터를 맵 형식(key-value)로 담을 수 있음
+	 *    scope는 request이다.
+	 *    단, setAttribute가 아닌 addAttribute메소드 이용 
+	 */
+	
+	/*
+	@RequestMapping("login.me")
+	public String loginMember(Member m, Model model, HttpSession session) {
+		
+		Member loginUser = mService.loginMember(m);
+		
+		if(loginUser == null) { // 로그인 실패 => 에러페이지
+			model.addAttribute("errorMsg", "로그인 실패!");
+			// return "/WEB-INF/views/common/errorPage.jsp";
+			// servlet-context.xml에 빈 등록되어있음 prefix, suffix
+			return "common/errorPage";
+		}else { // 로그인 성공 => 메인페이지
+			
+			session.setAttribute("loginUser", loginUser);
+			return "redirect:/"; // redirect : url재요청
+		}
+		
+	}
+	
+	/*
+	 * 2. ModelAndView 객체를 사용하는 방법 
+	 *    Model은 데이터를 맵형식으로 담을 수 있는 공간이라고 한다면
+	 *    View는 응답뷰에 대한 정보를 담을 수 있는 공간
+	 *    
+	 *    ModelAndView는 두개를 합쳐놓은 객체
+	 */
+	@RequestMapping("login.me")
+	public ModelAndView loginMember(Member m, Model model, HttpSession session, ModelAndView mv) {
+		
+		Member loginUser = mService.loginMember(m);
+		
+		if(loginUser == null) { // 로그인 실패 => 에러페이지
+			mv.addObject("errorMsg", "로그인 실패!");
+			mv.setViewName("common/errorPage");
+		}else { // 로그인 성공 => 메인페이지
+			session.setAttribute("loginUser", loginUser);
+			mv.setViewName("redirect:/");
+		}
+		return mv;
+	}
+	
+	
+	
+	
+}
