@@ -17,13 +17,13 @@
             <h2>마이페이지</h2>
             <br>
 
-            <form action="" method="post" onsubmit="">
+            <form action="update.me" method="post">
                 <div class="form-group">
                     <label for="userId">* ID :</label>
                     <input type="text" class="form-control" id="userId" name="userId" value="${ loginUser.userId }" readonly><br>
                     
                     <label for="userName">* Name :</label>
-                    <input type="text" class="form-control" id="userName" name="userName" value="${ loginUser.userName }" readonly><br>
+                    <input type="text" class="form-control" id="userName" name="userName" value="${ loginUser.userName }" required><br>
                     
                     <label for="email"> &nbsp; Email :</label>
                     <input type="email" class="form-control" id="email" name="email" value="${ loginUser.email }"><br>
@@ -43,21 +43,14 @@
                     <input type="radio" name="gender" id="Female" value="F">
                     <label for="Female">여자</label><br>
                     
+                    <script>
+                    	$(function(){
+                    		if("${loginUser.gender}" != ""){
+                    			$("input[value=${loginUser.gender}]").attr("checked", true);
+                    		}
+                    	})
+                    </script>
                 </div>
-                
-                <script>
-                	/*checked 되게 하는 방법..*/
-                	 $(function(){
-                		 var gender = '${loginUser.gender}';
-                		 console.log(gender);
-                		if(gender == 'M'){
-                			$("input[#Male]").prop('checked', true);
-                		}else{
-                			$("input[#Female]").prop('checked', true);
-                		}
-                	}) 
-                
-                </script>
                 <br>
                 <div class="btns" align="center">
                     <button type="submit" class="btn btn-primary">수정하기</button>
@@ -88,10 +81,10 @@
 			                        정말로 탈퇴 하시겠습니까?
                     </b>
 
-                    <form action="" method="post">
+                    <form action="delete.me" method="post">
                       	  비밀번호 : 
                         <input type="password" name="userPwd" required>
-
+                        <input type="hidden" name="userId" value="${ loginUser.userId }">
                         <button type="submit" class="btn btn-danger">탈퇴하기</button>
                     </form>
 

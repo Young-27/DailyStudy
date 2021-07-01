@@ -80,8 +80,24 @@
 		  )
 	</insert>
 	
+	<update id="updateMember">
+		update member
+		   set user_name = #{userName}
+		     , email = #{email}
+		     , age = #{age}
+		     , phone = #{phone}
+		     , address = #{address}
+		     , gender = #{gender}
+		     , modify_date = sysdate
+		 where user_id = #{userId}
+	</update>
 	
-	
+	<update id="deleteMember">
+		update
+			   member
+		   set status = 'N'
+		 where user_id = #{userId}
+	</update>
 	
 	
 	
