@@ -18,7 +18,6 @@
 	</script>
 </head>
 <body>
-	안뇽
 	<div id='calendar'></div>
 </body>
 </html>
