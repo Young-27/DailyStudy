@@ -98,12 +98,12 @@
                			</c:otherwise>
 	               	</c:choose>
 	                  	
-	                  	<c:choose>
-	                  		<c:when test="${ empty condition }">
+                  	<c:choose>
+                  		<c:when test="${ empty condition }">
 		                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 		                    	<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ p }">${ p }</a></li>
 		                    </c:forEach>
-		                </c:when>
+	                	</c:when>
 		                <c:otherwise>
 		                	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 								<li class="page-item"><a class="page-link" href="list.bo?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
