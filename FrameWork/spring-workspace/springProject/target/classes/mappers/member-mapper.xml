@@ -99,7 +99,12 @@
 		 where user_id = #{userId}
 	</update>
 	
-	
+	<select id="idCheck" resultType="_int">
+		select
+			   count(*)
+		  from member
+		 where user_id = #{userId}
+	</select>
 	
 	
 	

@@ -60,7 +60,52 @@
         </div>
         <br><br>
     </div>
-
+    
+	<script>
+		$(function(){
+			// 아이디 입력하는 input요소객체
+			var $idInput = $("#enrollForm input[name=userId]");
+			
+			$idInput.keyup(function(){
+				//console.log($idInput.val());
+				
+				// 우선 최소 5글자 이상으로 입력했을때만 ajax요청해서 중복체크 하도록
+				if($idInput.val().length >= 5){
+					
+					$.ajax({
+						url:"idCheck.me",
+						data:{checkId:$idInput.val()},
+						success:function(result){
+							
+							if(result == "NNNNN"){ // 사용불가능
+								// => 빨간색 메세지(사용불가능) 출력
+								$("#checkResult").show();
+								$("#checkResult").css("color", "red").text("중복된 아이디가 존재합니다. 다시 입력해주세요.");
+								// => 버튼 비활성화
+								$("#enrollForm :submit").attr("disabled", true);
+								
+							}else{ // 사용가능
+								// => 초록색 메세지(사용가능) 출력
+								$("#checkResult").show();
+								$("#checkResult").css("color", "green").text("멋진 아이디네요!");
+								// => 버튼 활성화
+								$("#enrollForm :submit").removeAttr("disabled");
+							}
+							
+						},error:function(result){
+							console.log("아이디 중복체크용 ajax 통신 실패");
+						}
+					})
+					
+				} else {
+					// 메세지 보여지지 않고, 버튼 비활성화
+					$("#checkResult").hide();
+					$("enrollForm :submit").attr("disabled", true);
+				}
+			})
+			
+		})
+	</script>
     <!-- 이쪽에 푸터바 포함할꺼임 -->
     <jsp:include page="../common/footer.jsp"/>
     
