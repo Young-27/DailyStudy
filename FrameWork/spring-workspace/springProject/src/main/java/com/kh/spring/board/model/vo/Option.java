@@ -8,11 +8,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter @Getter
 @ToString
-public class Reply {
-	private int replyNo;
-	private String replyContent;
-	private int refBoardNo;
-	private String replyWriter;
-	private String createDate;
-	private String status;
+public class Option {
+
+	private int optNo;
+	private String optName;
+	private int optPrice;
+	private int refProNo;
+	
 }

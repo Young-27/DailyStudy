@@ -314,13 +314,6 @@ public class MemberController {
 	}
 	
 	
-	/**
-	 * 풀캘린더 
-	 */
-	@RequestMapping("calendar.me")
-	public String calendar() {
-		return "board/calendar";
-	}
 	
 	
 	

@@ -6,6 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.content{
+            background-color:rgb(247, 245, 245);
+            width:80%;
+            margin:auto;
+        }
+    .innerOuter{
+        border:1px solid lightgray;
+        width:80%;
+        margin:auto;
+        padding:5% 15%;
+        background:white;
+    }
+	table *{margin:5px;}
+    table{width:100%;}
+</style>
 </head>
 <body>
 <body>
@@ -82,34 +98,86 @@
             <table id="replyArea" class="table" align="center">
                 <thead>
                     <tr>
-                        <th colspan="2">
-                            <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
-                        </th>
-                        <th style="vertical-align: middle"><button class="btn btn-secondary">등록하기</button></th>
+                    	<c:choose>
+                    		<c:when test="${ empty loginUser }">
+		                        <th colspan="2">
+		                            <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%" readonly>로그인한 사용자만 이용가능한 서비스입니다. 로그인 후 이용바랍니다.</textarea>
+		                        </th>
+		                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
+		                    </c:when>
+		                    <c:otherwise>
+		                        <th colspan="2">
+		                            <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
+		                        </th>
+		                        <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addReply();">등록하기</button></th>
+		                    </c:otherwise>
+                        </c:choose>
                     </tr>
                     <tr>
-                       <td colspan="3">댓글 (<span id="rcount">3</span>) </td> 
+                       <td colspan="3">댓글 (<span id="rcount"></span>) </td> 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>user02</th>
-                        <td>댓글입니다.너무웃기다앙</td>
-                        <td>2020-04-10</td>
-                    </tr>
-                    <tr>
-                        <th>user01</th>
-                        <td>많이봐주세용</td>
-                        <td>2020-04-08</td>
-                    </tr>
-                    <tr>
-                        <th>admin</th>
-                        <td>댓글입니다ㅋㅋㅋ</td>
-                        <td>2020-04-02</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
+        
+        <script>
+        	$(function(){
+        		selectReplyList();
+        	})
+        	
+        	function addReply(){
+        		
+        		if($("#content").val().trim().length != 0){ // 유효한 댓글 작성 시 => insert요청
+        			
+        			$.ajax({
+        				url:"rinsert.bo",
+        				data:{
+        					refBoardNo:${b.boardNo},
+        					replyContent:$("#content").val(),
+        					replyWriter:'${loginUser.userId}'
+        				}, success:function(status){
+        					
+        					if(status == "success"){
+        						selectReplyList();
+        						$("#content").val("");
+        					}
+        						        					
+        				}, error:function(){
+        					console.log("댓글 작성용 ajax통신 실패");
+        				}
+        			})
+        			
+        		}else{
+        			alertify.alert("댓글 작성후 등록해주세요!");
+        		}
+        		
+        	}
+        	
+        	function selectReplyList(){
+        		$.ajax({
+        			url:"rlist.bo",
+        			data:{bno:${ b.boardNo }},
+        			success:function(list){
+        				//console.log(list);
+        				$("rcount").text(list.length);
+        				var value = "";
+        				for(var i in list){
+        					value += "<tr>"
+			                          + "<th>" + list[i].replyWriter + "</th>"
+			                          + "<td>" + list[i].replyContent + "</td>"
+			                          + "<td>" + list[i].createDate + "</td>"
+			                       + "</tr>";
+        				}
+        				$("#replyArea tbody").html(value);
+        			},error:function(){
+        				console.log("댓글 리스트 조회용 ajax 통신 실패");
+        			}
+        		})
+        	}
+        </script>
+        
         <br><br>
     </div>
 

@@ -100,16 +100,7 @@
 		        </c:choose>
             </div>
         </div>
-        <div id="header_2">
-            <ul>
-                <li><a href="calendar.bo">HOME</a></li>
-                <li><a href="">공지사항</a></li>
-                <li><a href="list.bo">자유게시판</a></li>
-                <li><a href="">사진게시판</a></li>
-            </ul>
-        </div>
-    </div>
-
+	
     <!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭시 보임) -->
     <div class="modal fade" id="loginModal">
         <div class="modal-dialog modal-sm">

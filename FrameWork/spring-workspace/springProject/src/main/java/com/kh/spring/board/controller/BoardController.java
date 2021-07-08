@@ -14,13 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.board.model.vo.Board;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
-import com.sun.xml.internal.ws.api.message.Attachment;
 
 @Controller
 public class BoardController {
@@ -212,15 +214,36 @@ public class BoardController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="rlist.bo", produces="application/json; charset=utf-8")
+	public String selectReplyList(int bno) {
+		
+		ArrayList<Reply> list = bService.selectReplyList(bno);
+		return new Gson().toJson(list);
+		
+	}
 	
+	@ResponseBody
+	@RequestMapping("rinsert.bo")
+	public String inserReply(Reply r) {
+		int result = bService.insertReply(r);
+		
+		/*
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+		*/
+		
+		return result > 0 ? "success" : "fail";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
+	@ResponseBody
+	@RequestMapping(value="topList.bo", produces="application/json; charset=utf-8")
+	public String selectTopList() {
+		return new Gson().toJson(bService.selectTopBoardList());
+	}
 	
 	// 파일 등록은 사용할 일이 많으니 따로 메소드로 빼두자.
 	public String saveFile(HttpSession session, MultipartFile upfile) { 

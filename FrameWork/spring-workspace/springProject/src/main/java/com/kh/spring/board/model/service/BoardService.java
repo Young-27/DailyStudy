@@ -36,5 +36,8 @@ public interface BoardService {
 	int searchListCount(HashMap map);
 	ArrayList<Board> searchList(HashMap map, PageInfo pi);
 	
+	// 상위 5개 게시글
+	ArrayList<Board> selectTopBoardList();
+	
 	
 }

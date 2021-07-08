@@ -18,11 +18,14 @@
             <h2>회원가입</h2>
             <br>
 
-            <form action="insert.me" method="post" onsubmit="">
+            <form id="enrollForm" action="insert.me" method="post" onsubmit="">
                 <div class="form-group">
                     <label for="userId">* ID :</label>
-                    <input type="text" class="form-control" id="userId" name="userId" placeholder="Please Enter ID" required><br>
-                    
+                    <input type="text" class="form-control" id="userId" name="userId" placeholder="Please Enter ID" required>
+                    <div id="checkResult" style="font-size:0.8em; display:none">
+                    	사용가능한 아이디입니다.
+                    </div>
+                    <br>
                     <label for="userPwd">* Password :</label>
                     <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="Please Enter Password" required><br>
                     
@@ -53,7 +56,7 @@
                 </div>
                 <br>
                 <div class="btns" align="center">
-                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <button type="submit" class="btn btn-primary disabled">회원가입</button>
                     <button type="reset" class="btn btn-danger"> 초기화</button>
                 </div>
             </form>
