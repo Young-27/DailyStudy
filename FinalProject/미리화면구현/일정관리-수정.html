@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <br>
+    <h3>일정 수정</h3>
+    <hr>
+    <table class="" align="center">
+        <tr>
+            <th width="120px">일정 제목</th>
+            <td colspan="2"><input type="text" style="width: 300px;" placeholder="일정 제목을 입력해주세요"></td>
+            <td>
+                <select name="" id="">
+                    <option value="">개인</option>
+                    <option value="">팀</option>
+                    <option value="">회사</option>
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>시작일</th>
+            <td><input type="date"></td>
+            <td><input type="date"></td>
+            <td rowspan="2"><input type="checkbox">시간설정</td> <!-- 시간설정 체크 해제시 시간 input 사라지게 / 기본값: 체크설정-->
+        </tr>
+        <tr>
+            <th>종료일</th>
+            <td><input type="date"></td>
+            <td><input type="date"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td colspan="2"><textarea name="" id="" cols="50" rows="10" style="resize: none;"></textarea></td>
+        </tr>
+
+    </table>
+    <hr>
+
+    <h3>업무 보고</h3>
+    <table class="" align="center">
+        <tr>
+            <th width="120px">제목</th>
+            <td colspan="2"><input type="text" style="width: 300px;" placeholder="제목을 입력해주세요"></td>
+            
+        </tr>
+        
+        <tr>
+            <th>내용</th>
+            <td colspan="2"><textarea name="" id="" cols="50" rows="5" style="resize: none;"></textarea></td>
+        </tr>
+
+        <tr>
+            <th>첨부파일</th>
+            <td><input type="file"></td>
+        </tr>
+    </table>
+    <br>
+    <div class="button-area" align="center">
+        <button class="btn btn-secondary">취소</button>
+        <button class="btn btn-primary">저장</button>
+    </div>
+</body>

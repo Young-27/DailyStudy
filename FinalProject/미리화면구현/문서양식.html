@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .outer{
+            width: 1000px;
+            height: 1000px;
+            margin: auto;
+        }
+        #do-navbar{
+            width: 200px;
+            margin: 50px;
+            margin-top: 0;
+            display: block;
+            float: left;
+        }
+        #document{
+            width: 800px;
+        }
+        #do-navbar li{
+            list-style: none;
+            
+        }
+        #do-navbar a{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <jsp:include page=""/>
+    <br><br>
+    <h4 style="margin-left: 30px;">문서양식</h4>
+    <div class="table-bordered"id="do-navbar">
+        <ul>
+            <a href=""><li>공용문서양식</li></a>
+            <a href=""><li>팀별문서양식</li></a>
+        </ul>
+        
+        
+    </div>
+    <div class="outer">
+        
+        <table border="1" class="table table-bordered text-center" id="document" align="center">
+            <thead>
+                <tr>
+                    <th>선택</th>
+                    <th>No</th>
+                    <th>작성자</th>
+                    <th>내용</th>
+                    <th>파일</th>
+                    <th>등록일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>사원 김개똥</td>
+                    <td>개정된 회의록 양식입니다.</td>
+                    <td>(파일이미지)</td>
+                    <td>21.07.02</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>사원 김개똥</td>
+                    <td>개정된 회의록 양식입니다.</td>
+                    <td>(파일이미지)</td>
+                    <td>21.07.02</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>사원 김개똥</td>
+                    <td>개정된 회의록 양식입니다.</td>
+                    <td>(파일이미지)</td>
+                    <td>21.07.02</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <br>
+    
+        <button class="btn btn-primary" style="margin-left: 200px;">수정</button>
+        <button class="btn btn-danger">삭제</button>
+    
+        <button class="btn btn-primary" style="float: right;">등록</button>
+        <br><br>
+        <div id="paging-area" align="center">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>

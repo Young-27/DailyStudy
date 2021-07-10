@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .outer{
+            width: 1000px;
+            height: 1000px;
+            margin: auto;
+            margin-left: 50px;
+        }
+
+        #navbar{
+            width: 200px;
+            height: 1000px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <jsp:include page=""/>
+    <br><br>
+    <div class="outer">
+        <h4 style="margin-left: 30px;">일정관리</h4>
+        <button class="btn btn-primary" style="width:200px;">일정 추가</button>
+        <br>
+
+        <div class="table-bordered" id="do-navbar" style="width:200px; margin-top: 10px; padding: 5px;">
+            <b>오늘일정</b>
+            <a href=""><b style="float: right;">∨</b></a>
+            <br>
+            <!-- 체크박스 체크 시 취소선 function-->
+            <input type="checkbox"> Conference <br>
+            <input type="checkbox"> Meeting <br>
+            <input type="checkbox"> Lunch <br>
+        </div>
+        <div class="table-bordered" id="do-navbar" style="width:200px; margin-top: 10px; padding: 5px;">
+            
+            <a href=""><b style="float: right;">∨</b></a>
+            <br>
+            <label for="">
+                <a href="" id="note-list">노트 목록</a>
+            </label>
+            <br>
+            <label for="">
+                <a href="" id="note-list">업무 보고</a>
+            </label>
+            <br>
+            <label for="">
+                <a href="" id="note-list">자원 예약</a>
+            </label>
+            
+        </div>
+        <div class="table-bordered" id="do-navbar" style="width:200px; margin-top: 10px; padding: 5px;">
+            
+            <!-- 일정 카테고리 선택하는 부분 -->
+            <input type="checkbox"> 전체 <br>
+            <input type="checkbox"> 개인 <input type="color"><br> 
+            <input type="checkbox"> 팀 <br>
+            <input type="checkbox"> 회사 <br>
+            <input type="checkbox"> 비품 <br>
+            <input type="checkbox"> 회의실 <br>
+            
+        </div>
+    </div>
+    
+    <div class="calendar"></div>
+   
+
+</body>
