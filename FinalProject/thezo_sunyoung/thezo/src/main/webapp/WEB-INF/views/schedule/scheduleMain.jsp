@@ -16,31 +16,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     
-<%-- 풀캘린더------------------------------------------------------------------------------------------------------ --%>
-    <link href='${pageContext.request.contextPath}/resources/fullcalendar-5.8.0/lib/main.css' rel='stylesheet' />
-    <script src='${pageContext.request.contextPath}/resources/fullcalendar-5.8.0/lib/main.js'></script>
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
+    
    
     <style>
     	#nav{
     		width: 20%;
     		float:left;
     	}
-        #calendar{
-        	width: 70%;
-        	margin-right:75px;
-        	float:right;
-        }
+        
     </style>
 </head>
 <body>
@@ -52,8 +35,8 @@
     
 	    <div class="outer">
 	    	<div id="nav">
-	    		<h4 style="margin-left: 30px;">일정관리</h4>
-		        <button class="btn btn-primary" style="width:200px;">일정 추가</button>
+	    		<b style="margin-left: 30px; font-size: 25px;">일정관리</b>
+		        <button class="btn btn-primary" style="width:200px;" data-toggle="modal" data-target="#scAdd">일정 추가</button>
 		        <br>
 	    		<div class="table-bordered" id="do-navbar" style="width:200px; margin-top: 10px; padding: 5px;">
 		            <b>오늘일정</b>
@@ -69,7 +52,7 @@
 		            <a href=""><b style="float: right;">∨</b></a>
 		            <br>
 		            <label for="">
-		                <a href="" id="note-list">노트 목록</a>
+		                <a href="list.nt" id="note-list">노트 목록</a>
 		            </label>
 		            <br>
 		            <label for="">
@@ -82,7 +65,8 @@
 		            
 		        </div>
 		        <div class="table-bordered" id="do-navbar" style="width:200px; margin-top: 10px; padding: 5px;">
-		            
+		            <b>필터</b>
+		            <br>
 		            <!-- 일정 카테고리 선택하는 부분 -->
 		            <input type="checkbox"> 전체 <br>
 		            <input type="checkbox"> 개인 <input type="color"><br> 
@@ -97,12 +81,70 @@
 	        
 	        
 	   		<%-- 캘린더 영역 ------------------------------------------------------------------------------- --%>
-			<div id="calendar" align="center"></div>
+			<jsp:include page="fullcalendar.jsp"/>
 	        
-	        
+	        <%-- 일정추가 (모달창) -------------------------------------------------------------------------------%>
+	        <form action="일정추가url">
+				<!-- The Modal -->
+				<div class="modal" id="scAdd">
+				  <div class="modal-dialog modal-lg">
+				    <div class="modal-content">
+				
+				      <!-- Modal Header -->
+				      <div class="modal-header">
+				        <h4 class="modal-title">일정 추가</h4>
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      </div>
+				
+				      <!-- Modal body -->
+				      <div class="modal-body">
+					    <table class="" align="center">
+					        <tr>
+					            <th width="120px">일정 제목</th>
+					            <td colspan="2"><input type="text" name="scheduleTitle" style="width: 380px;" placeholder="일정 제목을 입력해주세요"></td>
+					            <td>
+					                <select name="scType" id="scType">
+					                    <option value="personal">개인</option>
+					                    <option value="dep">부서</option>
+					                    <option value="com">회사</option>
+					                </select>
+					            </td>
+					        </tr>
+					        
+					        <tr>
+					            <th>시작일</th>
+					            <td><input type="date" name="startDate"></td>
+					            <td><input type="text" name="startTime"></td>
+					            <td rowspan="2"><input type="checkbox">시간설정</td> <!-- 시간설정 체크 해제시 시간 input 사라지게 / 기본값: 체크설정-->
+					        </tr>
+					        <tr>
+					            <th>종료일</th>
+					            <td><input type="date" name="endDate"></td>
+					            <td><input type="text" name="endTime"></td>
+					        </tr>
+					        <tr>
+					            <th>내용</th>
+					            <td colspan="2"><textarea name="sheduleContent" id="" cols="50" rows="10" style="resize: none;"></textarea></td>
+					        </tr>
+					
+					    </table>
+					    
+				      </div>
+				
+				      <!-- Modal footer -->
+				      <div class="modal-footer center">
+					      <div class="button-area">
+						        <button class="btn btn-secondary" data-dismiss="modal">취소</button>
+						        <button class="btn btn-primary" type="submit">저장</button>
+						  </div>
+				      </div>
+				
+				    </div>
+				  </div>
+				</div>
+	        </form>
 	        
 	    </div>
-	    
 	    
    </section>
 

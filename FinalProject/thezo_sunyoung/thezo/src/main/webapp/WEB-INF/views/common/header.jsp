@@ -94,7 +94,7 @@
                     <li><a href="">게시판</a>
                         <ul>
                             <li><a href="">공지사항</a></li>
-                            <li><a href="">문서관리</a></li>
+                            <li><a href="list.doc">문서관리</a></li>
                             <li><a href="">벼룩시장</a></li>
                             <li><a href="">사내게시판</a></li>
                         </ul>

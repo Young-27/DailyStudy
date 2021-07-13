@@ -11,4 +11,9 @@ public class ScheduleController {
 		return "schedule/scheduleMain";
 	}
 	
+	@RequestMapping("list.nt")
+	public String noteList() {
+		return "schedule/noteListView";
+	}
+	
 }
