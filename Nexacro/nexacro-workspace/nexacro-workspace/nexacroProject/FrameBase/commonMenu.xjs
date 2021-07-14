@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script version="1.0" type="xscript5.1"><![CDATA[
+// 클릭된 메뉴에 맞는 form의 url값 전달 받아서 WorkFrame에 적용
+this.xfn_open = function(surl){
+	
+	// WorkFrame에 접근
+	var workframe = nexacro.getApplication().mainframe.VFrameSet00.HFrameSet00.WorkFrame;
+	
+	// formurl 속성 값 변경
+	workframe.set_formurl(surl);
+	
+}]]></Script>

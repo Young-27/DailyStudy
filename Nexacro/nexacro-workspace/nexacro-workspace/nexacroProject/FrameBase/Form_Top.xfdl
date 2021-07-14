@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Top" width="1280" height="50" titletext="Form_Top">
+    <Layouts>
+      <Layout width="1280" height="50" screenid="screen00">
+        <ImageViewer id="ImageViewer00" taborder="0" text="" left="7" top="5" width="174" height="40" image="url('theme://images/img_WF_Nexacro.png')"/>
+        <Menu id="Menu00" taborder="1" left="192" top="7" width="800" height="36" innerdataset="menu" captioncolumn="m_name" idcolumn="m_id" levelcolumn="m_level" onmenuclick="Menu00_onmenuclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "FrameBase::commonMenu.xjs";
+
+this.Menu00_onmenuclick = function(obj:nexacro.Menu,e:nexacro.MenuClickEventInfo)
+{
+	var surl = nexacro.getApplication().menu.lookup("m_id", e.id, "m_url");
+	this.xfn_open(surl);
+};
+]]></Script>
+  </Form>
+</FDL>

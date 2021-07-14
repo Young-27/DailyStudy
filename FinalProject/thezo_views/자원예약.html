@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자원예약</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .outer{
+            width: 1200px;
+            height: 1000px;
+            margin: auto;
+            margin-left: 50px;
+            
+        }
+
+        .nav{
+            width: 200px;
+            float: left;
+        }
+
+        #list-area{
+            width: 600px;
+            height: 800px;
+            margin-left: 50px;
+            background-color: lightsteelblue;
+            float: left;
+            
+        }
+
+        #list-area>div{
+            width: 200px;
+            height: 300px;
+            margin: 50px;
+            background: url('/images/note.png');
+            background-size: 200px 300px;
+            background-position: center;
+            float: left;
+            position:relative;
+        }
+
+        #list-area>div>div{
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <!-- 메뉴바 -->
+    <jsp:include page=""/>
+
+    <br><br>
+    <div class="outer">
+        <div class="nav">
+            <b style="margin-left: 30px; margin-right: 50px;font-size: 18px;">자원예약</b>
+            
+            <br> 
+            <a href="일정관리url" class="btn btn-primary btn-sm" style="color: white;">뒤로</a> 
+            &nbsp;
+            
+            <button class="btn btn-primary" style="width:200px;" function="noteAdd();">예약하기</button>
+            
+            <br>
+
+            <div class="table-bordered" id="do-navbar" style="width:200px; margin-top: 10px; padding: 5px;">
+                
+                <a href=""><b style="float: right;">∨</b></a>
+                <br>
+                <label for="">
+                    <a href="" id="myList">나의예약목록</a>
+                </label>
+                <br>
+                <label for="">
+                    <a href="" id="conferenceRoom">회의실</a>
+                </label>
+                <br>
+                <label for="">
+                    <a href="" id="car">차량</a>
+                </label>
+                <br>
+                <label for="">
+                    <a href="" id="supplise">비품</a>
+                </label>
+                
+                
+        </div>
+    </div>
+
+      
+
+    
+
+    
+    
+        
+
+   
+
+</body>

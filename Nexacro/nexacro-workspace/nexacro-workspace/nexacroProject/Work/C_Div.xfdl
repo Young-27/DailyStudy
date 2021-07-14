@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="C_Div" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Div id="Div00" taborder="0" text="Div00" left="122" top="45" width="314" height="281" border="1px solid blueviolet">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="Static00" left="25" top="31" width="176" height="43"/>
+              <Button id="Button00" taborder="1" text="Button00" left="27" top="104" width="144" height="42"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

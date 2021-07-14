@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="H_Dataset_Grid" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Grid id="Grid00" taborder="0" left="43" top="51" width="137" height="201" binddataset="Dataset00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="name"/>
+                <Cell col="1" text="age"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:name"/>
+                <Cell col="1" text="bind:age"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="age" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="name">홍길동</Col>
+            <Col id="age">20</Col>
+          </Row>
+          <Row>
+            <Col id="name">김말똥</Col>
+            <Col id="age">16</Col>
+          </Row>
+          <Row>
+            <Col id="name">강개순</Col>
+            <Col id="age">30</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

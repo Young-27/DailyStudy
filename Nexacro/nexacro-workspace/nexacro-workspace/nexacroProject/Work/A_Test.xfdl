@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="A_Test" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" text="Hello World" left="50" top="77" width="120" height="60" cssclass="lavender"/>
+        <Static id="Static01" taborder="1" text="Good&#13;&#10;Bye" left="50" top="175" width="158" height="35" cssclass="yellowgreen"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

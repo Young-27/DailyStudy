@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="E_Checkbox_Radio_Combo" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <CheckBox id="CheckBox00" taborder="0" text="메일 수신 여부" left="93" top="54" width="150" height="20" value="true" onclick="CheckBox00_onclick"/>
+        <Radio id="Radio00" taborder="1" left="94" top="120" width="280" height="50" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" onitemchanged="Radio00_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">COM</Col>
+                <Col id="datacolumn">컴퓨터</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">LAP</Col>
+                <Col id="datacolumn">노트북</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">TAB</Col>
+                <Col id="datacolumn">태블릿</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Combo id="Combo00" taborder="2" text="" left="85" top="210" width="150" height="20" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">COM</Col>
+                <Col id="datacolumn">컴퓨터</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">LAP</Col>
+                <Col id="datacolumn">노트북</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">TAB</Col>
+                <Col id="datacolumn">태블릿</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Radio id="Radio01" taborder="3" left="350" top="110" width="280" height="50" innerdataset="Dataset00" codecolumn="CODE" datacolumn="VALUE"/>
+        <Combo id="Combo01" taborder="4" text="" left="353" top="209" width="150" height="20" innerdataset="Dataset00" codecolumn="CODE" datacolumn="VALUE"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.CheckBox00_onclick = function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
+{
+	if(obj.value){ // 체크가 됏을경우
+		nexacro.getApplication().trace(obj.text);
+	}
+};
+
+this.Radio00_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	nexacro.getApplication().trace(obj.text);
+};
+]]></Script>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="VALUE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">COM</Col>
+            <Col id="VALUE">컴퓨터</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">LAP</Col>
+            <Col id="VALUE">노트북</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">TAB</Col>
+            <Col id="VALUE">태블릿</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

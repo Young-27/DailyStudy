@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="F_ImageViewer" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <ImageViewer id="ImageViewer00" taborder="0" text="" left="97" top="95" width="280" height="188" image="url('imagerc::city.PNG')" stretch="fixaspectratio"/>
+        <Button id="Button00" taborder="1" text="꽃" left="419" top="130" width="131" height="45" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="2" text="도시" left="420" top="205" width="130" height="45" onclick="Button01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ImageViewer00.set_image("imagerc::flower.PNG");
+	this.ImageViewer00.set_stretch("fit");
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.ImageViewer00.set_image("imagerc::city.PNG");
+	this.ImageViewer00.set_stretch("none");
+};
+]]></Script>
+  </Form>
+</FDL>

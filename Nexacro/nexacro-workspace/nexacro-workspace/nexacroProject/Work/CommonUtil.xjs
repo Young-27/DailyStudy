@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script version="1.0" type="xscript5.1"><![CDATA[
+this.dayDiff = function(start, end){ // 시작날짜, 끝날짜 컴포넌트 객체
+	
+	var startDate = new Date();
+	startDate.setFullYear(start.getYear());
+	startDate.setMonth(start.getMonth()-1);
+	startDate.setDate(start.getDay());
+	
+	var endDate = new Date();
+	endDate.setFullYear(end.getYear());
+	endDate.setMonth(end.getMonth()-1);
+	endDate.setDate(end.getDay());
+	
+	var dday = (endDate - startDate) / 1000 / 60 / 60 / 24;
+	return Math.floor(dday);
+	
+}]]></Script>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Practice3_Dday" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="Static00" taborder="0" text="시작 날짜" left="70" top="80" width="120" height="50" cssclass="lavender"/>
+        <Static id="Static01" taborder="1" text="끝 날짜" left="70" top="151" width="120" height="49" cssclass="lavender"/>
+        <Calendar id="Calendar00" taborder="2" left="218" top="85" width="150" height="45"/>
+        <Calendar id="Calendar01" taborder="3" left="218" top="155" width="150" height="45"/>
+        <Button id="Button00" taborder="4" text="계산하기" left="72" top="238" width="120" height="50" onclick="Button00_onclick"/>
+        <Static id="Static02" taborder="5" text="계산 날짜는" left="220" top="230" width="80" height="60"/>
+        <Edit id="Edit00" taborder="6" left="300" top="245" width="90" height="37"/>
+        <Static id="Static03" taborder="7" text="일 입니다" left="400" top="230" width="120" height="60"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "Work::CommonUtil.xjs";
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var result = this.dayDiff(this.Calendar00, this.Calendar01);
+	this.Edit00.set_value(result);
+};
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Practice2" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Grid id="Grid00" taborder="0" left="50" top="37" width="230" height="235" binddataset="EMP" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="48"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="EMPL_ID"/>
+                <Cell col="2" text="FULL_NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow+1"/>
+                <Cell col="1" text="bind:EMPL_ID" maskeditformat="expr:AA-###" maskedittype="string"/>
+                <Cell col="2" text="bind:FULL_NAME"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="1" text="FullName" left="295" top="37" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Static id="Static01" taborder="2" text="Empl_ID" left="295" top="87" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Static id="Static02" taborder="3" text="HireDate" left="295" top="137" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Static id="Static03" taborder="4" text="Married" left="295" top="187" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Static id="Static04" taborder="5" text="Salary" left="295" top="237" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Static id="Static05" taborder="6" text="Gender" left="295" top="287" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Static id="Static06" taborder="7" text="Dept_ID" left="295" top="337" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Static id="Static07" taborder="8" text="MEMO" left="295" top="387" width="120" height="35" background="pink" textAlign="center" font="14px/normal &quot;Gulim&quot;"/>
+        <Edit id="Edit00" taborder="9" left="435" top="37" width="200" height="35"/>
+        <MaskEdit id="MaskEdit00" taborder="10" left="435" top="87" width="200" height="35" format="AA-###" type="string"/>
+        <Calendar id="Calendar00" taborder="11" left="435" top="137" width="200" height="35"/>
+        <CheckBox id="CheckBox00" taborder="12" text="결혼여부" left="435" top="187" width="200" height="35"/>
+        <MaskEdit id="MaskEdit01" taborder="13" left="435" top="237" width="200" height="35" format="#,###"/>
+        <Radio id="Radio00" taborder="14" left="435" top="287" width="200" height="35" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">M</Col>
+                <Col id="datacolumn">남성</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">W</Col>
+                <Col id="datacolumn">여성</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Combo id="Combo00" taborder="15" text="Combo00" left="435" top="337" width="200" height="35" innerdataset="DEPT" codecolumn="DEPT_CD" datacolumn="DEPT_NAME"/>
+        <TextArea id="TextArea00" taborder="16" left="435" top="387" width="200" height="113"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="EMP" columnid="FULL_NAME"/>
+      <BindItem id="item1" compid="MaskEdit00" propid="value" datasetid="EMP" columnid="EMPL_ID"/>
+      <BindItem id="item2" compid="Calendar00" propid="value" datasetid="EMP" columnid="HIRE_DATE"/>
+      <BindItem id="item3" compid="CheckBox00" propid="value" datasetid="EMP" columnid="MARRIED"/>
+      <BindItem id="item4" compid="MaskEdit01" propid="value" datasetid="EMP" columnid="SALARY"/>
+      <BindItem id="item5" compid="Radio00" propid="value" datasetid="EMP" columnid="GENDER"/>
+      <BindItem id="item6" compid="Combo00" propid="value" datasetid="EMP" columnid="DEPT_CD"/>
+      <BindItem id="item7" compid="TextArea00" propid="value" datasetid="EMP" columnid="MEMO"/>
+    </Bind>
+  </Form>
+</FDL>

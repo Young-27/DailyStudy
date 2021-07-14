@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="G_Calendar" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Calendar id="Calendar00" taborder="0" left="76" top="97" width="150" height="20"/>
+        <Calendar id="Calendar01" taborder="1" left="287" top="98" width="197" height="192" type="monthonly" usetrailingday="true"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

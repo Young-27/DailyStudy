@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Practice1" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <ImageViewer id="ImageViewer00" taborder="0" text="" left="68" top="110" width="239" height="157" image="url('imagerc::flower.PNG')" stretch="fit"/>
+        <Combo id="Combo00" taborder="1" text="" left="360" top="160" width="194" height="48" innerdataset="Dataset00" codecolumn="url" datacolumn="name" onitemchanged="Combo00_onitemchanged"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="url" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="name">꽃</Col>
+            <Col id="url">imagerc::flower.PNG</Col>
+          </Row>
+          <Row>
+            <Col id="name">강</Col>
+            <Col id="url">imagerc::river.PNG</Col>
+          </Row>
+          <Row>
+            <Col id="name">숲</Col>
+            <Col id="url">imagerc::forest.PNG</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.ImageViewer00.set_image(obj.value); // url값
+	this.ImageViewer00.set_stretch("fit");
+};
+]]></Script>
+  </Form>
+</FDL>

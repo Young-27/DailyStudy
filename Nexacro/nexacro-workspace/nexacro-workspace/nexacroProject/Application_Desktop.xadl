@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="Application_Desktop" screenid="Desktop_screen">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="true" showstatusbar="true" width="1280" height="720"/>
+    </Layout>
+    <Style url="xcssrc::test_css.xcss"/>
+  </Application>
+</ADL>

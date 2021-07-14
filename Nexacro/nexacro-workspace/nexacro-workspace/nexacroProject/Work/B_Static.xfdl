@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="B_Static" width="1280" height="720" titletext="New Form" color="orange">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="Static00" taborder="0" text="Static Test" left="79" top="113" width="120" height="60" color="orange" font="bold 20px/normal &quot;Gulim&quot;"/>
+        <Button id="Button00" taborder="1" text="버튼입니다" left="220" top="120" width="120" height="50" onclick="myEvent"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/*
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	// this : 현재 작업중인 form 영역을 가리키는 Scope
+	// -- application : 넥사크로 애플리케이션에서 사용하는 전역 Scope
+	// Button00 : 클릭이벤트가 발생하는 버튼의 고유 아이디
+	// onclick : 이벤트종류
+	// obj : 현재 클릭이벤트가 발생한 버튼 객체
+	// e : 이벤트정보를 가지고 있는 객체
+	
+	nexacro.getApplication().trace("클릭됨"); // System.out.println() 역할
+	nexacro.getApplication().trace(obj);
+	nexacro.getApplication().trace(e);
+	
+	this.alert("클릭했습니다");
+	
+};
+*/
+
+this.myEvent = function(){
+	alert("나만의 이벤트 실행");
+	nexacro.getApplication().trace("myEvent 동작");
+};
+
+]]></Script>
+  </Form>
+</FDL>

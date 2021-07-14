@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[.Static.lavender
+{
+	background:lavender;
+	-nexa-text-align : center;
+	font : bold 12pt "Arial";
+}
+
+.Static.yellowgreen
+{
+	background:yellowgreen;
+	-nexa-text-align : center;
+	font : bold 12pt "Arial";
+}
+.Button
+{
+	background:purple;
+	border-radius:3px;
+	color:white;
+}
+.Button[status=mouseover]
+{
+	background:lightpink;
+}
+]]></XCSS>
