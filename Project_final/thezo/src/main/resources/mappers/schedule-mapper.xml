@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scheduleMapper">
+
+	<resultMap id="scheduleResult" type="Schedule">
+		<result column="sc_no" property="scNo"/>
+		<result column="sc_writer" property="scWriter"/>
+		<result column="sc_title" property="title"/>
+		<result column="sc_content" property="scContent"/>
+		<result column="sc_type" property="scType"/>
+		<result column="sc_start" property="start"/>
+		<result column="sc_end" property="end"/>
+		<result column="allday" property="allday"/>
+		<result column="status" property="status"/>
+		<result column="report_title" property="reportTitle"/>
+		<result column="report_writer" property="reportWriter"/>
+		<result column="report_content" property="reportContent"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="create_date" property="createDate"/>
+	</resultMap>
+	
+	<select id="selectScheduleList" resultMap="scheduleResult">
+		select 
+		       sc_no
+		     , mem_name as sc_writer
+		     , sc_title
+		     , sc_content
+		     , sc_type
+		     , sc_start
+		     , sc_end
+		     , allday
+		     , s.status
+		  from schedule s
+		  join member m on (s.sc_writer = m.mem_no)
+		 where s.status = 'Y'
+		   <if test="scType=='개인'">
+		   		and sc_writer = #{scWriter}
+		   		and sc_type like '%' || #{scType} || '%'
+		   </if>
+		   <if test="scType=='회사'">
+		   		and sc_type like '%' || #{scType} || '%'
+		   </if>
+		   <if test="scType=='부서'">
+		   		and sc_type like '%' || #{scType} || '%'
+		   </if>
+		   <if test="scType=='all'">
+		   		and sc_writer = #{scWriter}
+		   		 or sc_type = '회사'
+		   		 or sc_type = '부서'
+		   </if>
+		   
+	</select>
+	
+	<select id="selectBizReport" resultMap="scheduleResult">
+		select
+			   sc_no
+			 , report_title
+		     , mem_name as report_writer
+		     , report_content
+		     , origin_name
+		     , change_name
+		     , create_date
+		  from biz_report b
+		  join member on (b.report_writer = m.mem_no)
+	</select>
+	
+	<select id="selectScheduleData" resultMap="scheduleResult">
+		select
+		       sc_title
+		     , sc_start
+		     , sc_end
+		     , allday
+		  from schedule
+	</select>
+	
+	<select id="selectScheduleDetail" resultMap="scheduleResult">
+		select
+			   sc_no
+		     , mem_name as sc_writer
+		     , sc_title
+		     , sc_content
+		     , sc_type
+		     , sc_start
+		     , sc_end
+		     , allday
+		     , s.status
+		     , report_title
+		     , mem_name as report_writer
+		     , report_content
+		     , b.origin_name
+		     , b.change_name
+		     , b.create_date
+		  from schedule s
+		  left join biz_report b using (sc_no)
+		  join member m on (sc_writer=mem_no)
+		 where s.status = 'Y'
+		   and sc_no = #{scNo} 
+	</select>
+	
+	<insert id="insertSchedule">
+		insert 
+		  into schedule
+		  (
+		    sc_no
+		  , sc_writer
+		  , sc_title
+		  , sc_content
+		  , sc_type
+		  , sc_start
+		  , sc_end
+		  , allday
+		  , status
+		  )
+		 values
+		 (
+		   seq_scno.nextval
+		 , #{scWriter}
+		 , #{title}
+		 , #{scContent}
+		 , #{scType}
+		 , #{start}
+		 , #{end}
+		 , #{allday}
+		 , 'Y'
+		 )
+	</insert>
+	
+	<insert id="insertBizReport">
+		insert
+		  into biz_report
+		  	   (
+		  	   	 sc_no
+		  	   , report_writer
+		  	   , report_title
+		  	   , report_content
+		  	   , origin_name
+		  	   , change_name
+		  	   , create_date
+		  	   , status
+		  	   )
+		 values
+		 	   (
+		 	     #{scNo}
+		 	   , #{reportWriter}
+		 	   , #{reportTitle}
+		 	   , #{reportContent}
+		 	   , #{originName}
+		 	   , #{changeName}
+		 	   , sysdate
+		 	   , 'Y'
+		 	   )
+	</insert>
+	
+	<delete id="deleteSchedule">
+		delete
+		  from schedule
+		 where sc_no = #{scNo}
+	</delete>
+	
+	<update id="updateSchedule">
+		update schedule
+		   set 
+		       sc_writer = #{scWriter}
+		     , sc_title = #{title}
+		     , sc_content = #{scContent}
+		     , sc_type = #{scType}
+		     , sc_start = #{start}
+		     , sc_end = #{end}
+		     , allday = #{allday}
+		 where sc_no = #{scNo}
+	</update>
+	
+</mapper>

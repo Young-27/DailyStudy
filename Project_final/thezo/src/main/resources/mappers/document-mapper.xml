@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="documentMapper">
+
+	<resultMap id="documentResult" type="Document">
+		<result column="doc_no" property="docNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="doc_writer" property="docWriter"/>
+		<result column="department" property="department"/>
+		<result column="doc_content" property="docContent"/>
+		<result column="doc_category" property="docCategory"/>
+		<result column="create_date" property="createDate"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<resultMap id="categoryResult" type="DocCategory">
+		<result column="dep_no" property="depNo"/>
+		<result column="dep_name" property="depName"/>
+	</resultMap>
+	
+	
+	<select id="selectListCount" resultType="_int">
+		select
+			   count(*)
+		  from document
+		 where status = 'Y'
+		   and doc_category = #{docCategory}
+	</select>
+	
+	<select id="selectDocumentList" resultMap="documentResult">
+		select
+		       doc_no
+		     , mem_no
+		     , mem_name as "doc_writer"
+		     , department
+		     , doc_content
+		     , doc_category
+		     , d.create_date
+		     , d.origin_name
+		     , d.change_name
+		     , d.status
+		  from document d
+		  join member m on (d.doc_writer = m.mem_no)
+		 where d.status = 'Y'
+		   and d.doc_category = #{docCategory}
+		 order
+		    by d.create_date desc
+	</select>
+	
+	<select id="selectDocument" resultMap="documentResult">
+		select 
+			   doc_no
+			 , mem_id as doc_writer
+			 , doc_content
+			 , doc_category
+			 , d.create_date
+			 , d.origin_name
+			 , d.change_name
+			 , d.status
+		  from document d 
+		  join member m on(doc_writer = mem_no)
+		 where doc_no = #{docNo}
+		   and d.status = 'Y'
+	</select>
+	
+	<select id="searchListCount" resultType="_int">
+		select count(*)
+		  from (select
+		               doc_no
+		             , department || ' ' || mem_name "DOC_WRITER"
+		             , doc_content
+		             , doc_category
+		             , create_date
+		             , d.origin_name
+		             , d.change_name
+		             , d.status
+		          from document d 
+		          join member m on (d.doc_writer = m.mem_no)
+		         where d.status = 'Y'
+		           and doc_category = #{docCategory}
+		         order
+		            by create_date desc) doc
+		 where
+		 <if test="condition=='writer'">
+		 	"DOC_WRITER" like '%' || #{keyword} || '%'
+		 </if>
+		 <if test="condition=='content'">
+		 	doc_content like '%' || #{keyword} || '%'
+		 </if>
+	</select>
+	
+	<select id="searchDocumentList" resultMap="documentResult">
+		select doc.*
+		  from (select
+		               doc_no
+		             , department || ' ' || mem_name "DOC_WRITER"
+		             , doc_content
+		             , doc_category
+		             , create_date
+		             , d.origin_name
+		             , d.change_name
+		             , d.status
+		          from document d 
+		          join member m on (d.doc_writer = m.mem_no)
+		         where d.status = 'Y'
+		           and doc_category = #{docCategory}
+		         order
+		            by create_date desc) doc
+		 where
+		 <if test="condition=='writer'">
+		 	"DOC_WRITER" like '%' || #{keyword} || '%' 
+		 </if>
+		 <if test="condition=='content'">
+		 	doc_content like '%' || #{keyword} || '%'
+		 </if>
+	</select>
+	
+	<select id="selectCategoryList" resultMap="categoryResult">
+		select dep_no
+			 , dep_name
+		  from department
+	</select>
+	
+	<insert id="insertDocument">
+		insert
+		  into document
+		  (
+		    doc_no
+		  , doc_writer
+		  , doc_content
+		  , doc_category
+		  , create_date
+		  , origin_name
+		  , change_name
+		  , status
+		  )
+		 values
+	 	   (
+	 	     seq_docno.nextval
+	 	   , #{docWriter}
+	 	   , #{docContent}
+	 	   , #{docCategory}
+	 	   , sysdate
+	 	   , #{originName}
+	 	   , #{changeName}
+	 	   , 'Y'
+	 	   )
+	</insert>
+	
+	<update id="deleteDocument">
+		update document
+		   set 
+		       status = 'N'
+		 where
+		 <foreach collection="array" item="arr" separator="and" index="index">
+		 	 doc_no = #{arr}
+		 </foreach>
+		   	   
+	</update>
+	
+	<update id="updateDocument">
+		update document
+		   set 
+		   	   doc_content = #{docContent}
+		   	 , doc_category = #{docCategory}
+		   	 , create_date = sysdate
+		   	 , origin_name = #{originName}
+		   	 , change_name = #{changeName}
+		 where status = 'Y'
+		   and doc_no = #{docNo}
+	</update>
+	
+	
+</mapper>
+

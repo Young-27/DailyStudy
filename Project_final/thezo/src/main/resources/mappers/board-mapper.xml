@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+
+	<resultMap id="boardResult" type="Board">
+		<result column="board_no" property="boardNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_writer" property="boardWriter"/>
+		<result column="board_content" property="boardContent"/>
+		<result column="board_date" property="boardDate"/> 
+		<result column="count" property="count"/>
+	</resultMap>
+	
+	<resultMap id="boardFileResult" type="BoardFile">
+		<result column="file_no" property="fileNo"/>
+		<result column="ref_section" property="refSection"/>
+		<result column="ref_bno" property="ref_bno"/>
+		<result column="origin_name" property="originName"/>
+		<result column="change_name" property="changeName"/> 
+		<result column="file_path" property="filePath"/>
+		<result column="uploadDate" property="uploadDate"/>
+	</resultMap>
+	
+	<resultMap id="reportResult" type="Report">
+		<result column="rp_code" property="rpCode"/>
+		<result column="rp_id" property="rpId"/>
+		<result column="rp_date" property="rpDate"/>
+		<result column="board_type" property="boardType"/>
+		<result column="rp_type" property="rpType"/> 
+		<result column="rp_section" property="rpSection"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<resultMap id="replyResult" type="Reply">
+		<result column="reply_no" property="replyNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ref_section" property="refSection"/>
+		<result column="ref_no" property="refNo"/>
+		<result column="reply_content" property="replyContent"/>
+		<result column="reply_writer" property="replyWriter"/> 
+		<result column="create_date" property="createDate"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+
+	<!-- 사용자 : 공지사항 글 총 갯수  -->
+	<select id="noticeListCount" resultType="_int">
+		select 
+		       count(*)
+		  from board
+		 where status = 'Y'
+		   and board_type = 1    
+	</select>
+
+	<!-- 사용자 : 공지사항 리스트 조회 -->
+	<select id="selectNoticeList" resultMap="boardResult">
+		select
+		       board_no
+		     , board_title
+		     , board_writer
+		     , to_char(board_date, 'YYYY-MM-DD') as board_date
+             , count
+		  from board
+		 where status = 'Y'
+           and board_type = 1
+		 order 
+		    by board_no desc       
+	</select>
+
+	<!-- 사용자 : 공지사항 리스트 검색바  -->
+	<select id="noticeSearchListCount" resultType="_int">
+		select count(*)
+		  from board
+		 where status = 'Y' 
+		    and board_type = 1
+		<choose>
+			<when test="condition == 'title'">
+				and board_title
+			</when>
+			<when test="condition == 'content'">
+				and board_content 
+			</when>
+			<otherwise>
+				and board_writer
+			</otherwise>
+		</choose>
+				like '%' || #{keyword} || '%' 
+	</select>
+
+	<!-- 사용자 : 공지사항 리스트 검색바 -->
+	<select id="noticeSearchList" resultMap="boardResult">
+	select 
+		   board_no
+		 , board_title
+		 , board_writer
+		 , to_char(board_date, 'YYYY-MM-DD') as board_date
+         , count
+      from board
+     where status = 'Y' 
+       and board_type = 1
+		<choose>
+			<when test="condition == 'title'">
+		   		and board_title
+		    </when>
+			<when test="condition == 'content'">
+				and board_content
+			</when>
+			<otherwise>
+				and board_writer
+			</otherwise>
+		</choose>
+				like '%' || #{keyword} || '%'
+		  order
+		     by board_no desc 
+	</select>
+
+	<!-- 사용자 : 공지사항 조회수 증가 -->
+	<update id="increaseNoticeCount">
+		update
+		       board
+		   set count = count+1
+		 where board_no = #{boardNo}
+		   and status = 'Y'
+		   and board_type = 1       
+	</update>
+
+	<!-- 사용자 : 공지사항 상세 조회 -->
+	<select id="selectNotice" resultMap="boardResult">
+		select
+			   board_no
+		     , board_title
+		     , board_writer
+		     , board_content
+		     , to_char(board_date, 'YYYY-MM-DD') as board_date
+		     , count
+ 		  from board b
+          left outer join board_file on(board_no = ref_bno)
+		 where board_no = #{boardNo}
+		   and board_type = 1
+           and b.status = 'Y'   
+	</select>
+	
+	<!-- 사용자 : 공지사항 첨부파일 상세 조회 -->
+	<select id="selectNoticeFile" resultMap="boardFileResult">
+		select 
+		       origin_name
+		     , change_name
+		  from board_file
+		 where ref_bno = #{refBno}
+		   and status = 'Y'      
+	</select>
+	
+	<!-- 사용자 : 공지사항 등록 -->
+	<insert id="insertNotice">
+		insert 
+		  into board
+		values(
+		            seq_nbno.nextval
+		          , #{ memNo}  
+		          , #{ boardWriter }
+		          , 1
+				  , #{ boardTitle }
+				  , #{ boardContent }
+		          , sysdate
+		          , 0
+		          , default
+				)
+	</insert>
+	
+	<!-- 사용자 : 공지사항 등록 첨부파일  -->
+	<insert id="insertNoticeFile">
+		insert 
+		   into board_file
+		   values(
+		           seq_bfno.nextval
+		         , '공지'
+		         , seq_nbno.currval
+		         , #{ originName }
+		         , #{ changeName }
+		         , 'resources/uploadFiles/'
+		         , sysdate
+		         , default
+		         )
+	</insert>
+	
+	<!-- 사용자 : 공지사항, 사내게시판 글 삭제 -->
+	<update id="deleteBoard">
+			update
+				  board
+			  set status = 'N'
+			where board_no = #{boardNo}  		
+	</update>
+		
+	<!-- 사용자 : 공지사항, 사내게시판 글 수정 -->	
+	<update id="updateBoard">
+		update
+			   board
+		   set board_title = #{boardTitle}
+		     , board_content = #{boardContent}
+		 where board_no = #{boardNo}
+	</update>	
+		
+	<!-- 사용자 : 공지사항, 사내게시판 글 수정(첨부파일) -->	
+	<update id="updateBoardFile">
+		update
+			   board_file
+		   set origin_name = #{originName}
+		     , change_name = #{changeName}
+		 where ref_bno = #{refBno}
+	</update>		
+	
+	<!-- 사용자 : 공지사항 등록 첨부파일(글 수정)  -->
+	<insert id="insertNoticeRefile">
+		insert 
+		   into board_file
+		   values(
+		           seq_bfno.nextval
+		         , '공지'
+		         , #{ refBno }
+		         , #{ originName }
+		         , #{ changeName }
+		         , 'resources/uploadFiles/'
+		         , sysdate
+		         , default
+		         )
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	<!--  사내게시판 영역  -->
+	
+	
+	<!-- 사용자 : 사내게시판 글 총 갯수  -->
+	<select id="boardListCount" resultType="_int">
+		select 
+		       count(*)
+		  from board
+		 where status = 'Y'
+		   and board_type = 2    
+	</select>
+
+	<!-- 사용자 : 사내게시판 리스트 조회 -->
+	<select id="selectBoardList" resultMap="boardResult">
+		select
+		       board_no
+		     , board_title
+		     , board_writer
+		     , to_char(board_date, 'YYYY-MM-DD') as board_date
+             , count
+		  from board
+		 where status = 'Y'
+           and board_type = 2
+		 order 
+		    by board_no desc       
+	</select>
+	
+	
+	<!-- 사용자 : 사내게시판 리스트 검색바  -->
+	<select id="boardSearchListCount" resultType="_int">
+		select count(*)
+		  from board
+		 where status = 'Y' 
+		    and board_type = 2
+		<choose>
+			<when test="condition == 'title'">
+				and board_title
+			</when>
+			<when test="condition == 'content'">
+				and board_content 
+			</when>
+			<otherwise>
+				and board_writer
+			</otherwise>
+		</choose>
+				like '%' || #{keyword} || '%' 
+	</select>
+
+	<!-- 사용자 : 사내게시판 리스트 검색바 -->
+	<select id="boardSearchList" resultMap="boardResult">
+	select 
+		   board_no
+		 , board_title
+		 , board_writer
+		 , to_char(board_date, 'YYYY-MM-DD') as board_date
+         , count
+      from board
+     where status = 'Y' 
+       and board_type = 2
+		<choose>
+			<when test="condition == 'title'">
+		   		and board_title
+		    </when>
+			<when test="condition == 'content'">
+				and board_content
+			</when>
+			<otherwise>
+				and board_writer
+			</otherwise>
+		</choose>
+				like '%' || #{keyword} || '%'
+		  order
+		     by board_no desc 
+	</select>
+	
+	<!-- 사용자 : 사내게시판 조회수 증가 -->
+	<update id="increaseBoardCount">
+		update
+		       board
+		   set count = count+1
+		 where board_no = #{boardNo}
+		   and status = 'Y'
+		   and board_type = 2       
+	</update>
+
+	<!-- 사용자 : 사내게시판 상세 조회 -->
+	<select id="selectBoard" resultMap="boardResult">
+		select
+			   board_no
+		     , board_title
+		     , board_writer
+		     , board_content
+		     , to_char(board_date, 'YYYY-MM-DD') as board_date
+		     , count
+ 		  from board b
+          left outer join board_file on(board_no = ref_bno)
+		 where board_no = #{boardNo}
+		   and board_type = 2
+           and b.status = 'Y'   
+	</select>
+	
+	<!-- 사용자 : 사내게시판 첨부파일 상세 조회 -->
+	<select id="selectBoardFile" resultMap="boardFileResult">
+		select 
+		       origin_name
+		     , change_name
+		  from board_file
+		 where ref_bno = #{refBno}
+		   and status = 'Y'      
+	</select>
+	
+		
+	<!-- 사용자 : 사내게시판 글 등록 -->
+	<insert id="insertBoard">
+		insert 
+		  into board
+		values(
+		            seq_nbno.nextval
+		          , #{ memNo}  
+		          , #{ boardWriter }
+		          , 2
+				  , #{ boardTitle }
+				  , #{ boardContent }
+		          , sysdate
+		          , 0
+		          , default
+				)
+	</insert>
+	
+	<!-- 사용자 : 사내게시판 등록 첨부파일  -->
+	<insert id="insertBoardFile">
+		insert 
+		   into board_file
+		   values(
+		           seq_bfno.nextval
+		         , '사내'
+		         , seq_nbno.currval
+		         , #{ originName }
+		         , #{ changeName }
+		         , 'resources/uploadFiles/'
+		         , sysdate
+		         , default
+		         )
+	</insert>
+	
+	<!-- 사용자 : 사내게시판 등록 첨부파일(글 수정)  -->
+	<insert id="insertBoardRefile">
+		insert 
+		   into board_file
+		   values(
+		           seq_bfno.nextval
+		         , '사내'
+		         , #{ refBno }
+		         , #{ originName }
+		         , #{ changeName }
+		         , 'resources/uploadFiles/'
+		         , sysdate
+		         , default
+		         )
+	</insert>
+	
+	<!-- 사용자 : 사내게시판 댓글 조회 -->
+	<select id="selectReplyList" resultMap="replyResult">
+		select 
+		       reply_no
+		     , reply_content
+		     , reply_writer
+		     , to_char(create_date, 'YYYY-MM-DD') create_date
+		  from reply
+		 where status = 'Y'
+		   and ref_no = #{boardNo}
+		 order
+		    by reply_no desc      
+	</select>
+	
+	<!-- 사용자 : 사내게시판 댓글 등록 -->
+	<insert id="insertReply">
+		insert
+			  into reply
+			  values
+			  (
+			   	seq_rno.nextval
+	          , #{ memNo }
+	          , '사내'
+	          , #{refNo} 
+			  , #{replyContent}
+			  , #{replyWriter}
+			  , sysdate 
+	          , default
+			  )  
+	</insert>
+
+
+
+
+	<!-- 관리자 영역 -->
+		
+	
+	<!-- 신고관리 : 신고글 총 갯수  -->
+	<select id="reportListCount" resultType="_int">
+		select 
+		       count(*)
+		  from report 
+	</select>
+
+	<!-- 신고관리 : 신고글 리스트 조회 -->
+	<select id="selectReportList" resultMap="reportResult">
+		select
+		       rp_code
+		     , rp_id
+             , to_char(rp_date, 'YYYY-MM-DD') as rp_date
+             , board_type
+             , rp_type
+             , rp_section
+             , status
+		  from report
+		 order 
+		    by rp_code desc      
+	</select>
+	
+		
+	<!-- 신고관리 : 사내게시판 리스트 검색바  -->
+	<select id="reportSearchListCount" resultType="_int">
+		select count(*)
+		  from report
+		<choose>
+			<when test="condition == 'wait'">
+				where status
+			</when>
+			<otherwise>
+				where status
+			</otherwise>
+		</choose>
+	</select>
+
+	<!-- 신고관리 : 신고관리 리스트 검색바 -->
+	<select id="reportSearchList" resultMap="reportResult">
+		select
+		       rp_code
+		     , rp_id
+             , to_char(rp_date, 'YYYY-MM-DD') as rp_date
+             , board_type
+             , rp_type
+             , rp_section
+             , status
+		  from report
+		  	<choose>
+				<when test="condition == 'wait'">
+					where status
+				</when>
+				<otherwise>
+					where status
+				</otherwise>
+			</choose>
+		 order 
+		    by rp_code desc
+	</select>
+
+</mapper>
